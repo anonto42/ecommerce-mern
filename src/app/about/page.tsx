@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='w-full min-h-screen'>
+    <div style={{backgroundImage:`url("/Image/bg-2.jpg")`}} className='w-full bg-cover min-h-screen'>
         
     </div>
   )
