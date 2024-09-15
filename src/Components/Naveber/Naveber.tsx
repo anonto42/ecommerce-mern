@@ -7,7 +7,8 @@ import { RiContactsLine, RiCustomerService2Line } from 'react-icons/ri'
 type navigation = "home" | "services" | "about" | "contact"
 
 const Naveber = () => {
-    const [navigate , setNavigate] = useState<navigation>("home");
+    const [navigate , setNavigate] = useState<navigation>();
+
   return (
     <div className='w-full h-[90px] bg-[#e6c79f00] flex items-center absolute'>
         <div className='w-full mx-auto xl:w-[1400px] xl:px-0 px-12 flex items-center justify-between'>
