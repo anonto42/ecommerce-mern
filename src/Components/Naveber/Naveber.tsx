@@ -36,10 +36,10 @@ const Naveber = () => {
                 <a href="/" title='Home'>
                     <IoHomeOutline className='cursor-pointer hover:text-gray-300 duration-150' />
                 </a>
-                <a href="/servicess" title='Services'>
+                <a href="/services" title='Services'>
                     <RiCustomerService2Line />
                 </a>
-                <a href="/contacts" title='Contacts'>
+                <a href="/contact" title='Contacts'>
                     <RiContactsLine />
                 </a>
                 <a href="/about" title='About'>
