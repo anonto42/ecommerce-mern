@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div style={{backgroundImage:`url("/Image/bg-se.jpg")`}} className='w-full min-h-screen bg-cover'>
+    <div style={{backgroundImage:`url("/Image/bg-se.jpg")`}} className='w-full min-h-screen bg-cover px-4 xl:px-0'>
       <div className='max-w-[1400px] h-full mx-auto pt-[20vh]'>
         <div className='text-white font-medium px-6 xl:px-0'>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique dolorum aspernatur cupiditate praesentium quos odio quisquam libero totam. Neque, alias!</p>
