@@ -13,7 +13,7 @@ const Footer = () => {
             <div className='w-[300px] h-full absolute right-2 sm:right-5 md:right-12 xl:right-0 text-center text-black capitalize font-medium pt-3'>
                 <h1 className='my-2 text-[20px] mt-6'><a href="">Contact Us</a></h1>
                 <a href="/contact">
-                  <button className='w-[140px] h-[50px] bg-[yellow] rounded-md text-[20px] text-[#646363] active:scale-105 duration-150 ease-linear mt-6'>Contact</button>
+                  <button className='w-[140px] h-[50px] shadow-md bg-[yellow] rounded-md text-[20px] text-[#646363] active:scale-105 duration-150 ease-linear mt-6'>Contact</button>
                 </a>
             </div>
         </div>
