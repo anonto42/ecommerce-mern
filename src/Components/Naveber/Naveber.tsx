@@ -7,7 +7,7 @@ import { RiContactsLine, RiCustomerService2Line } from 'react-icons/ri'
 const Naveber = () => {
 
   return (
-    <div className='w-full h-[90px] bg-[#e6c79f00] flex items-center absolute'>
+    <div className='w-full h-[90px] bg-[#4f5357] flex items-center absolute'>
         <div className='w-full mx-auto xl:w-[1400px] xl:px-0 px-12 flex items-center justify-between'>
             {/* Logo */}
             <div className='w-[110px] '>
