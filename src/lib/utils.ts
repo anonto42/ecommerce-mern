@@ -8,3 +8,6 @@ export function cn(...inputs: ClassValue[]) {
 
 // Types are decleared here
 
+export interface CounterState {
+  value:number
+}
