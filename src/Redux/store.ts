@@ -2,11 +2,12 @@
 
 import { configureStore  } from "@reduxjs/toolkit";
 import counterSlice from "@/Redux/counters/counterSlice";
+import LocationSlice from "./counters/LocationSlice";
 
 export const store = configureStore(
     {
         reducer:{
-            counter : counterSlice
+            isHome : LocationSlice
         }
     }
 )

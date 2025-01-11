@@ -11,3 +11,6 @@ export function cn(...inputs: ClassValue[]) {
 export interface CounterState {
   value:number
 }
+export interface WindowsLoation {
+  location:string
+}
