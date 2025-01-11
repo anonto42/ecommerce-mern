@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Fairrow Associatiesllc",
-  description: "This des will generate by default",
+  title: "S-Brand",
+  description: "We create the best product on the T-Shirt World",
 };
 export default function RootLayout({
   children,
@@ -26,11 +26,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link 
+          rel="icon" 
+          href="/Image/Top_logo.svg"
+          sizes="any"
+          />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > 
       <div>
-        {children}
+        <Naveber /> 
+        <main>
+          {children}
+        </main>
+        <Footer />
       </div>
       </body>
     </html>
