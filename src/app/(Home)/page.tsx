@@ -1,14 +1,15 @@
 "use client"
 import React from 'react';
-import { usePathname } from "next/navigation";
+import type { RootState } from '@/Redux/store';
+import { useSelector} from 'react-redux';
 
 const page = () => {
-  
-  const partname = usePathname()
-  console.log(partname)
+  const { location } = useSelector((state: RootState)=> state.isHome)
 
   return (
-    <div>page</div>
+    <div>
+
+    </div>
   )
 }
 
