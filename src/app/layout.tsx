@@ -27,20 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link 
-          rel="icon" 
-          href="/Image/Top_logo.svg"
-          sizes="any"
-          />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#09090B]`}
       > 
       <ProviderFile>
         <div className="w-full h-full">
           <Naveber /> 
-          <div className="w-full h-auto">
+          <div className="max-w-[1280px] min-h-svh mx-auto border">
             {children}
           </div>
           <Footer />
