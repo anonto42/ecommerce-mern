@@ -35,18 +35,16 @@ export default function RootLayout({
           />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#09090B]`}
       > 
       <ProviderFile>
-        <div className="max-w-[1200px] h-full flex justify-center">
-          <div className="w-full h-full">
-            <Naveber /> 
-            <main className="w-full h-full">
-              {children}
-            </main>
-            <Footer />
+        <div className="w-full h-full">
+          <Naveber /> 
+          <div className="w-full h-auto">
+            {children}
           </div>
-          </div>
+          <Footer />
+        </div>
       </ProviderFile>
       </body>
     </html>
