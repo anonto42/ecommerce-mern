@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState : WindowsLoation = {
-    location: "Some this is mesing"
+    location: "This is the location of the application Home on the device"
 }
 
 export const LocationSlice = createSlice(
