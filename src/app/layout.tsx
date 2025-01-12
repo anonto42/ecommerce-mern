@@ -38,13 +38,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > 
       <ProviderFile>
-        <div>
-          <Naveber /> 
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <div className="max-w-[1200px] h-full flex justify-center">
+          <div className="w-full h-full">
+            <Naveber /> 
+            <main className="w-full h-full">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          </div>
       </ProviderFile>
       </body>
     </html>
