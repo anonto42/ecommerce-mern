@@ -6,6 +6,14 @@ export default {
   ],
   theme: {
     extend: {},
+    colors:{
+      bodyColor: "#09090B",
+      mainBg : "#202124",
+      topBarBgColor : "#202124",
+      sndIconColor : "#c9c9c9",
+      mainIconColor : "#2db12d",
+      topBarTextColor : "#c9c9c9",
+    }
   },
   plugins: [],
 }
