@@ -13,6 +13,9 @@ export default {
       sndIconColor : "#c9c9c9",
       mainIconColor : "#2db12d",
       topBarTextColor : "#c9c9c9",
+      navebarBgColor : "#111111",
+      navigatorBg : "#c9c9c9",
+      navigatorTextColor : "#202124",
     }
   },
   plugins: [],
