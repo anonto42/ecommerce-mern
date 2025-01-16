@@ -7,7 +7,7 @@ import { FaBars } from "react-icons/fa";
 import SideBarForMobile from './SideBarForMobile';
 
 const Naveber = () => {
-  const [items,setBar] = useState(false);
+  const [items,setBar] = useState(true);
   return (
     <div className='w-full h-auto'>
       {
@@ -48,6 +48,7 @@ const Naveber = () => {
             className='xl:hidden w-full h-full flex justify-end items-center'
           >
             <FaBars 
+              onClick={()=>setBar(true)}
               className='text-topBarTextColor text-[30px] active:scale-110'
             />
           </div>
