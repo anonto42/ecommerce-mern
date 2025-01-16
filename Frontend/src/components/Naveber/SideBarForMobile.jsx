@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const SideBarForMobile = () => {
-  const [bar,setBar] = useState(true)
   return (
-    <div className={'absolute w-[50%] h-svh bg-mainIconColor z-[99] right-0 duration-150 ease-in-out'}>
-        
-    </div>
+    <div>SideBarForMobile</div>
   )
 }
 
