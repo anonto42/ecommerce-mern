@@ -5,9 +5,10 @@ import TopBar from './TopBar.Jsx';
 import Navigato from '../Navigator/Navigato';
 import { FaBars } from "react-icons/fa";
 import SideBarForMobile from './SideBarForMobile';
+import { IoClose as IoMdCloseCircle } from "react-icons/io5";
 
 const Naveber = () => {
-  const [items,setBar] = useState(true);
+  const [items,setBar] = useState(false);
   return (
     <div className='w-full h-auto'>
       {
@@ -47,10 +48,18 @@ const Naveber = () => {
           <div
             className='xl:hidden w-full h-full flex justify-end items-center'
           >
-            <FaBars 
-              onClick={()=>setBar(true)}
-              className='text-topBarTextColor text-[30px] active:scale-110'
-            />
+            {
+              items?
+              <IoMdCloseCircle
+                onClick={()=>setBar(!items)}
+               className='text-topBarTextColor text-[45px] active:scale-110 cursor-pointer -mr-3'
+              /> 
+              :
+              <FaBars 
+              onClick={()=>setBar(!items)}
+              className='text-topBarTextColor text-[30px] active:scale-110 cursor-pointer'
+              />
+            }
           </div>
         </div>
        </nav>
