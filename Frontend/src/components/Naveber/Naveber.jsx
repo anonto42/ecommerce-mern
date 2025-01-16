@@ -1,20 +1,29 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TopBar from './TopBar.Jsx';
 import Navigato from '../Navigator/Navigato';
 import { FaBars } from "react-icons/fa";
 import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
+import NavigatorForMobile from '../Navigator/NavigatorForMobir';
 
 const Naveber = () => {
   const [items,setBar] = useState(false);
+  const [cato, setCato] = useState(false);
+
+  useEffect(()=>{
+    ;(()=>{ if ( items == false ) setCato(false) })()
+  },[items,cato])
   return (
     <div className='w-full h-auto'>
       {
         window.location.href === "http://localhost:5173/" ? <TopBar /> : ""
       }
-      <SideBarForMobile on={items} setBar={setBar} />
+      <SideBarForMobile on={items} cat={cato} setCat={setCato} />
+      {
+        cato? ( <NavigatorForMobile on={cato} item={["on","off","close"]} key={items} />):(<></>)
+      }
          {/* This is the main navebar */}
        <nav className='w-full bg-navebarBgColor h-[100px] z-50 relative'>
         <div className='max-w-[1280px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
