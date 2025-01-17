@@ -6,7 +6,7 @@ import { MdOutlineFavorite } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-const TopBar = () => {
+const TopStatusBar = () => {
   return (
     <div className={`w-full bg-mainBg`}>
         <div className='flex mx-auto h-[60px] max-w-[1280px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
@@ -67,4 +67,4 @@ const TopBar = () => {
   )
 }
 
-export default TopBar
+export default TopStatusBar

@@ -1,12 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import TopBar from './TopBar.Jsx';
 import Navigato from '../Navigator/Navigato';
 import { FaBars } from "react-icons/fa";
 import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
 import NavigatorForMobile from '../Navigator/NavigatorForMobir';
+import TopStatusBar from './TopStatusBar';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
@@ -18,7 +18,7 @@ const NavigationBar = () => {
   return (
     <div className='w-full h-auto'>
       {
-        window.location.href === "http://localhost:5173/" ? <TopBar /> : ""
+        window.location.href === "http://localhost:5173/" ? <TopStatusBar /> : ""
       }
       <SideBarForMobile on={items} cat={cato} setCat={setCato} />
       {
