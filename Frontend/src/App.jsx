@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Router, Routes} from "react-router-dom"
 import Home from './pages/Home/Home'
-import Naveber from './components/Naveber/Naveber'
+import NavigationBar from './components/Naveber/NavigationBar'
 
 const App = () => {
   return (
     <BrowserRouter>
-    <Naveber />
+    <NavigationBar />
       <Routes>
         <Route path='/' element={<Home/>} />
       </Routes>

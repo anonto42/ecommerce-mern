@@ -8,7 +8,7 @@ import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
 import NavigatorForMobile from '../Navigator/NavigatorForMobir';
 
-const Naveber = () => {
+const NavigationBar = () => {
   const [items,setBar] = useState(false);
   const [cato, setCato] = useState(false);
 
@@ -76,4 +76,4 @@ const Naveber = () => {
   )
 }
 
-export default Naveber
+export default NavigationBar
