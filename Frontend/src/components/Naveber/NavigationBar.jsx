@@ -18,7 +18,7 @@ const NavigationBar = () => {
   return (
     <div className='w-full h-auto'>
       {
-        window.location.href === "http://localhost:5173/" ? <TopStatusBar /> : ""
+        window.location.href === "https://t-shirt-iota.vercel.app/" ? <TopStatusBar /> : ""
       }
       <SideBarForMobile on={items} cat={cato} setCat={setCato} />
       {
