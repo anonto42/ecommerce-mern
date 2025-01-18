@@ -16,6 +16,7 @@ export default {
       navebarBgColor : "#111111",
       navigatorBg : "#c9c9c9",
       navigatorTextColor : "#202124",
+      textDarkColor : "#0c0c0c"
     }
   },
   plugins: [],
