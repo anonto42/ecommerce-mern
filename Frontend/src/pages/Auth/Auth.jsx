@@ -2,7 +2,7 @@ import React from 'react'
 
 const Auth = () => {
   return (
-    <div>Auth</div>
+    <div className='w-full min-h-[90svh]'>Auth</div>
   )
 }
 
