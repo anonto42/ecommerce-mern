@@ -14,44 +14,46 @@ const Footer = () => {
         className='w-full min-h-[300px] bg-navebarBgColor text-topBarTextColor'
     >
         <div
-                    className='w-full h-[150px] border-b border-sndIconColor md:flex max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10 xl:px-0 duration-150 ease-in-out justify-between py-6 md:py-0'
-                >
-            <h1
-                        className='text-topBarTextColor text-xl font-[500] sm:text-3xl md:flex items-center md:text-4xl'
-                    >Join Our Newsletter and Get updated.</h1>
-            <div
-                        className='w-full md:w-[50%] h-full flex justify-center md:justify-end items-center'
-                    >
+            className='w-full border-b-[0.1px] border-sndIconColor'
+        >
+            <div className='h-[150px] md:flex max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10 xl:px-0 duration-150 ease-in-out justify-between py-6 md:py-0'>
+                <h1
+                    className='text-topBarTextColor text-xl font-[500] sm:text-3xl md:flex items-center md:text-4xl'
+                >Join Our Newsletter and Get updated.</h1>
                 <div
-                            className='flex w-[450px] xl:w-[550px] h-[50px] md:h-[55px] rounded-lg justify-center text-topBarTextColor items-center overflow-hidden'
-                        >
-                    <input 
-                                type="text" 
-                                className='w-full h-full px-4 text-sm md:text-lg font-semibold bg-[#222222ad]'
-                                placeholder='Enter your Email'    
-                            />
-                    <button 
-                                className='w-[180px] font-semibold h-full bg-mainIconColor hover:bg-[#44df44] hover:text-[#5f5f5f] duration-100 ease-linear text-base md:text-[17px] active:bg-[#2c912c] active:text-[#d6d6d6]'
-                            >SUBSCRIBE
-                            </button>
+                    className='w-full md:w-[50%] h-full flex justify-center md:justify-end items-center'
+                >
+                    <div
+                        className='flex w-[450px] xl:w-[550px] h-[50px] md:h-[55px] rounded-lg justify-center text-topBarTextColor items-center overflow-hidden'
+                    >
+                        <input 
+                            type="text" 
+                            className='w-full h-full px-4 text-sm md:text-lg font-semibold bg-[#222222ad]'
+                            placeholder='Enter your Email'    
+                        />
+                        <button 
+                            className='w-[180px] font-semibold h-full bg-mainIconColor hover:bg-[#44df44] hover:text-[#5f5f5f] duration-100 ease-linear text-base md:text-[17px] active:bg-[#2c912c] active:text-[#d6d6d6]'
+                        >SUBSCRIBE
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <div 
-            className='max-w-[1400px] h-full mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center pt-4'
+            className='max-w-[1400px] h-full mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out pt-4'
         >
             <div className='w-full h-full'>
                 <div 
-                    className='w-full h-full grid sm:grid-cols-2 md:grid-cols-4'
+                    className='w-full h-full grid sm:grid-cols-2 md:grid-cols-4 '
                 >
                     <div
-                        className='sm:w-[90%] mb-4'
+                        className='sm:w-[90%] mb-4 sm:text-center'
                     >
                         <h2 className='text-2xl text-topBarTextColor font-semibold mb-3'>Company Info</h2>
                         <p className='text-sm text-sndTextColor'>S-Brand, We Design our Tshirts for young generation, we keep positive footprint on all of our items. We are working to bringing a new sense of fashion design and style.</p>
                     </div>
                     <div
-                        className='mb-4'
+                        className='mb-4 sm:text-center'
                     >
                         <h2 className='text-2xl text-topBarTextColor font-semibold mb-3'>Products Info</h2>
                         {
@@ -65,7 +67,7 @@ const Footer = () => {
                         }
                     </div>
                     <div 
-                        className='mb-4'
+                        className='mb-4 sm:text-center'
                     >
                         <h2 className='text-2xl text-topBarTextColor font-semibold mb-3'>Shortcuts</h2>
                         {
@@ -79,7 +81,7 @@ const Footer = () => {
                         }
                     </div>
                     <div
-                        className='mb-4'
+                        className='mb-4 sm:text-center'
                     >
                         <h2 className='text-2xl text-topBarTextColor font-semibold mb-3'>Policy & Info</h2>
                         {
