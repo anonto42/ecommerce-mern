@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter, Route, Routes} from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
 import ScreenBeforeMounted from './components/ScreenBeforeMounted/ScreenBeforeMounted'
 const Application = React.lazy( ()=>import('./utils/LazyConfig') )
 
