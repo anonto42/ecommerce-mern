@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const TopStatusBar = () => {
   return (
     <div className={`w-full bg-mainBg`}>
-        <div className='flex mx-auto h-[60px] max-w-[1280px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
+        <div className='flex mx-auto h-[60px] max-w-[1400px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
             <div className='flex'>
                 <Link to={"/"} className='flex text-center xl:mr-3'>
                     <div 

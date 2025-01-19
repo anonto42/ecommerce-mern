@@ -26,7 +26,7 @@ const NavigationBar = () => {
       }
          {/* This is the main navebar */}
        <nav className='w-full bg-navebarBgColor h-[100px] z-50 relative'>
-        <div className='max-w-[1280px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
+        <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
           <div className='w-full h-full flex items-center'>
             <Link to="/" className='w-[145px]'>
               <img src="/logo.png" className='w-full h-full' alt="" />
