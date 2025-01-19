@@ -8,12 +8,12 @@ import Footer from '../components/Footer/Footer'
 const LazyConfig = () => {
   return (
     <>
-        <NavigationBar />
-            <Routes>
-                <Route path='/' element={<Home/>} />
-                <Route path='/auth' element={<Auth/>} />
-            </Routes>
-        <Footer />
+      <NavigationBar />
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/auth' element={<Auth/>} />
+        </Routes>
+      <Footer />
     </>
   )
 }
