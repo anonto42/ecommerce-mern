@@ -24,7 +24,7 @@ const NavigationBar = () => {
         cato? ( <NavigatorForMobile on={cato} item={["on","off","close"]} key={items} />):(<></>)
       }
          {/* This is the main navebar */}
-       <div className='w-full bg-navebarBgColor h-[100px] z-50 fixed shadow-md shadow-black'>
+       <div className='w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black'>
         <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
           <div className='w-full h-full flex items-center'>
             <Link to="/" className='w-[145px]'>
