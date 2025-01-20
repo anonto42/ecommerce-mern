@@ -1,4 +1,3 @@
-"use client"
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigato from '../Navigator/Navigato';
@@ -16,7 +15,7 @@ const NavigationBar = () => {
     ;(()=>{ if ( items == false ) setCato(false) })()
   },[items,cato])
   return (
-    <div className='w-full h-auto'>
+    <div className='w-full h-full'>
       {
         window.location.href === "https://t-shirt-iota.vercel.app/" ? <TopStatusBar /> : ""
       }
@@ -25,7 +24,7 @@ const NavigationBar = () => {
         cato? ( <NavigatorForMobile on={cato} item={["on","off","close"]} key={items} />):(<></>)
       }
          {/* This is the main navebar */}
-       <nav className='w-full bg-navebarBgColor h-[100px] z-50 relative'>
+       <div className='w-full bg-navebarBgColor h-[100px] z-50 fixed theNave'>
         <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
           <div className='w-full h-full flex items-center'>
             <Link to="/" className='w-[145px]'>
@@ -71,7 +70,7 @@ const NavigationBar = () => {
             }
           </div>
         </div>
-       </nav>
+       </div>
     </div>
   )
 }
