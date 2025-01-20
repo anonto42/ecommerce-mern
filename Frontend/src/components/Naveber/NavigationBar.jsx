@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigato from '../Navigator/Navigato';
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaShoppingCart } from "react-icons/fa";
 import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
 import NavigatorForMobile from '../Navigator/NavigatorForMobir';
 import TopStatusBar from './TopStatusBar';
+import { MdOutlineFavorite } from 'react-icons/md';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
@@ -31,7 +32,7 @@ const NavigationBar = () => {
               <img src="/logo.png" className='w-full h-full' alt="" />
             </Link>
           </div>
-          <div className='xl:flex justify-between items-center w-[60%] h-full hidden'>
+          <div className='md:flex justify-between items-center w-[800px] h-full hidden'>
             <Link to="/">
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
                 Home
@@ -52,9 +53,20 @@ const NavigationBar = () => {
                 Contact
               </h2>
             </Link>
+            <Link to="/cat" className=''>
+                <div 
+                  className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer relative`}
+                  title="Cart"
+                 >
+                    <FaShoppingCart size={21} />
+                    <div className={`absolute -top-2 left-4 w-[20px] flex items-center justify-center h-[20px] bg-[red] rounded-full`}>
+                      <span className={`text-sndIconColor font-semibold`}>{'0'}</span>
+                    </div>
+                  </div>
+            </Link>
           </div>
           <div
-            className='xl:hidden w-full h-full flex justify-end items-center'
+            className='md:hidden w-full h-full flex justify-end items-center'
           >
             {
               items?

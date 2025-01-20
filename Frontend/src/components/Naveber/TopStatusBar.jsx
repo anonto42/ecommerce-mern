@@ -40,17 +40,6 @@ const TopStatusBar = () => {
                         </div>
                     </div>
                 </Link>
-                <Link to="" className='xl:hidden'>
-                    <div
-                        className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-0 relative`}
-                        title='Favorite items'
-                    >
-                        <MdOutlineFavorite size={24} />
-                        <div className={`absolute -top-2 left-4 w-[20px] flex items-center justify-center h-[20px] bg-[red] rounded-full`}>
-                            <span className={`text-sndIconColor font-semibold`}>{'0'}</span>
-                        </div>
-                    </div>
-                </Link>
             </div>
             <div className=''>
                 <Link to="">
