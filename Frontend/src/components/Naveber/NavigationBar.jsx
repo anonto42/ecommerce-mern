@@ -6,26 +6,36 @@ import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
 import NavigatorForMobile from '../Navigator/NavigatorForMobir';
 import TopStatusBar from './TopStatusBar';
-import { MdOutlineFavorite } from 'react-icons/md';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
   const [cato, setCato] = useState(false);
+  const [ navTob,setNavBar ] = useState(false);
+  let bar = (window.location.href === "https://t-shirt-iota.vercel.app/") || (window.location.href === "http://localhost:5173/")
+
+
+  ;(()=>window.addEventListener("scroll",function(){
+    let scrTop = this.window.pageYOffset || document.documentElement.scrollTop;
+    if(scrTop > 0 ) setNavBar(true);
+    else setNavBar(false);
+  }))()
 
   useEffect(()=>{
     ;(()=>{ if ( items == false ) setCato(false) })()
-  },[items,cato])
+    
+  },[items,cato,bar])
+
   return (
     <div className='w-full h-full'>
       {
-        window.location.href === "https://t-shirt-iota.vercel.app/" ? <TopStatusBar /> : ""
+        bar ? <TopStatusBar /> : ""
       }
       <SideBarForMobile on={items} cat={cato} setCat={setCato} />
       {
         cato? ( <NavigatorForMobile on={cato} item={["on","off","close"]} key={items} />):(<></>)
       }
          {/* This is the main navebar */}
-       <div className='w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black'>
+       <div className={!navTob?'w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black':'w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black thebar top-0'}>
         <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
           <div className='w-full h-full flex items-center'>
             <Link to="/" className='w-[145px]'>
