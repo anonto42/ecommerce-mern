@@ -89,6 +89,11 @@ const NavigationBar = () => {
             }
           </div>
         </div>
+        <div
+          className='relative'
+        >
+          <NavigatorForMobile on={cato} setCato={setCato} items={[1,2,3,54,6,7]} key={items} />
+        </div>
        </div>
     </div>
   )
