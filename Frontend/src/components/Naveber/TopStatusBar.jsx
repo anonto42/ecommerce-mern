@@ -2,7 +2,6 @@ import React from 'react';
 import { IoIosCall } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
-import { MdOutlineFavorite } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
@@ -11,25 +10,25 @@ const TopStatusBar = () => {
     <div className={`w-full bg-mainBg`}>
         <div className='flex mx-auto h-[60px] max-w-[1400px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
             <div className='flex'>
-                <Link to={"/"} className='flex text-center xl:mr-3'>
+                <Link to={"/"} className='flex text-center md:mr-3'>
                     <div 
                         className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-1`}
                         title='Contact number'
                         >
                         <IoIosCall size={24}/>
                     </div>
-                    <h2 className={`hidden xl:block text-topBarTextColor font-semibold mt-1`}>+88-01864461331</h2>
+                    <h2 className={`hidden md:block text-topBarTextColor font-semibold mt-1`}>+88-01864461331</h2>
                 </Link>
-                <Link to={""} className='flex text-center xl:mr-3'>
+                <Link to={""} className='flex text-center'>
                     <div 
                         className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-1`}
                         title='E-Mail'
                     >
                         <IoMail size={23} />
                     </div>
-                    <h2 className={`hidden xl:block text-topBarTextColor font-semibold mt-1`}>anontom90@gmail.com</h2>
+                    <h2 className={`hidden md:block text-topBarTextColor font-semibold mt-1`}>anontom90@gmail.com</h2>
                 </Link>
-                <Link to="" className='xl:hidden'>
+                <Link to="" className='md:hidden'>
                     <div 
                         className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-1 relative`}
                         title="Cart"
