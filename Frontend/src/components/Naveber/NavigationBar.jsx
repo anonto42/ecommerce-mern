@@ -26,7 +26,7 @@ const NavigationBar = () => {
   },[items,cato,bar])
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full pb-[80px]'>
       {
         bar ? <TopStatusBar /> : ""
       }
