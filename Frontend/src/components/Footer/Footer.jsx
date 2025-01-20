@@ -123,7 +123,7 @@ const Footer = () => {
             <div
                 className='max-w-[1280px] h-full mx-auto flex justify-center items-center'
             >
-                <p className='text-white text-md text-topBarTextColor'>S-Brand. © All rights reserved.</p>
+                <p className='text-md text-topBarTextColor'>S-Brand. © All rights reserved.</p>
             </div>
         </div>
     </div>
