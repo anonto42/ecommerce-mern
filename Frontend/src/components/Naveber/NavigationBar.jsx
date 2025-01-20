@@ -9,7 +9,7 @@ import TopStatusBar from './TopStatusBar';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
-  const [cato, setCato] = useState(false);
+  const [cato, setCato] = useState(true);
   const [ navTob,setNavBar ] = useState(false);
   let bar = (window.location.href === "https://t-shirt-iota.vercel.app/") || (window.location.href === "http://localhost:5173/")
 
@@ -30,13 +30,10 @@ const NavigationBar = () => {
       {
         bar ? <TopStatusBar /> : ""
       }
-      <SideBarForMobile on={items} cat={cato} setCat={setCato} />
-      {
-        cato? ( <NavigatorForMobile on={cato} item={["on","off","close"]} key={items} />):(<></>)
-      }
          {/* This is the main navebar */}
        <div className={!navTob?'w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black':'w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black thebar top-0'}>
-        <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full'>
+        <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full relative'>
+          <SideBarForMobile on={items} cat={cato} setCat={setCato} item={items} />
           <div className='w-full h-full flex items-center'>
             <Link to="/" className='w-[145px]'>
               <img src="/logo.png" className='w-full h-full' alt="" />
