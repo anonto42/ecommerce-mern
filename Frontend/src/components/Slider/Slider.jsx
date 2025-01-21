@@ -19,7 +19,7 @@ const Slider = ({ images }) => {
     return (
         <div className="relative w-full h-full overflow-hidden">
             <div 
-                className='w-full h-full flex absolute z-20'
+                className='w-full h-full flex absolute z-10'
             >
                 <div
                     onClick={()=>leftSlite()}
