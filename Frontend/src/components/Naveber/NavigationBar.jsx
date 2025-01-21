@@ -9,7 +9,7 @@ import TopStatusBar from './TopStatusBar';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
-  const [cato, setCato] = useState(true);
+  const [cato, setCato] = useState(false);
   const [ navTob,setNavBar ] = useState(false);
   let bar = (window.location.href === "https://t-shirt-iota.vercel.app/") || (window.location.href === "http://localhost:5173/")
 
