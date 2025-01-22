@@ -2,20 +2,27 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    appData : [],
-    userData : [],
+    appData : [
+        "application"
+    ],
+    userData : [
+        "user"
+    ],
 }
 
 const allDatas = createSlice({
     name:"applicationData",
     initialState,
     reducers:{
-        setData: ( state , action ) => {
-            state = action.payload;
+        setAppData: ( state , action ) => {
+            state.appData = action.payload;
+        },
+        setUserData: ( state , action ) => {
+            state.userData = action.payload;
         }
     }
 })
 
 
 export default allDatas;
-export const { setData } = allDatas.actions
+export const { setAppData , setUserData } = allDatas.actions
