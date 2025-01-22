@@ -122,16 +122,16 @@ const products = [
 
 
 const initialState = {
-    appData : [
+    appData : {
         heroImages,
         catagorys,
         bestSellingProducts,
         specialOffersDiscounts,
         products
-    ],
-    userData : [
-        "user"
-    ],
+    },
+    userData : {
+        user:"user"
+    }
 }
 
 const allDatas = createSlice({
