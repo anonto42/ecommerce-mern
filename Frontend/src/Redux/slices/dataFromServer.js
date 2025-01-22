@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import firstHeroImage from '/hero.jpg';
 import secondHeroImage from '/hero2.jpg';
 import theardHeroImage from '/hero3.jpg';
-import defualtImage from "/assets/frontImage.png";
+import defualtImage from "/gg.png";
 
 
 const heroImages = [
@@ -40,7 +40,7 @@ const product = {
     _id:"owerj;oqwericvaasdhaoiew0923",
     title:"Product Name",
     price:"0",
-    images:[ defualtImage , defualtImage , defualtImage ],
+    images:[ defualtImage , firstHeroImage , defualtImage ],
     description:"lorem ipsum dolor sit amet, consectetur adip occ occurence velit vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel aug augue vel augue vel augue vel augue vel augue vel aug uncertainty",
     catagory:"T-shirt",
     quantity:0,
