@@ -7,10 +7,11 @@ const ShowCaseCart = ({price,title,images,reviews,count}) => {
     <div
         onMouseEnter={()=>setHover(!hover)}
         onMouseLeave={()=>setHover(!hover)}
-        className='min-w-[200px] h-[250px] bg-[#646464] mr-2 sm:mr-3 md:mr-4 rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] hover:scale-[1.03] text-topBarTextColor transition-transform transform'
+        className={`min-w-[200px] h-[250px] bg-[#646464] mr-2 sm:mr-3 md:mr-4 rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] hover:scale-[1.03] text-topBarTextColor`}
         style={
             {
-                transform:`translateX(-${count * 100}%)`
+                transform:`translateX(-${count * 100}%)`,
+                scale: hover? 1.03 : 1
             }
         }
     >
