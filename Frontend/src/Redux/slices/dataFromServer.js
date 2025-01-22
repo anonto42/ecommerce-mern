@@ -40,7 +40,7 @@ const product = {
     _id:"owerj;oqwericvaasdhaoiew0923",
     title:"Product Name",
     price:"0",
-    image:[ defualtImage , defualtImage , defualtImage ],
+    images:[ defualtImage , defualtImage , defualtImage ],
     description:"lorem ipsum dolor sit amet, consectetur adip occ occurence velit vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel aug augue vel augue vel augue vel augue vel augue vel aug uncertainty",
     catagory:"T-shirt",
     quantity:0,
