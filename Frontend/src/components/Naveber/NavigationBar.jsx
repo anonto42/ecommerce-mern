@@ -39,7 +39,7 @@ const NavigationBar = () => {
               <img src="/logo.png" className='w-full h-full' alt="" />
             </Link>
           </div>
-          <div className='md:flex justify-between items-center w-[800px] h-full hidden'>
+          <div className='lg:flex justify-between items-center w-[800px] h-full hidden'>
             <Link to="/">
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
                 Home
@@ -73,7 +73,7 @@ const NavigationBar = () => {
             </Link>
           </div>
           <div
-            className='md:hidden w-full h-full flex justify-end items-center'
+            className='lg:hidden w-full h-full flex justify-end items-center'
           >
             {
               items?
