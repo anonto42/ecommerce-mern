@@ -13,12 +13,13 @@ const NavigationBar = () => {
   const [ navTob,setNavBar ] = useState(false);
   let bar = (window.location.href === "https://ecomarts.vercel.app/") || (window.location.href === "http://localhost:5173/")
 
-
-  ;(()=>window.addEventListener("scroll",function(){
+  useEffect(()=>{
+    ;(()=>window.addEventListener("scroll",function(){
     let scrTop = this.window.pageYOffset || document.documentElement.scrollTop;
     if(scrTop > 0 ) setNavBar(true);
     else setNavBar(false);
   }))()
+  },[])
 
   useEffect(()=>{
     ;(()=>{ if ( items == false ) setCato(false) })()
