@@ -11,7 +11,7 @@ const NavigationBar = () => {
   const [items,setBar] = useState(false);
   const [cato, setCato] = useState(false);
   const [ navTob,setNavBar ] = useState(false);
-  let bar = (window.location.href === "https://t-shirt-iota.vercel.app/") || (window.location.href === "http://localhost:5173/")
+  let bar = (window.location.href === "https://ecomarts.vercel.app/") || (window.location.href === "http://localhost:5173/")
 
 
   ;(()=>window.addEventListener("scroll",function(){
