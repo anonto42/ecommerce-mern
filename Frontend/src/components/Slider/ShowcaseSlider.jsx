@@ -5,13 +5,17 @@ import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 
 const ShowcaseSlider = ({cart}) => {
     const [on,setOn] = useState(false);
-    const [position,setPosition] = useState(1);
+    const [position,setPosition] = useState(0);
+    let windowsSize = window.innerWidth;
+    const fixedSize = Math.floor(windowsSize / 205) 
+    console.log(position)
+
     const increment = () => {
-        if( position > ( cart.length - 1 ))setPosition(1);
+        if( position > ( cart.length - fixedSize))setPosition(1);
         else setPosition(position + 1);
     }
     const decrement = () => {
-        if( position < 1 ) setPosition(cart.length);
+        if( position < 1 ) setPosition(cart.length - 1 );
         else setPosition(position - 1);
     }
   return (
