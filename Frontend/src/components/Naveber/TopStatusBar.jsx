@@ -41,7 +41,7 @@ const TopStatusBar = () => {
                 </Link>
             </div>
             <div className=''>
-                <Link to="">
+                <Link to="/auth">
                     <div className={`flex h-[35px] border-2 w-[100px] justify-center items-center rounded-full text-mainIconColor hover:bg-mainIconColor border-sndIconColor hover:text-sndIconColor hover:border-none`}>
                         <div className='flex'>
                             <FaUser size={20} className='mt-1.5px' />
