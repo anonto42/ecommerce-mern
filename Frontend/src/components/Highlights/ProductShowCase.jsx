@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ShowcaseSlider from '../Slider/ShowcaseSlider'
 
-const ProductShowCase = ({showCaseName,bestSellingProducts}) => {
+const ProductShowCase = ({showCaseName,sellingProducts}) => {
   return (
     <div 
       className='w-full min-h-[380px]'>
@@ -18,7 +18,7 @@ const ProductShowCase = ({showCaseName,bestSellingProducts}) => {
       <div
         className='max-w-[1400px] mx-auto h-[300px]'
       >
-        <ShowcaseSlider cart={bestSellingProducts} />
+        <ShowcaseSlider cart={sellingProducts} />
       </div>
     </div>
   )
