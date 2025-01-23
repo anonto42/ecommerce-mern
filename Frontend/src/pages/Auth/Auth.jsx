@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Auth = () => {
   const [auth,setAuth] = useState(true);
-  const [forgot,setForgot] = useState(true);
+  const [forgot,setForgot] = useState(false);
   return (
       <div className="flex items-center justify-center min-h-[70svh]">
       <div className="bg-[white] shadow-lg rounded-lg p-8 max-w-xs md:max-w-md w-full">
