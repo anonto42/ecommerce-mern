@@ -15,7 +15,7 @@ const ShowcaseSlider = ({cart}) => {
         else setPosition(position + 1);
     }
     const decrement = () => {
-        if( position < 1 ) setPosition(cart.length - fixedSize );
+        if( position < 1 ) setPosition(cart.length - 1 );
         else setPosition(position - 1);
     }
   return (
