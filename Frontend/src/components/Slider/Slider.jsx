@@ -1,35 +1,52 @@
 import React, { useState, useEffect } from 'react';
+import { RotatingLines } from "react-loader-spinner"
 
 const Slider = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loadedImages, setLoadedImages] = useState({});
+
+    // Automatically slide to the next image every 5 seconds
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
         }, 5000);
         return () => clearInterval(interval);
     }, [images.length]);
-    function leftSlite(){
-        if(currentIndex < 0) setCurrentIndex(images.length - 1)
-        else setCurrentIndex(currentIndex - 1)
-    }
-    function rightSlite(){
-        if(currentIndex == (images.length - 1 )) setCurrentIndex(0)
-        else setCurrentIndex(currentIndex + 1)
-    }
+
+    // Go to the previous slide
+    const leftSlide = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? images.length - 1 : prevIndex - 1
+        );
+    };
+
+    // Go to the next slide
+    const rightSlide = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
+    // Handle image load
+    const handleImageLoad = (idx) => {
+        setLoadedImages((prevState) => ({ ...prevState, [idx]: true }));
+    };
+
     return (
         <div className="relative w-full h-full overflow-hidden">
-            <div 
-                className='w-full h-full flex absolute z-10'
-            >
+            {/* Overlay for click navigation */}
+            <div className="w-full h-full flex absolute z-10">
                 <div
-                    onClick={()=>leftSlite()}
-                    className='w-[50%] h-full'
+                    onClick={leftSlide}
+                    className="w-[50%] h-full cursor-pointer"
                 ></div>
                 <div
-                    onClick={rightSlite} 
-                    className='w-[50%] h-full'
+                    onClick={rightSlide}
+                    className="w-[50%] h-full cursor-pointer"
                 ></div>
             </div>
+
+            {/* Slider */}
             <div
                 className="w-full h-full flex transition-transform duration-1000 ease-in-out"
                 style={{
@@ -39,14 +56,42 @@ const Slider = ({ images }) => {
                 {images.map((image, idx) => (
                     <div
                         key={idx}
-                        className="flex-shrink-0 w-full h-full bg-center bg-cover"
-                        style={{ backgroundImage: `url(${image})` }}
-                    ></div>
+                        className="flex-shrink-0 w-full h-full bg-center bg-cover relative"
+                        style={{
+                            backgroundColor: '#f0f0f0'
+                        }}
+                    >
+                        {/* Lazy load image */}
+                        <img
+                            loading='lazy'
+                            src={image}
+                            alt={`Slide ${idx + 1}`}
+                            className={
+                                `w-full h-full object-cover transition-opacity duration-500 ${
+                                loadedImages[idx] ? 'opacity-100' : 'opacity-0'
+                                }`
+                            }
+                            onLoad={() => handleImageLoad(idx)}
+                        />
+                        {!loadedImages[idx] && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <RotatingLines
+                                    visible={true}
+                                    height="90"
+                                    width="90"
+                                    color="#ABDDA4"
+                                    strokeWidth="5"
+                                    animationDuration="0.75"
+                                    ariaLabel="rotating-lines-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                />
+                            </div>
+                        )}
+                    </div>
                 ))}
             </div>
         </div>
-
-
     );
 };
 
