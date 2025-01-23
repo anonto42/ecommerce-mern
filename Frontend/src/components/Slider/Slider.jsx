@@ -56,18 +56,14 @@ const Slider = ({ images }) => {
                 {images.map((image, idx) => (
                     <div
                         key={idx}
-                        className="flex-shrink-0 w-full h-full bg-center bg-cover relative"
-                        style={{
-                            backgroundColor: '#f0f0f0'
-                        }}
+                        className="flex-shrink-0 w-full bg-[#f0f0f0] h-full bg-center bg-cover relative"
                     >
-                        {/* Lazy load image */}
                         <img
                             loading='lazy'
                             src={image}
                             alt={`Slide ${idx + 1}`}
                             className={
-                                `w-full h-full object-cover transition-opacity duration-500 ${
+                                `w-full h-full object-cover transition-opacity duration-500 ease-in ${
                                 loadedImages[idx] ? 'opacity-100' : 'opacity-0'
                                 }`
                             }
@@ -79,7 +75,7 @@ const Slider = ({ images }) => {
                                     visible={true}
                                     height="90"
                                     width="90"
-                                    color="#ABDDA4"
+                                    color="#7F8289"
                                     strokeWidth="5"
                                     animationDuration="0.75"
                                     ariaLabel="rotating-lines-loading"
