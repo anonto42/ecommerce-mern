@@ -7,8 +7,7 @@ const ShowcaseSlider = ({cart}) => {
     const [on,setOn] = useState(false);
     const [position,setPosition] = useState(0);
     let windowsSize = window.innerWidth;
-    const fixedSize = Math.floor(windowsSize / 205) 
-    console.log(position)
+    const fixedSize = Math.floor(windowsSize / 205)
 
     const increment = () => {
         if( position > ( cart.length - fixedSize))setPosition(1);
