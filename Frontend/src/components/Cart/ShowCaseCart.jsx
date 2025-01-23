@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { MdStar } from "react-icons/md";
+import { RotatingLines } from 'react-loader-spinner';
 
 const ShowCaseCart = ({price,title,images,reviews,count}) => {
-    const [hover,setHover] = useState(false);
+    const [hover,setHover] = useState(1);
+    const [load,setLoad] = useState(false)
   return (
     <div
-        onMouseEnter={()=>setHover(!hover)}
-        onMouseLeave={()=>setHover(!hover)}
-        className={`min-w-[200px] h-[250px] bg-[#646464] mr-2 sm:mr-3 md:mr-4 rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] hover:scale-[1.03] text-topBarTextColor`}
+        onMouseEnter={()=>setHover(2)}
+        onMouseLeave={()=>setHover(1)}
+        className={`min-w-[200px] h-[250px] bg-[#646464] mr-2 sm:mr-3 md:mr-4 rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] text-topBarTextColor`}
         style={
             {
-                transform:`translateX(-${count * 100}%)`,
-                scale: hover? 1.03 : 1
+                transform:`translateX(-${count * 100}%)`
             }
         }
     >
@@ -19,13 +20,31 @@ const ShowCaseCart = ({price,title,images,reviews,count}) => {
             className='w-full h-[150px] relative'
         >
             <div
-                className='w-full h-full bg-center bg-cover absolute'
-                style={
-                    { 
-                        backgroundImage:!hover?`url(${images[0]})`:`url(${images[1]})`
-                    }
+                className='w-full h-full bg-center bg-cover relative flex-shrink-0 bg-[#f0f0f0] flex'
+            >
+                <img 
+                    className={`w-full h-full object-cover transition-opacity duration-500 ease-in ${load? "opacity-100" : "opacity-0"}`}
+                    src={images[hover]} 
+                    alt="Not found"
+                    loading='lazy'
+                    onLoad={()=>setLoad(true)}
+                />
+                {
+                    !load?(
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <RotatingLines
+                                visible={true}
+                                height="50"
+                                width="50"
+                                color="#7F8289"
+                                strokeWidth="5"
+                                animationDuration="0.75"
+                                ariaLabel="rotating-lines-loading"
+                            />
+                        </div>
+                    ):(<></>)
                 }
-            />
+            </div>
         </div>
         <h2 
             className='text-xl font-normal pt-2 pl-2 pb-1 font-sans'
