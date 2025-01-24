@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ScreenBeforeMounted from './components/ScreenBeforeMounted/ScreenBeforeMounted'
 import { ToastContainer } from 'react-toastify';
 import Nopage from './pages/Nopage/Nopage';
+import Products from './pages/products/Products';
 const NavigationBar =  React.lazy( ()=>import('./components/Naveber/NavigationBar') )
 const Footer =  React.lazy( ()=>import('./components/Footer/Footer') )
 const Home =  React.lazy( ()=>import('./pages/Home/Home') )
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/auth' element={<Auth/>} />
+          <Route path='/products' element={<Products products/>} />
           <Route path='*' element={<Nopage />} />
         </Routes>
       <Footer />
