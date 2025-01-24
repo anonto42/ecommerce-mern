@@ -10,13 +10,13 @@ const ProductShowCase = ({showCaseName,sellingProducts}) => {
       >
         <h1 
             className='text-topBarTextColor text-2xl sm:text-3xl md:text-4xl font-semibold font-serif'>
-                {
-                    showCaseName
-                }
+              {
+                  showCaseName
+              }
         </h1>
       </div>
       <div
-        className='max-w-[1400px] mx-auto h-[300px]'
+        className='max-w-[1400px] mx-auto min-h-[350px]'
       >
         <ShowcaseSlider cart={sellingProducts} />
       </div>

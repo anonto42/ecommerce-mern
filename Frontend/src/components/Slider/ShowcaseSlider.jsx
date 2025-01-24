@@ -26,12 +26,12 @@ const ShowcaseSlider = ({cart}) => {
     >
         <GoChevronLeft 
             onClick={()=>decrement()}
-            className={on?'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-center hover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[115px] text-[60px] z-50 cursor-pointer duration-200 ease-in-out left-5 bg-[#16b91679]' : 'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-center hover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[115px] text-[60px] z-50 cursor-pointer duration-200 ease-in-out left-5 xl:-left-[100px] bg-[#16b91679]' }
+            className={on?'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-center hover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[45%] text-[60px] z-30 cursor-pointer duration-200 ease-in-out left-5 bg-[#16b91679]' : 'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-center hover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[45%] text-[60px] z-30 cursor-pointer duration-200 ease-in-out left-5 xl:-left-[100px] bg-[#16b91679]' }
         />
 
         <GoChevronRight 
             onClick={()=>increment()}
-            className={on?'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-center hover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[115px] text-[60px] z-50 cursor-pointer duration-200 ease-in-out right-5 bg-[#16b91679]' : 'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-centerhover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[115px] text-[60px] z-50 cursor-pointer duration-200 ease-in-out right-5 xl:-right-[100px] bg-[#16b91679]' }
+            className={on?'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-center hover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[45%] text-[60px] z-30 cursor-pointer duration-200 ease-in-out right-5 bg-[#16b91679]' : 'absolute w-[60px] h-[60px] border-[3.5px] rounded-full text-centerhover:text-textDarkColor hover:border-textDarkColor border-white text-white hover:bg-white active:bg-white top-[45%] text-[60px] z-30 cursor-pointer duration-200 ease-in-out right-5 xl:-right-[100px] bg-[#16b91679]' }
         />
 
 
@@ -44,6 +44,7 @@ const ShowcaseSlider = ({cart}) => {
                         to={`/product/${title}`}
                         >
                         <ShowCaseCart 
+                            mr={true}
                             price={price}
                             title={title}
                             images={images || defualtImage}
