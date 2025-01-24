@@ -11,7 +11,7 @@ const Nopage = () => {
             className='text-center'
         >
             <h1 
-                className='text-center text-2xl my-4'
+                className='text-center text-xl md:text-2xl my-4'
             >
                 <strong>
                     Sorry, this page isn't available.
@@ -25,7 +25,7 @@ const Nopage = () => {
             </h1>
             <Link to={"/"}>
                 <button 
-                    className='text-4xl active:scale-105 text-mainIconColor'
+                    className='md:text-4xl text-3xl active:scale-105 text-mainIconColor'
                 >
                     <FaHome />
                 </button>
