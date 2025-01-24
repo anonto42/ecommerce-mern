@@ -37,7 +37,7 @@ const HeroSection = () => {
        className='w-full h-[55svh] relative'
     >
       <button
-        className='border-2 text-topBarTextColor xl:p-3 p-2 md:text-lg xl:text-xl 2xl:text-2xl font-semibold rounded-lg mt-3 hover:bg-topBarTextColor hover:text-textDarkColor z-[11] cursor-pointer duration-200 absolute xl:top-[69%] top-[60%] left-[50%] xl:left-[49.3%] translate-x-[-50%] translate-y-[-50%] gsapBtnAnimation opacity-[100%]'
+        className='border-2 text-topBarTextColor xl:p-3 p-2 md:text-lg xl:text-xl 2xl:text-2xl font-semibold rounded-lg mt-3 hover:bg-topBarTextColor hover:text-textDarkColor z-[11] cursor-pointer duration-200 absolute xl:top-[69%] top-[35svh] left-[50%] xl:left-[49.3%] translate-x-[-50%] translate-y-[-50%] gsapBtnAnimation opacity-[100%]'
       >Discover More</button>
       <Slider images={images} />
 
