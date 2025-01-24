@@ -14,14 +14,14 @@ const Footer = () => {
         className='w-full min-h-[300px] bg-navebarBgColor text-topBarTextColor'
     >
         <div
-            className='w-full border-b-[0.1px] border-sndIconColor'
+            className='w-full border-b-[0.1px] h-auto border-sndIconColor'
         >
             <div className='h-[150px] md:flex max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10 xl:px-0 duration-150 ease-in-out justify-between py-6 md:py-0'>
                 <h1
-                    className='text-topBarTextColor text-xl font-[500] sm:text-3xl md:flex items-center md:text-4xl'
+                    className='text-topBarTextColor text-xl font-[500] sm:text-2xl md:flex items-center md:text-3xl'
                 >Join Our Newsletter and Get updated.</h1>
                 <div
-                    className='w-full md:w-[50%] h-full flex justify-center md:justify-end items-center'
+                    className='w-full md:w-[50%] h-auto mt-2 sm:mt-0 sm:h-full flex justify-center md:justify-end items-center mb-1'
                 >
                     <div
                         className='flex w-[450px] xl:w-[550px] h-[50px] md:h-[55px] rounded-lg justify-center text-topBarTextColor items-center overflow-hidden'
