@@ -10,10 +10,10 @@ const ScreenBeforeMounted = () => {
       <nav
       >
         <div
-          className='w-full h-[70px] bg-[#292929]'
+          className='w-full h-[60px] bg-[#292929]'
         ></div>
         <div
-          className='w-full h-[90px] bg-[#5a5a5a] shadow-xl shadow-[#00000080] z-20 flex justify-center items-center'
+          className='w-full h-[80px] bg-[#5a5a5a] shadow-xl shadow-[#00000080] z-20 flex justify-center items-center rounded-e-sm'
         >
           <RotatingLines
           width={55}
@@ -21,7 +21,7 @@ const ScreenBeforeMounted = () => {
         </div>
       </nav>
       <div
-        className='w-full h-[55vh] bg-[#ffffffa2] flex justify-center items-center'
+        className='w-full h-[55vh] bg-[#ffffff00] flex justify-center items-center'
       >
         <RotatingLines />
       </div>
