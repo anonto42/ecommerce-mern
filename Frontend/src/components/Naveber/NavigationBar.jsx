@@ -9,7 +9,6 @@ import TopStatusBar from './TopStatusBar';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
-  const [cato, setCato] = useState(false);
   const [ navTob,setNavBar ] = useState(false);
   let bar = (window.location.href === "https://ecomarts.vercel.app/") || (window.location.href === "http://localhost:5173/")
 
@@ -21,11 +20,6 @@ const NavigationBar = () => {
   }))()
   },[])
 
-  useEffect(()=>{
-    ;(()=>{ if ( items == false ) setCato(false) })()
-    
-  },[items,cato,bar])
-
   return (
     <div className='w-full h-full pb-[80px]'>
       {
@@ -34,7 +28,7 @@ const NavigationBar = () => {
          {/* This is the main navebar */}
        <div className={!navTob?'w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black':'w-full bg-navebarBgColor h-[80px] z-50 fixed shadow-md shadow-black thebar top-0'}>
         <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full relative'>
-          <SideBarForMobile on={items} cat={cato} setCat={setCato} item={items} />
+          <SideBarForMobile on={items} item={items} />
           <div className='w-full h-full flex items-center'>
             <Link to="/" className='w-[145px]'>
               <img src="/logo.png" className='w-full h-full' alt="" />
@@ -51,11 +45,11 @@ const NavigationBar = () => {
                 Products
               </h2>
             </Link>
-            <h2 
-              className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white] cursor-pointer'
-            >
-              <Navigato />
-            </h2>
+            <Link to="/account">
+              <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
+                Account
+              </h2>
+            </Link>
             <Link to="/">
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
                 Contact
@@ -93,7 +87,7 @@ const NavigationBar = () => {
         <div
           className='relative'
         >
-          <NavigatorForMobile on={cato} setCato={setCato} setBar={setBar} items={[1,2,3,54,6,7]} key={items} />
+          <NavigatorForMobile setBar={setBar} items={[1,2,3,54,6,7]} key={items} />
         </div>
        </div>
     </div>
