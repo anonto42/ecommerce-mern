@@ -38,11 +38,128 @@ const reviews = [
 ]
 const product = {
     _id:"owerj;oqwericvaasdhaoiew0923",
-    title:"Product Name",
+    title:"T-shirt",
     price:"0",
     images:[ defualtImage , firstHeroImage , defualtImage ],
     description:"lorem ipsum dolor sit amet, consectetur adip occ occurence velit vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel aug augue vel augue vel augue vel augue vel augue vel aug uncertainty",
     catagory:"T-shirt",
+    quantity:0,
+    reviews,
+    size:['M',"S","X","L","XL"],
+    color:["Black","White"],
+    gender:["Male","Female"],
+    material:["Cotton","Polyester"],
+    colorCode:["Black","blue","gray","Red"],
+    fabric:["Denim","Cotton"],
+    brand:"S-Brand",
+    questionsAboutProduct:[
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+    ]
+}
+const product2 = {
+    _id:"owerj;oqwericvaasdhaoiew0923",
+    title:"Polo-T-shirt",
+    price:"0",
+    images:[ defualtImage , firstHeroImage , defualtImage ],
+    description:"lorem ipsum dolor sit amet, consectetur adip occ occurence velit vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel aug augue vel augue vel augue vel augue vel augue vel aug uncertainty",
+    catagory:"Polo-T-shirt",
+    quantity:0,
+    reviews,
+    size:['M',"S","X","L","XL"],
+    color:["Black","White"],
+    gender:["Male","Female"],
+    material:["Cotton","Polyester"],
+    colorCode:["Black","blue","gray","Red"],
+    fabric:["Denim","Cotton"],
+    brand:"S-Brand",
+    questionsAboutProduct:[
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+    ]
+}
+const product3 = {
+    _id:"owerj;oqwericvaasdhaoiew0923",
+    title:"Shirt",
+    price:"0",
+    images:[ defualtImage , firstHeroImage , defualtImage ],
+    description:"lorem ipsum dolor sit amet, consectetur adip occ occurence velit vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel aug augue vel augue vel augue vel augue vel augue vel aug uncertainty",
+    catagory:"Shirt",
+    quantity:0,
+    reviews,
+    size:['M',"S","X","L","XL"],
+    color:["Black","White"],
+    gender:["Male","Female"],
+    material:["Cotton","Polyester"],
+    colorCode:["Black","blue","gray","Red"],
+    fabric:["Denim","Cotton"],
+    brand:"S-Brand",
+    questionsAboutProduct:[
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+        {
+            question:"What is the best size for me?",
+            answer:"S"
+        },
+    ]
+}
+const product4 = {
+    _id:"owerj;oqwericvaasdhaoiew0923",
+    title:"pant name",
+    price:"0",
+    images:[ defualtImage , firstHeroImage , defualtImage ],
+    description:"lorem ipsum dolor sit amet, consectetur adip occ occurence velit vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel augue vel aug augue vel augue vel augue vel augue vel augue vel aug uncertainty",
+    catagory:"Pant",
     quantity:0,
     reviews,
     size:['M',"S","X","L","XL"],
@@ -103,21 +220,26 @@ const specialOffersDiscounts = [
 ]
 const catagorys = [
     "T-shirt",
-    "Poto-shirt",
+    "Polo-T-shirt",
     "Shirt",
     "Pant"
 ]
 const products = [
     product,
+    product3,
+    product2,
     product,
+    product2,
+    product4,
+    product4,product,
+    product3,
+    product3,
+    product2,
     product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product
+    product2,
+    product4,
+    product3,
+    
 ]
 
 
