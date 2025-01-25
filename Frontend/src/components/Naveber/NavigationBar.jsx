@@ -45,7 +45,7 @@ const NavigationBar = () => {
                 Products
               </h2>
             </Link>
-            <Link to="/account">
+            <Link to="/profile">
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
                 Account
               </h2>
