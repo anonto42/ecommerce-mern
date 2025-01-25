@@ -23,7 +23,7 @@ const ProductPage = () => {
         className='lg:max-w-[1400px] w-full mx-auto h-full lg:flex lg:mt-16'
       >
         <div
-          className='w-full h-auto px-4 pt-4'
+          className='w-full h-auto px-4 pt-4 relative'
         >
           <img 
             src={image} 
@@ -35,7 +35,7 @@ const ProductPage = () => {
           {
             !load?(
               <div 
-                className='w-[320px] md:w-[450px] md:h-[550px] mx-auto h-[350px] bg-slate-100 border-2 border-mainIconColor rounded-md overflow-hidden'
+                className='w-[320px] absolute z-20 md:w-[450px] md:h-[550px] mx-auto h-[350px] bg-slate-100 border-2 border-mainIconColor rounded-md overflow-hidden'
               ></div>
             ):(<></>)
           }
@@ -47,46 +47,49 @@ const ProductPage = () => {
             >
               <div
                 onClick={()=>{setImage(img[0]);setImageLocation(1)}}
-                className={imgLoaction===1?'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-mainIconColor ml-2 cursor-pointer':'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-topBarTextColor ml-2 cursor-pointer'}
+                className={imgLoaction===1?'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-mainIconColor ml-2 cursor-pointer relative':'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-topBarTextColor ml-2 cursor-pointer relative'}
               >
                 <img 
                   src={img[0]} 
                   alt="" 
+                  loading='lazy'
                   className='w-full h-full'
                 />
                 {!load?(
                     <div 
-                      className='w-full h-full bg-slate-100'
+                      className='w-full h-full bg-slate-100 absolute z-20'
                     ></div>
                     ):(<></>)}
               </div>
               <div
                 onClick={()=>{setImage(img[1]);setImageLocation(2)}}
-                className={imgLoaction===2?'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-mainIconColor ml-2 cursor-pointer':'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-topBarTextColor ml-2 cursor-pointer'}
+                className={imgLoaction===2?'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-mainIconColor ml-2 cursor-pointer relative':'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-topBarTextColor ml-2 cursor-pointer relative'}
               >
                 <img 
                   src={img[1]} 
                   alt="" 
+                  loading='lazy'
                   className='w-full h-full'
                 />
                 {!load?(
                     <div 
-                      className='w-full h-full bg-slate-100'
+                      className='w-full h-full bg-slate-100 absolute z-20'
                     ></div>
                     ):(<></>)}
               </div>
               <div
                 onClick={()=>{setImage(img[2]);setImageLocation(3)}}
-                className={imgLoaction===3?'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-mainIconColor ml-2 cursor-pointer':'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-topBarTextColor ml-2 cursor-pointer'}
+                className={imgLoaction===3?'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-mainIconColor ml-2 cursor-pointer relative':'w-[80px] h-[80px] md:w-[110px] md:h-[110px] overflow-hidden rounded-md border-2 border-topBarTextColor ml-2 cursor-pointer relative'}
               >
                 <img 
                   src={img[2]} 
                   alt="" 
+                  loading='lazy'
                   className='w-full h-full'
                 />
                 {!load?(
                     <div 
-                      className='w-full h-full bg-slate-100'
+                      className='w-full h-full bg-slate-100 absolute z-20'
                     ></div>
                     ):(<></>)}
               </div>
