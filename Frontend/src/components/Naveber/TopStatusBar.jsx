@@ -10,7 +10,7 @@ const TopStatusBar = () => {
     <div className={`w-full bg-mainBg`}>
         <div className='flex mx-auto h-[60px] max-w-[1400px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
             <div className='flex'>
-                <Link to={"/"} className='flex text-center md:mr-3'>
+                <Link to={"/"} className='flex text-center lg:mr-3'>
                     <div 
                         className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-1`}
                         title='Contact number'
@@ -28,7 +28,7 @@ const TopStatusBar = () => {
                     </div>
                     <h2 className={`hidden lg:block text-topBarTextColor font-semibold mt-1`}>anontom90@gmail.com</h2>
                 </Link>
-                <Link to="" className='lg:hidden'>
+                <Link to="/cart" className='lg:hidden'>
                     <div 
                         className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-1 relative`}
                         title="Cart"

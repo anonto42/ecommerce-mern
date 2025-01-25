@@ -55,7 +55,7 @@ const NavigationBar = () => {
                 Contact
               </h2>
             </Link>
-            <Link to="/cat" className=''>
+            <Link to="/cart" className=''>
                 <div 
                   className={`border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer relative`}
                   title="Cart"
@@ -83,11 +83,6 @@ const NavigationBar = () => {
               />
             }
           </div>
-        </div>
-        <div
-          className='relative'
-        >
-          <NavigatorForMobile setBar={setBar} items={[1,2,3,54,6,7]} key={items} />
         </div>
        </div>
     </div>
