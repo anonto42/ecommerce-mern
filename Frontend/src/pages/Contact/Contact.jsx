@@ -9,11 +9,35 @@ const Contact = () => {
             className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10 xl:px-0'
         >
             <div
+                className='w-[500px] h-[150px] mx-auto text-center pt-4'
+            >
+                <h1
+                    className='text-2xl font-serif font-semibold mb-4'
+                >Our whatsapp number : 
+                    <small
+                        className='text-lg font-light font-mono'
+                    >
+                        {" "}+91 9999999999
+                    </small>
+                </h1>
+
+                <h1
+                    className='text-2xl font-serif font-semibold mb-4'
+                >Our email address : 
+                    <small
+                        className='text-lg font-light font-mono'
+                    >
+                       {" "} example@example.com
+                    </small>
+                </h1>
+
+            </div>
+            <div
                 className='max-w-[800px] mx-auto min-h-[500px] mt-6 relative'
             >
                 <form action="" className=''>
                     <h1
-                        className='text-[18px] mb-2 font-semibold'
+                        className='text-xl md:text-2xl mb-2 font-semibold'
                     >Send Your Messages</h1>
                     <div
                         className='md:flex w-full h-full justify-center items-center'
