@@ -2,12 +2,13 @@ import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ScreenBeforeMounted from './components/ScreenBeforeMounted/ScreenBeforeMounted'
 import { ToastContainer } from 'react-toastify';
-import Nopage from './pages/Nopage/Nopage';
-import Products from './pages/products/Products';
-import ProductPage from './pages/Product/ProductPage';
-import Profile from './pages/Profile/Profile';
-import Contact from './pages/Contact/Contact';
-import CartPage from './pages/Cart/CartPage';
+const Contact = React.lazy(()=>import('./pages/Contact/Contact'))
+const Profile = React.lazy(()=>import('./pages/Profile/Profile'))
+const ProductPage = React.lazy(()=>import('./pages/Product/ProductPage'))
+const Products = React.lazy(()=>import('./pages/products/Products'))
+const Nopage = React.lazy(()=>import('./pages/Nopage/Nopage'))
+const CartPage = React.lazy(()=>import('./pages/Cart/CartPage'))
+const Checkout = React.lazy(()=>import('./pages/Checkout/Checkout'))
 const NavigationBar =  React.lazy( ()=>import('./components/Naveber/NavigationBar') )
 const Footer =  React.lazy( ()=>import('./components/Footer/Footer') )
 const Home =  React.lazy( ()=>import('./pages/Home/Home') )
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/checkout' element={<Checkout />} />
           <Route path='/product/:id' element={<ProductPage />} />
           <Route path='*' element={<Nopage />} />
         </Routes>
