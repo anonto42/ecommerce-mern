@@ -6,7 +6,7 @@ const ProductOfCart = () => {
     const[image,setImage] = useState(false)
   return (
     <div
-      className='w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto'
+      className='w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto mb-8'
     >
       <div
         className='w-full h-[80px] border-b-2 border-topBarTextColor flex justify-between px-4 text-topBarTextColor font-medium'
@@ -38,7 +38,7 @@ const ProductOfCart = () => {
           <div
           >
             <h2
-                className='text-[14px] w-[56px] md:w-auto'
+                className='text-[14px] w-[56px] sm:w-auto'
             >{"Title of the Product"}</h2>
             <h3
               className='md:text-sm text-[12px]'
