@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ProductOfCart from './ProductOfCart';
+import ProductOfCart from '../../components/Cart/ProductOfCart';
 
 const CartPage = () => {    
   const[cart,setCart] = useState(true)
