@@ -8,7 +8,6 @@ const ProductPage = React.lazy(()=>import('./pages/Product/ProductPage'))
 const Products = React.lazy(()=>import('./pages/products/Products'))
 const Nopage = React.lazy(()=>import('./pages/Nopage/Nopage'))
 const CartPage = React.lazy(()=>import('./pages/Cart/CartPage'))
-const Checkout = React.lazy(()=>import('./pages/Checkout/Checkout'))
 const NavigationBar =  React.lazy( ()=>import('./components/Naveber/NavigationBar') )
 const Footer =  React.lazy( ()=>import('./components/Footer/Footer') )
 const Home =  React.lazy( ()=>import('./pages/Home/Home') )
@@ -26,7 +25,6 @@ const App = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/checkout' element={<Checkout />} />
           <Route path='/product/:id' element={<ProductPage />} />
           <Route path='*' element={<Nopage />} />
         </Routes>
