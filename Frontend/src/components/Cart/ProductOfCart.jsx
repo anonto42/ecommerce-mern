@@ -161,13 +161,10 @@ const ProductOfCart = () => {
         <div
           className='w-[50%] h-full flex justify-end items-center'
         >
-            <div
-                className='flex items-center'
-            >
-                <button
-                    className='w-[120px] h-[45px] text-sm text-textDarkColor rounded-full shadow-md cursor-pointer font-semibold active:scale-95 shadow-[#000000d0] bg-mainIconColor'
-                >Checkout</button>
-            </div>
+          <button
+              onClick={()=>window.location.href ="/checkout"}
+              className='w-[120px] h-[45px] text-sm text-textDarkColor rounded-full shadow-md cursor-pointer font-semibold active:scale-95 shadow-[#000000d0] bg-mainIconColor'
+          >Shop Now</button>
         </div>
 
       </div>
