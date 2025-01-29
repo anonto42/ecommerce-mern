@@ -7,6 +7,7 @@ import Products from './pages/products/Products';
 import ProductPage from './pages/Product/ProductPage';
 import Profile from './pages/Profile/Profile';
 import Contact from './pages/Contact/Contact';
+import CartPage from './pages/Cart/CartPage';
 const NavigationBar =  React.lazy( ()=>import('./components/Naveber/NavigationBar') )
 const Footer =  React.lazy( ()=>import('./components/Footer/Footer') )
 const Home =  React.lazy( ()=>import('./pages/Home/Home') )
@@ -20,6 +21,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/auth' element={<Auth/>} />
+          <Route path='/cart' element={<CartPage />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/products' element={<Products />} />
