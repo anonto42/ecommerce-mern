@@ -16,7 +16,7 @@ const Checkout = ({allData,shopNowSet}) => {
         >
           <IoCloseCircleOutline 
            onClick={()=>shopNowSet( e => !e)}
-           className='w-[40px] h-[40px] absolute top-5 right-5 cursor-pointer active:scale-105 text-textDarkColor z-10 shadow-md shadow-black rounded-full duration-100 ease-in'
+           className='w-[40px] h-[40px] absolute top-6 right-6 cursor-pointer active:scale-105 text-textDarkColor z-10 shadow-md shadow-black rounded-full duration-100 ease-in'
         />
 
         <div
