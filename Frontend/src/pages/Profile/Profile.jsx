@@ -136,7 +136,7 @@ const Profile = () => {
             <img 
               src="" 
               alt="" 
-              className='w-[60px] h-[80px] rounded-lg overflow-hidden mx-auto'
+              className='w-[60px] h-[80px] rounded-lg overflow-hidden md:mx-0 mx-auto'
             />
             <h2
               className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
