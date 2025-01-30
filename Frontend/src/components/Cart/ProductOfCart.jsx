@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const ProductOfCart = () => {
+const ProductOfCart = ({shopNow,shop,items}) => {
     const[image,setImage] = useState(false)
   return (
     <div
-      className='w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto mb-8'
+      className={items?'w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto mb-8':'w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto'}
     >
       <div
         className='w-full h-[80px] border-b-2 border-topBarTextColor flex justify-between px-4 text-topBarTextColor font-medium'
@@ -25,7 +25,7 @@ const ProductOfCart = () => {
             className='w-[50px] h-[65px] mr-3 overflow-hidden rounded-md relative'
           >
             <div
-                className={`absolute w-full h-full z-10 bg-slate-200 ${!image?"opacity-100":"opacity-0"} duration-100 ease-linear`}
+                className={`absolute w-full h-full bg-slate-200 ${!image?"opacity-100":"opacity-0"} duration-100 ease-linear`}
             />
             <img 
                 className='w-full h-full'
@@ -162,7 +162,7 @@ const ProductOfCart = () => {
           className='w-[50%] h-full flex justify-end items-center'
         >
           <button
-              onClick={()=>window.location.href ="/checkout"}
+              onClick={()=>shopNow( e => !e )}
               className='w-[120px] h-[45px] text-sm text-textDarkColor rounded-full shadow-md cursor-pointer font-semibold active:scale-95 shadow-[#000000d0] bg-mainIconColor'
           >Shop Now</button>
         </div>
