@@ -136,7 +136,7 @@ const Profile = () => {
             <img 
               src="" 
               alt="" 
-              className='w-[60px] h-[80px] rounded-lg overflow-hidden'
+              className='w-[60px] h-[80px] rounded-lg overflow-hidden mx-auto'
             />
             <h2
               className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
@@ -149,10 +149,10 @@ const Profile = () => {
             >Paid</h2>
 
             <h2
-              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center text-center'
             >Number <br /> 01600101074</h2>
             <h2
-              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center text-center'
             >2 <br /> Pice's</h2>
           </div>
 
