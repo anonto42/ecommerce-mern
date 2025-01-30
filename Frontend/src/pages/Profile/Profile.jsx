@@ -3,13 +3,13 @@ import React from 'react'
 const Profile = () => {
   return (
     <div
-      className='w-full min-h-svh text-topBarTextColor'
+      className='w-full min-h-svh text-topBarTextColor mb-6'
     >
       <div
         className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10 xl:px-0 pt-8'
       >
         <div
-          className='w-full h-[415px] border lg:flex rounded-md p-4 border-topBarTextColor relative'
+          className='w-full md:h-[415px] h-[480px] sm:h-[450px] border lg:flex rounded-md p-4 border-topBarTextColor relative'
         >
           <form action="">
             <div
@@ -122,61 +122,42 @@ const Profile = () => {
 
 
         <div
-          className='w-full h-[400px] border mt-4 rounded-md'
+          className='w-full min-h-[400px] border mt-4 rounded-md'
         >
           <h1
             className='text-2xl underline p-4'
           >Order's : </h1>
+
+
+
           <div
-            className='w-full h-[80px] border-b border-t flex items-center px-4 justify-between'
+            className='w-full min-h-[100px] md:border-b border-t md:flex items-center px-4 justify-between pt-2 md:pt-0'
            >
             <img 
               src="" 
               alt="" 
-              className='w-[80px] h-[50px] rounded-lg overflow-hidden'
+              className='w-[60px] h-[80px] rounded-lg overflow-hidden'
             />
             <h2
-              className='min-w-[120px] h-full border-l border-r justify-center flex items-center'
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
             >Title</h2>
             <h2
-              className='min-w-[120px] h-full border-l border-r justify-center flex items-center'
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
             >Price</h2>
             <h2
-              className='w-[120px] text-center h-full border-l border-r justify-center flex items-center'
-            >Bkash <br /> Pament</h2>
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
+            >Paid</h2>
 
             <h2
-              className='w-[120px] text-center h-full border-l border-r justify-center flex items-center'
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
             >Number <br /> 01600101074</h2>
             <h2
-              className='w-[120px] text-center h-full border-l border-r justify-center flex items-center'
+              className='md:w-[120px] w-full h-full border mt-2 md:border-0 md:border-l md:border-r justify-center flex items-center'
             >2 <br /> Pice's</h2>
           </div>
-          <div
-            className='w-full h-[80px] border-b border-t flex items-center px-4 justify-between mt-3'
-           >
-            <img 
-              src="" 
-              alt="" 
-              className='w-[80px] h-[50px] rounded-lg overflow-hidden'
-            />
-            <h2
-              className='min-w-[120px] h-full border-l border-r justify-center flex items-center'
-            >Title</h2>
-            <h2
-              className='min-w-[120px] h-full border-l border-r justify-center flex items-center'
-            >Price</h2>
-            <h2
-              className='w-[120px] text-center h-full border-l border-r justify-center flex items-center'
-            >Bkash <br /> Pament</h2>
 
-            <h2
-              className='w-[120px] text-center h-full border-l border-r justify-center flex items-center'
-            >Number <br /> 01600101074</h2>
-            <h2
-              className='w-[120px] text-center h-full border-l border-r justify-center flex items-center'
-            >2 <br /> Pice's</h2>
-          </div>
+
+
         </div>
 
       </div>
