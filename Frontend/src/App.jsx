@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ScreenBeforeMounted from './components/ScreenBeforeMounted/ScreenBeforeMounted'
 import { ToastContainer } from 'react-toastify';
+import Deshbord from './pages/Admin/Deshbord';
 const Contact = React.lazy(()=>import('./pages/Contact/Contact'))
 const Profile = React.lazy(()=>import('./pages/Profile/Profile'))
 const ProductPage = React.lazy(()=>import('./pages/Product/ProductPage'))
@@ -26,6 +27,7 @@ const App = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/products' element={<Products />} />
           <Route path='/product/:id' element={<ProductPage />} />
+          <Route path='/admin/deshbord' element={<Deshbord />} />
           <Route path='*' element={<Nopage />} />
         </Routes>
       <Footer />
