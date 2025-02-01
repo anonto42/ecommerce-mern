@@ -234,7 +234,7 @@ const ShopComponent = () => {
 
         {/* serch resuld */}
         <div
-          className='w-full md:h-[400px] '
+          className='w-full h-[440px]'
         >
           {/* Dufalt value */}
           <h1
