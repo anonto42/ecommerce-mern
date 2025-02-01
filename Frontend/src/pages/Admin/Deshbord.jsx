@@ -6,6 +6,7 @@ import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
+import Loader from '../../components/Loader/Loader';
 const DeshbordComponent = React.lazy(()=>import('../../components/Admin/DeshbordComponent'));
 const ShopComponent = React.lazy(()=>import('../../components/Admin/ShopComponent'));
 const MessageComponent = React.lazy(()=>import('../../components/Admin/MessageComponent'));
@@ -80,7 +81,7 @@ const Deshbord = () => {
       <div
         className='w-full h-full pl-[65px]'
       >
-        <Suspense fallback={<></>}>
+        <Suspense fallback={<Loader/>}>
           {
             position === 1? <DeshbordComponent /> :
             position === 2? <ShopComponent /> :
