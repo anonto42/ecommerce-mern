@@ -1,11 +1,11 @@
 {
   "name": "s-brand",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node ./src/server.js",
-    "dev": "nodemon ./src/server.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "anontom90@gmail.com",
   "license": "ISC",
