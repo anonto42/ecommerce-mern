@@ -33,7 +33,7 @@ const Deshbord = () => {
     >
       {/* SideBar */}
       <div
-        className='w-[65px] h-full absolute bg-navebarBgColor shadow-[5px_0_10px_rgba(0,0,0,0.3)] flex justify-center pt-[20%]'
+        className='w-[65px] h-full absolute bg-navebarBgColor shadow-[5px_0_10px_rgba(0,0,0,0.3)] flex justify-center pt-[10%]'
       >
         <div
           className='text-topBarTextColor text-3xl'
