@@ -14,7 +14,7 @@ const ShopComponent = () => {
       </div>
 
       <h1
-        className='mt-4 text-xl font-semibold'
+        className='mt-8 md:mt-4 text-xl font-semibold'
       >Product's :-{">"} </h1>
 
       {/* All Product's */}
@@ -22,7 +22,7 @@ const ShopComponent = () => {
         className='w-full'
       >
         <div
-          className='mx-auto max-w-[820px] overflow-auto h-[500px] bg-navebarBgColor mt-4 rounded-xl'
+          className='mx-auto max-w-[820px] overflow-auto h-[500px] bg-navebarBgColor mt-4 rounded-xl pl-4 md:pl-0'
         >
 
           {/* Product's sheat */}
@@ -62,6 +62,10 @@ const ShopComponent = () => {
               >
                 category : <span className='underline font-mono'>{"T-shirt"} </span>
               </h3>
+
+              <h3
+                className='text-lg'
+              >Quantity : <span className='underline font-mono'>{"12"}</span>{" "}PCS</h3>
 
               <h3
                 className='text-lg'
@@ -214,7 +218,7 @@ const ShopComponent = () => {
         {/* Serch Product */}
         <form action="">
           <div
-            className='w-[350px] h-[50px] mt-4 rounded-lg overflow-hidden font-serif'
+            className='md:w-[350px] w-[250px] h-[50px] mt-4 rounded-lg overflow-hidden font-serif'
           >
             <input 
               type="text" 
@@ -230,7 +234,7 @@ const ShopComponent = () => {
 
         {/* serch resuld */}
         <div
-          className='w-full h-[400px]'
+          className='w-full md:h-[400px] '
         >
           {/* Dufalt value */}
           <h1
@@ -239,7 +243,7 @@ const ShopComponent = () => {
 
           {/* Product */}
           <div
-            className='p-3 border w-full rounded-xl'
+            className='p-3 border overflow-auto w-full rounded-xl'
           >
             <form action="" >
               <div
@@ -253,7 +257,17 @@ const ShopComponent = () => {
                   <input 
                     className='mt-2'
                     placeholder='Change the Main file'
-                    type="file"/>
+                    type="file"
+                  />
+                  <h2
+                    className='mt-3 font-semibold'
+                  >Quantity <span className='text-xl'>{"11"}</span></h2>
+                  <input 
+                    type="text" 
+                    name="" id="" 
+                    placeholder='Update the Quantity'
+                    className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
+                  />
                 </div>
                 <div>
                   <h3>Title : {"The name of the product"}</h3>
