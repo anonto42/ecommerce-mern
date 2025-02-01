@@ -28,7 +28,7 @@ const Deshbord = () => {
 
   return (
     <div
-      className='max-w-[1400px] h-[100svh] mx-auto relative'
+      className='max-w-[1400px] min-h-[100svh] mx-auto relative'
     >
       {/* SideBar */}
       <div
