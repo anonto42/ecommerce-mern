@@ -78,7 +78,7 @@ const Deshbord = () => {
 
       {/* Body of the main contents */}
       <div
-        className='w-full h-full overflow-y-auto pl-[65px]'
+        className='w-full h-full pl-[65px]'
       >
         <Suspense fallback={<></>}>
           {
