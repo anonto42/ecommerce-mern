@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import  { v2 as CloudiNary } from "cloudinary";
 import userRoute from './Routes/User.routes.js';
 import connectDB from './DB/ConnectDB.js';
+import adminRoutes from './Routes/Admin.routes.js';
 
 
 const app = express();
@@ -34,7 +35,8 @@ CloudiNary.config(
 );
 
 // Route add on hare
-app.use("/user/api",userRoute);
+app.use("/api/user",userRoute);
+app.use("/api/admin",adminRoutes);
 
 
 // DB connect
