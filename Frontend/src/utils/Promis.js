@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { setAppData, setUserData } from "../Redux/slices/dataFromServer";
 import axios from "axios";
 
@@ -9,23 +9,20 @@ import axios from "axios";
 
 const Promis = () => {
     const dispatch = useDispatch();
-    const [user,setUser] = useState('');
-
-    
-    useEffect(()=>{
+    try {
         
-        ;(async ()=> {
-            if (user) return ;
-            const { data } = await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true});
-            setUser(data.data);
-            dispatch(setUserData(data.data))
-        })();
+        useEffect(()=>{
 
-        if (user) window.localStorage.setItem("user",JSON.stringify(user))
-    
-    
-    },[user])
-
+            axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
+            .then( res => dispatch(setUserData(res.data.data)))
+            .catch(err => dispatch(setUserData(undefined)))
+        
+            },[])
+        
+    } catch (error) {
+        console.error(error)
+        dispatch(setAppData(false))
+    }
 
 
 
