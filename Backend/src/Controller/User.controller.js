@@ -111,13 +111,6 @@ async function userProfile(req,res) {
     try {
         // get user id from middleware
         const user = req.user ;
-        if(!user){
-            return res
-                .status(403)
-                .json(
-                    Responce.error( "You are not Authenticated" , false )
-                )
-        };
         // get user data
         const userData = await UserModel.findById( user._id ).select("-password");
         if(!userData){
@@ -144,5 +137,52 @@ async function userProfile(req,res) {
     }
 }
 
+async function updateUserProfile(req,res) {
+    try {
+        const { number,city,thana,area,location } = req.body;
+        const user = req.user._id;
+        
+        const updateData = {
+            number,
+            city,
+            thana,
+            area,
+            location
+        }
 
-export { login , register , userProfile , logout }
+        const find = await UserModel.findById(user);
+        if(!find) {
+            return res
+            .status(404)
+            .json(
+                Responce.error( "User not exised!" , false )
+            )
+        };
+
+        const userData = await UserModel.findByIdAndUpdate( user , updateData );
+        if(!userData) {
+            return res
+            .status(405)
+            .json(
+                Responce.error("Somting was wrong" , false )
+            )
+        };
+
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Done to get the profile" , userData , true )
+            )
+    } catch (error) {
+        console.log(error.message)
+        return res
+            .status(404)
+            .json(
+                Responce.error("Please try again", false)
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login , logout, register, userProfile } from "../Controller/User.controller.js";
+import { login , logout, register, updateUserProfile, userProfile } from "../Controller/User.controller.js";
 import tokenCheck from "../Middleware/Aut.js";
 
 const userRoute = Router();
@@ -11,9 +11,8 @@ userRoute.route("/login").post( login )
 userRoute.route("/logout").delete( logout )
 // Get user information
 userRoute.route("/user").get( tokenCheck , userProfile )
-
-userRoute.route("/").get( (req,res)=> res.json("success"))
-
+// update user profile
+userRoute.route("/update").put( tokenCheck , updateUserProfile )
 
 
 export default userRoute;
