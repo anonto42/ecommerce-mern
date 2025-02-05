@@ -40,9 +40,11 @@ app.use("/api/admin",adminRoutes);
 
 
 // DB connect
-await connectDB();
-
-// server setup
-app.listen( port , ()=>{
-    console.log(`Your server is listening on port : ${port}`);
-})
+connectDB()
+.then( () => (
+    // server setup
+    app.listen( port , ()=>{
+        console.log(`Your server is listening on port : ${port}`);
+    })
+))
+.catch( error => console.error(`DB Connection error... :-> ` + error) );
