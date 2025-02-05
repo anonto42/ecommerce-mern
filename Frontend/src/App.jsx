@@ -15,7 +15,7 @@ const Home =  React.lazy( ()=>import('./pages/Home/Home') )
 const Auth =  React.lazy( ()=>import('./pages/Auth/Auth') )
 
 const App = () => {
-  const apiUrl = import.meta.env.VITE_REACT_APP_TESTIN
+  const apiUrl = import.meta.env.VITE_REACT_SERVER_API
   console.log("env : " + apiUrl)
   return (
     <BrowserRouter>
