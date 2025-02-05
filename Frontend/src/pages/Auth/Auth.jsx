@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { Hourglass } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
-import { headerConfigForPost } from '../../utils/helper';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -14,26 +13,25 @@ const Auth = () => {
   const [load,setLoading] = useState(false);
   const server = import.meta.env.VITE_REACT_SERVER_API
 
-  const formData = new FormData();
-
+  
   // Login funcion
   const login = async (e) => {
     try {
       setLoading(true);
       e.preventDefault();
 
-      formData.append('email', email);
-      formData.append('password', password);
-
-      const data =  await axios.post(`${server}/user/login`, formData , headerConfigForPost );
-console.log(data)
+      if( email && password === "" ) return toast.warning("Email and password must not be empty!")
+      
+      const data =  await axios.post(`${server}/user/login`, {email,password} , {withCredentials:true} );
       setEmail("");
       setPassword("");
       setLoading(false);
 
-      toast.success("Logged In Successfully");
-      setTimeout(() => {}, 3000);
-      window.location.href = "/";
+      toast.success(data.data.message);
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 4000);
+      console.log("success")
     } catch (error) {
       console.log(error)
       setLoading(false)
@@ -47,24 +45,34 @@ console.log(data)
       setLoading(true);
       e.preventDefault();
 
+
+      if( email && password === "" ) return toast.warning("All fields ar required!")
+
       if( password != confirmPassword ) return toast.error("Please check the confirm password");
 
-      formData.append('email', email);
-      formData.append('password', password);
+      const data = {
+        name,
+        email,
+        password
+      }
 
-      const respons = await axios.post(`${server}/user/login`, formData , headerConfigForPost );
+      const respons = await axios.post(`${server}/user/register`, data , {withCredentials:true} );
 
+      setName("")
       setEmail("");
       setPassword("");
+      setConfirmPassword("")
       setLoading(false);
 
-      toast.success("Logged In Successfully");
-      setTimeout(() => {}, 3000);
-      window.location.href = "/";
+      toast.success(respons.data.message);
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 4000);
+
     } catch (error) {
       console.log(error)
       setLoading(false)
-      toast.error("Couldn't login")
+      toast.error("Couldn't sign up")
     }
   }
 
@@ -114,7 +122,7 @@ console.log(data)
             ):(auth === true ?(
               <div id="login-form" className={forgot?"hidden":""}>
                 <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-6">Log In</h2>
-                <form action='POST'>
+                <form>
                   <input 
                     type="email" placeholder="Email" 
                     className="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-inputOnAuthRing"   
@@ -130,6 +138,7 @@ console.log(data)
                     onChange={ e => setPassword(e.target.value )} 
                   />
                   <button
+                    type='submit'
                     onClick={login}
                     className="w-full bg-btn text-white py-2 md:py-3 rounded-lg font-semibold hover:bg-[#1f861b] transition duration-200">Log In</button>
                   <p className="text-center text-gray-500 mt-6">
@@ -173,7 +182,9 @@ console.log(data)
                     value={confirmPassword}
                     onChange={ e => setConfirmPassword(e.target.value )}
                     />
-                  <button type="submit" className="w-full bg-btn text-white py-2 md:py-3 rounded-lg font-semibold hover:bg-[#1f861b]  transition duration-200">Sign Up</ button>
+                  <button 
+                    onClick={registre}
+                    className="w-full bg-btn text-white py-2 md:py-3 rounded-lg font-semibold hover:bg-[#1f861b]  transition duration-200">Sign Up</ button>
                   <p className="text-center text-gray-600 mt-6">
                       Already have an account? 
                       <a href="#" className="text-blue-600 hover:underline" onClick={()=>setAuth(!auth)}>Log In</a>
