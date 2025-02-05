@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Promis = () => {
     const dispatch = useDispatch();
-    const [user,setUser] = useState(undefined);
+    const [user,setUser] = useState('');
 
     
     useEffect(()=>{
@@ -18,7 +18,7 @@ const Promis = () => {
             if (user) return ;
             const { data } = await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true});
             setUser(data.data);
-            dispatch(setUserData(user))
+            dispatch(setUserData(data.data))
         })();
 
         if (user) window.localStorage.setItem("user",JSON.stringify(user))
