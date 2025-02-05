@@ -26,6 +26,8 @@ const tokenCheck = async (req,res,next) => {
         // send the data on the rext request
         const user = await UserModel.findById( decodedToken._id ).select("-password");
 
+        req.user = user;
+
         if(!user){
             return res
                 .status(403)
