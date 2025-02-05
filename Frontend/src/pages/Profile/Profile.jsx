@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Hourglass } from 'react-loader-spinner';
+import { CiLogin } from "react-icons/ci";
 
 const Profile = () => {  
   
   const { userData } = useSelector( event => event.applicationData)
-  const [load,setLoad]= useState(false);
+
+  
+  function myFunction(){
+    if (userData === undefined) return toast.info("Please login!")
+    else return
+  }
+  setTimeout(myFunction, 8000);
   
   const [name , setName] = useState("name...");
   const [email , setEmail] = useState("email...");
@@ -13,30 +23,87 @@ const Profile = () => {
   const [thana , setThana] = useState("thana...");
   const [Area , setArea] = useState("area...");
   const [road , setRoad] = useState("road...");
-
+  const [loading,setLoad]= useState(false);
+  
   useEffect(()=>{
     if(userData != null){
       setEmail(userData.email)
+      setPhone(userData.number)
+      setThana(userData.thana)
       setName(userData.name)
-      setPhone(userData.phone)
+      setCity(userData.city)
+      setArea(userData.area)
+      setRoad(userData.location)
     }
   },[userData])
 
-
-  const updatedUserInformation = (e) => {
-    e.preventDefault()
+  const updatedUserInformation = async (e) => {
     try {
+      e.preventDefault()
+      if ( userData === undefined ) return window.location.href = "/auth"
+      setLoad(true)
+      const updateData = {
+        number:phone,
+        city,
+        thana,
+        area: Area,
+        location : road
+      }
+
+      const {data} = await axios.put(`${import.meta.env.VITE_REACT_SERVER_API}/user/update`, updateData , { withCredentials: true })
+
+      toast.success(data.message)
+
+      setLoad(false)
       
     } catch (error) {
       console.log(error)
-      toas
+      toast.error("Something went wrong! Please try again")
+      setLoad(false)
+    }
+  }
+
+  const logout =  async () => {
+    try {
+      if ( userData === undefined ) return window.location.href = "/auth"
+
+      const continew = confirm("Are you sure you want to log out?")
+
+      if (!continew) return;
+
+      await axios.delete(`${process.env.REACT_APP_API_URL}/user/logout`,{withCredentials:true});
+      toast.success("Logged out successfully");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 4000);
+      
+    } catch (error) {
+      toast.error("Something went wrong! Please try again");
     }
   }
 
   return (
     <div
-      className='w-full min-h-svh text-topBarTextColor mb-6'
+      className='w-full min-h-svh text-topBarTextColor mb-6 relative'
     >
+      <CiLogin
+        onClick={logout}
+        className='absolute text-3xl right-5 top-4 bg-navebarBgColor w-[40px] h-[40px] rounded-xl p-1 z-10 active:scale-110 duration-100 ease-linear cursor-pointer'
+      />
+      {
+        loading?(
+          <div className='absolute h-full w-full bg-[#c7c0c033] flex justify-center items-center'>
+            <Hourglass
+              visible={true}
+              height="60"
+              width="60"
+              ariaLabel="hourglass-loading"
+              wrapperClass=""
+              colors={['#2db12d', '#72a1ed']}
+            />
+          </div>
+        ):(<></>)
+      }
       <div
         className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10 xl:px-0 pt-8'
       >
