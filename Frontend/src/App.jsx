@@ -18,18 +18,18 @@ const Auth =  React.lazy( ()=>import('./pages/Auth/Auth') )
 const App = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<ScreenBeforeMounted />}>
       <Promis />
+      <Suspense fallback={<ScreenBeforeMounted />}>
       <NavigationBar />
         <Routes>
           <Route path='/' element={<Home/>} />
-          <Route path='/auth' element={<Auth/>} />
           <Route path='/cart' element={<CartPage />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/admin/dashboard' element={<Deshbord />} />
+          <Route path='/auth' element={<Auth/>} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/products' element={<Products />} />
           <Route path='/product/:id' element={<ProductPage />} />
-          <Route path='/admin/dashboard' element={<Deshbord />} />
           <Route path='*' element={<Nopage />} />
         </Routes>
       <Footer />
