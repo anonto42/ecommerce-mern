@@ -159,7 +159,7 @@ async function updateUserProfile(req,res) {
             )
         };
 
-        const userData = await UserModel.findByIdAndUpdate( user , updateData );
+        const userData = await UserModel.findByIdAndUpdate( user , updateData ).selecte("-password");
         if(!userData) {
             return res
             .status(405)
@@ -172,7 +172,7 @@ async function updateUserProfile(req,res) {
         return res
             .status(200)
             .json(
-                Responce.success( "Done to get the profile" , userData , true )
+                Responce.success( "User information updated successfully" , userData , true )
             )
     } catch (error) {
         console.log(error.message)
