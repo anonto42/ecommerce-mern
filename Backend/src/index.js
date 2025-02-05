@@ -10,6 +10,7 @@ import adminRoutes from './Routes/Admin.routes.js';
 
 const app = express();
 const port = process.env.PORT || 3500
+const allowedOrigin = ["http://localhost:5173/",process.env.ORIGIN]
 
 // configarations
 app.use(express.json());
@@ -22,8 +23,9 @@ dotenv.config(
 );
 app.use(cors(
     {
-        origin:"*",
-        // origin:process.env.ORIGIN,
+        origin:function(origin,callBack){
+            !origin || allowedOrigin.includes(origin) ? callBack(null, true) : callBack(new Error("Not allowed by CORS"))
+        },
         credentials:true,
         optionsSuccessStatus:200,
         methods:["GET", "POST", "PUT", "DELETE"]
