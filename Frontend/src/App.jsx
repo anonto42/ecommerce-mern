@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ScreenBeforeMounted from './components/ScreenBeforeMounted/ScreenBeforeMounted'
 import { ToastContainer } from 'react-toastify';
 import Deshbord from './pages/Admin/Deshbord';
+import Promis from "../src/utils/Promis"
 const Contact = React.lazy(()=>import('./pages/Contact/Contact'))
 const Profile = React.lazy(()=>import('./pages/Profile/Profile'))
 const ProductPage = React.lazy(()=>import('./pages/Product/ProductPage'))
@@ -17,6 +18,7 @@ const Auth =  React.lazy( ()=>import('./pages/Auth/Auth') )
 const App = () => {
   return (
     <BrowserRouter>
+      <Promis />
       <Suspense fallback={<ScreenBeforeMounted />}>
       <NavigationBar />
         <Routes>
