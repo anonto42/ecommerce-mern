@@ -98,6 +98,15 @@ async function login (req,res) {
     }
 }
 
+function logout (req,res){
+    return res
+        .status(200)
+        .cookie( "eCommUserData" , "" , cookieOption )
+        .json(
+            Responce.error("Logout done", true)
+        )
+}
+
 async function userProfile(req,res) {
     try {
         // get user id from middleware
@@ -106,7 +115,7 @@ async function userProfile(req,res) {
             return res
                 .status(403)
                 .json(
-                    Responce.error( "You are not authenticated" , false )
+                    Responce.error( "You are not Authenticated" , false )
                 )
         };
         // get user data
@@ -136,4 +145,4 @@ async function userProfile(req,res) {
 }
 
 
-export { login , register , userProfile }
+export { login , register , userProfile , logout }
