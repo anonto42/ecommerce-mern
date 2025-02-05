@@ -12,6 +12,8 @@ userRoute.route("/logout").delete( logout )
 // Get user information
 userRoute.route("/user").get( tokenCheck , userProfile )
 
+userRoute.route("/").get( (req,res)=> res.json("success"))
+
 
 
 export default userRoute;
