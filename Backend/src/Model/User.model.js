@@ -14,23 +14,33 @@ const userSchema = new Schema(
             unique: true 
         },
         number: { 
-            type: String 
+            type: String,
+            required: true,
+            default:"DEFAULT! Please enter yours..."
         },
         password: { 
             type: String, 
             required: true 
         },
         city: { 
-            type: String 
+            type: String,
+            required: true,
+            default:"DEFAULT! Please enter yours..."
         },
         thana: { 
-            type: String 
+            type: String,
+            required: true,
+            default:"DEFAULT! Please enter yours..."
         },
         area: { 
-            type: String 
+            type: String,
+            required: true,
+            default:"DEFAULT! Please enter yours..."
         },
         location: { 
-            type: String 
+            type: String,
+            required: true,
+            default:"DEFAULT! Please enter yours..."
         },
         cart: [
             { 
