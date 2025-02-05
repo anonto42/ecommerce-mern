@@ -5,7 +5,7 @@ const userRoute = Router();
 
 // Authentication
 userRoute.route("/register").post(register)
-userRoute.route("/login").get(login)
+userRoute.route("/login").post(login)
 
 
 
