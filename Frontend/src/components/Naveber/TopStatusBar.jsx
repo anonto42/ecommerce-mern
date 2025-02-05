@@ -4,8 +4,10 @@ import { IoMail } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TopStatusBar = () => {
+    const { userData } = useSelector( event => event.applicationData )
   return (
     <div className={`w-full bg-mainBg`}>
         <div className='flex mx-auto h-[60px] max-w-[1400px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
@@ -42,11 +44,11 @@ const TopStatusBar = () => {
                 </Link>
             </div>
             <div className=''>
-                <Link to="/auth">
+                <Link to={userData!= undefined?"/profile":"/auth"}>
                     <div className={`flex h-[35px] border-2 w-[100px] justify-center items-center rounded-full text-mainIconColor hover:bg-mainIconColor border-sndIconColor hover:text-sndIconColor hover:border-none`}>
                         <div className='flex'>
                             <FaUser size={20} className='mt-1.5px' />
-                            <span className={`ml-2 text-sndIconColor`}>Login</span>
+                            <span className={`ml-2 text-sndIconColor ${userData!= undefined? "text-sm ml-1":"text-md ml-2"}`}>{userData!= undefined?"Account":"Login"}</span>
                         </div>
                     </div>
                 </Link> 
