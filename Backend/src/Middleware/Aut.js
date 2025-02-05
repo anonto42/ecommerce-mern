@@ -6,7 +6,7 @@ import { UserModel } from "../Model/User.model.js";
 const tokenCheck = async (req,res,next) => {
     try {
         // get cookie
-        const cookie = req.cookies.e-comm-user-data;
+        const cookie = req.cookies.eCommUserData;
         if(!cookie) {
             return res
                 .status(403)

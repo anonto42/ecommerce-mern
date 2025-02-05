@@ -36,7 +36,7 @@ async function register (req,res) {
         // send responce
         return res
             .status(200)
-            .cookie( "e-comm-user-data" , jwtToken( newUser ) , cookieOption )
+            .cookie( "eCommUserData" , jwtToken( newUser ) , cookieOption )
             .json(
                 Responce.success( "User created successfully" , true )
             )
@@ -84,7 +84,7 @@ async function login (req,res) {
         // send responce
         return res
             .status(200)
-            .cookie( "e-comm-user-data" , jwtToken( user ) , cookieOption )
+            .cookie( "eCommUserData" , jwtToken( user ) , cookieOption )
             .json(
                 Responce.success( "User login successfully" , true )
             )
@@ -98,5 +98,42 @@ async function login (req,res) {
     }
 }
 
+async function userProfile(req,res) {
+    try {
+        // get user id from middleware
+        const user = req.user ;
+        if(!user){
+            return res
+                .status(403)
+                .json(
+                    Responce.error( "You are not authenticated" , false )
+                )
+        };
+        // get user data
+        const userData = await UserModel.findById( user._id ).select("-password");
+        if(!userData){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "User not found" , false )
+                )
+        }        
+        // send responce
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Done to get the profile" , user , true )
+            )
+        
+    } catch (error) {
+        console.log(error.message)
+        return res
+            .status(404)
+            .json(
+                Responce.error("Please try again", false)
+            )
+    }
+}
 
-export { login , register }
+
+export { login , register , userProfile }
