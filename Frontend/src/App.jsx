@@ -18,8 +18,8 @@ const Auth =  React.lazy( ()=>import('./pages/Auth/Auth') )
 const App = () => {
   return (
     <BrowserRouter>
-      <Promis />
       <Suspense fallback={<ScreenBeforeMounted />}>
+      <Promis />
       <NavigationBar />
         <Routes>
           <Route path='/' element={<Home/>} />
