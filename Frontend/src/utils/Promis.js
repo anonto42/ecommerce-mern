@@ -10,7 +10,6 @@ import axios from "axios";
 const Promis = () => {
     const dispatch = useDispatch();
     const [user,setUser] = useState(undefined);
-    const { userData , appdata } = useSelector( event => event.applicationData)
 
     
     useEffect(()=>{
@@ -19,22 +18,13 @@ const Promis = () => {
             if (user) return ;
             const { data } = await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true});
             setUser(data.data);
-            dispatch(
-                setUserData(data.data)
-            )
-        })()
+            dispatch(setUserData(user))
+        })();
+
+        if (user) window.localStorage.setItem("user",JSON.stringify(user))
     
     
     },[user])
-
-
-
-
-
-
-
-
-
 
 
 
