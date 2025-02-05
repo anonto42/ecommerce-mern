@@ -39,4 +39,4 @@ const productSchema = new Schema(
 )
 
 
-export const ProductSchema = model("Product", productSchema);
+export const ProductModel = model("Product", productSchema);
