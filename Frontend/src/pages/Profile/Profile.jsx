@@ -1,6 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-const Profile = () => {
+const Profile = () => {  
+  
+  const { userData } = useSelector( event => event.applicationData)
+  const [load,setLoad]= useState(false);
+  
+  const [name , setName] = useState("name...");
+  const [email , setEmail] = useState("email...");
+  const [phone , setPhone] = useState("phone...");
+  const [city , setCity] = useState("city...");
+  const [thana , setThana] = useState("thana...");
+  const [Area , setArea] = useState("area...");
+  const [road , setRoad] = useState("road...");
+
+  useEffect(()=>{
+    if(userData != null){
+      setEmail(userData.email)
+      setName(userData.name)
+      setPhone(userData.phone)
+    }
+  },[userData])
+
+
+  const updatedUserInformation = (e) => {
+    e.preventDefault()
+    try {
+      
+    } catch (error) {
+      console.log(error)
+      toas
+    }
+  }
+
   return (
     <div
       className='w-full min-h-svh text-topBarTextColor mb-6'
@@ -11,7 +43,7 @@ const Profile = () => {
         <div
           className='w-full md:h-[415px] h-[480px] sm:h-[450px] border lg:flex rounded-md p-4 border-topBarTextColor relative'
         >
-          <form action="">
+          <form>
             <div
               className='flex items-center'
             >
@@ -19,8 +51,8 @@ const Profile = () => {
               <input 
                 type="text" 
                 name="" 
-                value={"Sohidul Islam anonto"} 
-                id="" 
+                value={name} 
+                onChange={ e => setName( e.target.value )}
                 className='ml-2 min-w-[210px] sm:w-[350px] border bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
               />
             </div>
@@ -31,8 +63,8 @@ const Profile = () => {
               <input 
                 type="text" 
                 name="" 
-                value={"anontom90@gmail.com"} 
-                id="" 
+                value={email} 
+                onChange={ e => setEmail( e.target.value )}
                 className='ml-2 border min-w-[210px] sm:w-[350px] bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
               />
             </div>
@@ -43,8 +75,8 @@ const Profile = () => {
               <input 
                 type="text" 
                 name="" 
-                value={"01600101074"} 
-                id="" 
+                value={phone} 
+                onChange={ e => setPhone( e.target.value )}
                 className='ml-2 border min-w-[210px] sm:w-[350px] bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
               />
             </div>
@@ -66,7 +98,8 @@ const Profile = () => {
                   <input 
                     type="text" 
                     name="" 
-                    value={"Dhaka"} 
+                    onChange={ e=> setCity( e.target.value )}
+                    value={city} 
                     className='ml-2 border min-w-[210px] sm:w-[350px] bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
                   />
                 </div>
@@ -79,7 +112,8 @@ const Profile = () => {
                   <input 
                     type="text" 
                     name="" 
-                    value={"Siddhirgonj"} 
+                    value={thana}
+                    onChange={ e => setThana( e.target.value )} 
                     className='ml-2 border min-w-[210px] sm:w-[350px] bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
                   />
                 </div>
@@ -92,7 +126,8 @@ const Profile = () => {
                   <input 
                     type="text" 
                     name="" 
-                    value={"Dhaka"} 
+                    value={Area} 
+                    onChange={ e => setArea( e.target.value )} 
                     className='ml-2 border min-w-[210px] sm:w-[350px] bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
                   />
                 </div>
@@ -105,13 +140,15 @@ const Profile = () => {
                   <input 
                     type="text" 
                     name="" 
-                    value={"Mosgid road"} 
+                    value={road}
+                    onChange={ e => setRoad( e.target.value )}
                     className='ml-2 border min-w-[210px] sm:w-[350px] bg-transparent px-1 sm:px-2 rounded-md border-topBarTextColor h-[40px]'
                   />
                 </div>
               </div>
             </div>
             <button
+              onClick={updatedUserInformation}
               className='bottom-[2%] absolute w-[120px] bg-mainIconColor text-textDarkColor h-[40px] text-xl font-semibold right-[5%] rounded-md'
             >Update</button>
           </form>
