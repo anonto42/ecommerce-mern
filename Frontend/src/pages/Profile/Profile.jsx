@@ -71,7 +71,7 @@ const Profile = () => {
 
       if (!continew) return;
 
-      await axios.delete(`${process.env.REACT_APP_API_URL}/user/logout`,{withCredentials:true});
+      await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/user/logout`,{withCredentials:true});
       toast.success("Logged out successfully");
       setTimeout(() => {
         window.location.href = "/";
