@@ -6,7 +6,7 @@ const DD_MM_YYYY = `${now.getDate().toString().padStart(2, '0')}_${(now.getMonth
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/Images/')
+        cb(null, './public/temp')
     },
     filename: function (req, file, cb) {
         cb(null,`${DD_MM_YYYY}-${file.originalname}`)
