@@ -4,6 +4,7 @@ const HeroSchema = Schema(
     {
         topText:{
             type: String,
+            default:"Somthing will Append hear for the next upload.",
             required: true
         },
         images:[
