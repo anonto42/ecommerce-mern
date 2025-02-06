@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login , logout, register, updateUserProfile, userProfile } from "../Controller/User.controller.js";
+import { Heros, login , logout, register, updateUserProfile, userProfile } from "../Controller/User.controller.js";
 import tokenCheck from "../Middleware/Aut.js";
 
 const userRoute = Router();
@@ -13,6 +13,8 @@ userRoute.route("/logout").delete( logout )
 userRoute.route("/user").get( tokenCheck , userProfile )
 // update user profile
 userRoute.route("/update").put( tokenCheck , updateUserProfile )
+// get hero information
+userRoute.route("/hero").get( Heros );
 
 
 export default userRoute;

@@ -1,6 +1,7 @@
 import Responce from "../Lib/Responce.js";
 import { cookieOption, jwtToken } from "../Lib/SendJwtToken.js";
 import { UserModel } from "../Model/User.model.js";
+import { HeroModel } from './../Model/Hero.model.js';
 
 
 async function register (req,res) {
@@ -184,5 +185,32 @@ async function updateUserProfile(req,res) {
     }
 }
 
+async function Heros (req,res){
+    try {
+        const responce = await HeroModel.findById( "67a50aeb81e26bbdb35d5354" );
+        if(!responce) {
+            return res
+               .status(404)
+               .json(
+                    Responce.error( "Failed to get!" , false )
+                )
+        }
 
-export { login , register , userProfile , logout , updateUserProfile }
+        return res
+         .status(200)
+         .json(
+            Responce.success( "Hero section data!" , responce , true )
+        )
+
+
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { login , register , userProfile , logout , updateUserProfile , Heros }
