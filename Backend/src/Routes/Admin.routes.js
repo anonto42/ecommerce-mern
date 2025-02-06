@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Heros, getUsers, hearoInformation, heroInformation } from "../Controller/Admin.controller.js";
+import { getUsers, hearoInformation, heroInformation } from "../Controller/Admin.controller.js";
 import adminAuth from "../Middleware/AutAdmin.js";
 import { uploader } from './../Middleware/Multer.js';
 
