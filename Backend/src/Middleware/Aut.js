@@ -25,9 +25,6 @@ const tokenCheck = async (req,res,next) => {
         }
         // send the data on the rext request
         const user = await UserModel.findById( decodedToken._id ).select("-password");
-
-        req.user = user;
-
         if(!user){
             return res
                 .status(403)
@@ -35,12 +32,15 @@ const tokenCheck = async (req,res,next) => {
                     Responce.error( "You are not Authenticated" , false )
                 )
         };
-
+        // send the data
+        req.user = user;
         next();
-
-        
     } catch (error) {
-        console.log(error.message)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Sommthing was wrong!" , null ,false )
+            )
     }
 }
 
