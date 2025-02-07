@@ -5,11 +5,6 @@ import theardHeroImage from '/hero3.jpg';
 import defualtImage from "/gg.png";
 
 
-const heroImages = [
-    firstHeroImage,
-    secondHeroImage,
-    theardHeroImage
-]
 const reviews = [
     {
         name:"John Doe",
@@ -218,12 +213,6 @@ const specialOffersDiscounts = [
     product,
     product,
 ]
-const catagorys = [
-    "T-shirt",
-    "Polo-T-shirt",
-    "Shirt",
-    "Pant"
-]
 const products = [
     product,
     product3,
@@ -245,8 +234,11 @@ const products = [
 
 const initialState = {
     appData : {
-        heroImages,
-        catagorys,
+        heroData : {
+            topText:"",
+            images:[]
+        },
+        catagorys:["...","..","."],
         bestSellingProducts,
         specialOffersDiscounts,
         products
@@ -258,8 +250,20 @@ const allDatas = createSlice({
     name:"applicationData",
     initialState,
     reducers:{
-        setAppData: ( state , action ) => {
-            state.appData = action.payload;
+        setAppHeroData: ( state , action ) => {
+            state.appData.heroData = action.payload;
+        },
+        setCatagorysData: ( state , action ) => {
+            state.appData.catagorys = action.payload;
+        },
+        setBestSellingProductsData: ( state , action ) => {
+            state.appData.bestSellingProducts = action.payload;
+        },
+        setSpecialOffersDiscountsData: ( state , action ) => {
+            state.appData.specialOffersDiscounts = action.payload;
+        },
+        setProductData: ( state , action ) => {
+            state.appData.products = action.payload;
         },
         setUserData: ( state , action ) => {
             state.userData = action.payload;
@@ -269,4 +273,4 @@ const allDatas = createSlice({
 
 
 export default allDatas;
-export const { setAppData , setUserData } = allDatas.actions
+export const { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData } = allDatas.actions
