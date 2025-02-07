@@ -6,11 +6,14 @@ import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
 import NavigatorForMobile from '../Navigator/NavigatorForMobir';
 import TopStatusBar from './TopStatusBar';
+import { useSelector } from 'react-redux';
 
 const NavigationBar = () => {
   const [items,setBar] = useState(false);
   const [ navTob,setNavBar ] = useState(false);
-  let bar = (window.location.href === "https://ecomarts.vercel.app/") || (window.location.href === "http://localhost:5173/")
+  const data = useSelector( data => data.applicationData.userData );
+
+  let bar = (window.location.href === import.meta.env.VITE_REACT_DOMAIN_NAME ) || (window.location.href === "http://localhost:5173/")
 
   useEffect(()=>{
     ;(()=>window.addEventListener("scroll",function(){
@@ -45,9 +48,13 @@ const NavigationBar = () => {
                 Products
               </h2>
             </Link>
-            <Link to="/profile">
+            <Link to={
+                  data.userType === "user" ? "/profile" : "/admin/dashboard"
+                }>
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
-                Account
+                {
+                  data.userType === "user" ? "Account" : "Dashboard"
+                }
               </h2>
             </Link>
             <Link to="/contact">
