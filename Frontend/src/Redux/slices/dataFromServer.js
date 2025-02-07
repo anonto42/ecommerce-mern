@@ -243,7 +243,7 @@ const initialState = {
         specialOffersDiscounts,
         products
     },
-    userData : null
+    userData : ""
 }
 
 const allDatas = createSlice({
