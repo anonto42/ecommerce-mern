@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setAppHeroData, setUserData } from "../Redux/slices/dataFromServer";
+import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData } from "../Redux/slices/dataFromServer";
 import axios from "axios";
 
 
