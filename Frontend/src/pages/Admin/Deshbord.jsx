@@ -12,18 +12,31 @@ const ShopComponent = React.lazy(()=>import('../../components/Admin/ShopComponen
 const MessageComponent = React.lazy(()=>import('../../components/Admin/MessageComponent'));
 const SetingsComponent = React.lazy(()=>import('../../components/Admin/SetingsComponent'));
 const UsersComponent = React.lazy(()=>import('../../components/Admin/UsersComponent'));
+import axios from 'axios';
+import { Hourglass } from 'react-loader-spinner';
 
 const Deshbord = () => {
 
   const [position,setPosition] = useState(1);
   const [logOutState,setLogOut] = useState(false);
 
-  const logOut = () => {
+  const logOut = async () => {
     try {
-      setLogOut(!confirm("We will log out your account!"))
-      console.log(logOutState)
+      setLogOut(true);
+      const data = confirm("We will log out your account!");
+      if( !data ) return setLogOut(false);
+
+      await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/user/logout`,{withCredentials: true})
+      .then( data => console.log(data))
+      .catch(err => console.log(err))
+      setLogOut(false)
+      toast.success("Logged out successfully");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 4000);
     } catch (error) {
       toast.error("Couldn't log out. try again")
+      setLogOut(false)
     }
   }
 
@@ -31,6 +44,20 @@ const Deshbord = () => {
     <div
       className='max-w-[1400px] min-h-[90svh] mx-auto relative'
     >
+      {
+          logOutState?(
+            <div className='absolute h-full w-full bg-[#c7c0c033] flex justify-center items-center'>
+              <Hourglass
+                visible={true}
+                height="60"
+                width="60"
+                ariaLabel="hourglass-loading"
+                wrapperClass=""
+                colors={['#2db12d', '#72a1ed']}
+              />
+            </div>
+          ):(<></>)
+        }
       {/* SideBar */}
       <div
         className='w-[65px] h-full absolute bg-navebarBgColor shadow-[5px_0_10px_rgba(0,0,0,0.3)] flex justify-center pt-[10%]'
