@@ -243,7 +243,19 @@ const initialState = {
         specialOffersDiscounts,
         products
     },
-    userData : ""
+    userData : {
+        name: "DEFAULT! Please enter yours...",
+        email: "DEFAULT! Please enter yours...",
+        number: "DEFAULT! Please enter yours...",
+        city: "DEFAULT! Please enter yours...",
+        thana: "DEFAULT! Please enter yours...",
+        area: "DEFAULT! Please enter yours...",
+        location: "DEFAULT! Please enter yours...",
+        cart: [],
+        orders: [],
+        wishlist: [],
+        userType: "",
+    }
 }
 
 const allDatas = createSlice({

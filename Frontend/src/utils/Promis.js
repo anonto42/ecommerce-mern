@@ -16,12 +16,36 @@ const Promis = () => {
             // Get user data
             axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
             .then( res => dispatch(setUserData(res.data.data)))
-            .catch(err => dispatch(setUserData(undefined)))
+            .catch(err => dispatch(setUserData({
+                name: "...",
+                email: "...",
+                number: "...",
+                city: "...",
+                thana: "...",
+                area: "...",
+                location: "...",
+                cart: [],
+                orders: [],
+                wishlist: [],
+                userType: "",
+            })))
 
             // get the hero section data
             axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hero`,{withCredentials:true})
             .then( res => dispatch(setAppHeroData(res.data.data)))
-            .catch(err => dispatch(setUserData(undefined)))
+            .catch(err => dispatch(setUserData({
+                name: "...",
+                email: "...",
+                number: "...",
+                city: "...",
+                thana: "...",
+                area: "...",
+                location: "...",
+                cart: [],
+                orders: [],
+                wishlist: [],
+                userType: "",
+            })))
         
             },[])
         

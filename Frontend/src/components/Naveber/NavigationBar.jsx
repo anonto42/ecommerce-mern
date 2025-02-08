@@ -49,11 +49,11 @@ const NavigationBar = () => {
               </h2>
             </Link>
             <Link to={
-                  data.userType === "user" ? "/profile" : "/admin/dashboard"
+                  data.userType !== "admin" ? "/profile" : "/admin/dashboard"
                 }>
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
                 {
-                  data.userType === "user" ? "Account" : "Dashboard"
+                  data.userType !== "admin" ? "Account" : "Dashboard"
                 }
               </h2>
             </Link>

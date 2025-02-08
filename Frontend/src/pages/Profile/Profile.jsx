@@ -7,14 +7,15 @@ import { CiLogin } from "react-icons/ci";
 
 const Profile = () => {  
   
-  const { userData } = useSelector( event => event.applicationData)
+  const { userType } = useSelector( event => event.applicationData.userData );
+  const { userData } = useSelector( event => event.applicationData );
 
-  
-  function myFunction(){
-    if (userData === undefined) return toast.info("Please login!")
-    else return
-  }
-  setTimeout(myFunction, 8000);
+  setTimeout(() => {
+    if (userType === "") return toast.info("Please login!")
+    }, 5000);
+    setTimeout(()=>{
+        window.location.href="/auth"
+    }, 7000);
   
   const [name , setName] = useState("name...");
   const [email , setEmail] = useState("email...");

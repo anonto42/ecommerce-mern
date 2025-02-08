@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -20,11 +19,11 @@ const SideBarForMobile = ({on}) => {
         </h2>
       </Link>
       <Link to={
-                data.userType === "user" ? "/profile" : "/admin/dashboard"
+                data.userType !== "admin" ? "/profile" : "/admin/dashboard"
             }>
         <h2 className={on?'w-full h-[50px] hover:bg-[green] duration-100 ease-linear font-semibold hover:text-topBarTextColor text-lg border-b-2 flex justify-center items-center':'w-full h-[0px] hover:bg-[green] duration-100 ease-linear font-semibold hover:text-topBarTextColor text-[0px] flex justify-center items-center'}>
           {
-            data.userType === "user" ? "Account" : "Dashboard"
+            data.userType === "admin" ? "Dashboard" : "Account"
           }
         </h2>
       </Link>

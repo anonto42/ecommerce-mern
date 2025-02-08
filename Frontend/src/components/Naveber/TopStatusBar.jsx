@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const TopStatusBar = () => {
-    const { userData } = useSelector( event => event.applicationData );
+    const { userType } = useSelector( event => event.applicationData.userData );
   return (
     <div className={`w-full bg-mainBg`}>
         <div className='flex mx-auto h-[60px] max-w-[1400px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
@@ -46,9 +46,9 @@ const TopStatusBar = () => {
             <div className=''>
                 <Link to=
                     {
-                        userData!= undefined? 
+                        userType !== ''? 
                             `${ 
-                                userData.userType === "user" ? "/profile" : "/admin/dashboard" 
+                                userType === "admin" ? "/admin/dashboard" : "/profile" 
                             }`: "/auth"
                     }
                 >
@@ -56,13 +56,13 @@ const TopStatusBar = () => {
                         <div className='flex'>
                             <FaUser 
                                 size={20} 
-                                className={`mt-1.5px ${userData.userType !== "user" ? "hidden" : "block"}`} 
+                                className={`mt-1.5px ${userType !== "" ? "hidden" : "block"}`} 
                             />
-                            <span className={`ml-2 text-sndIconColor ${userData!= undefined? "text-sm ml-1":"text-md ml-2"}`}>
+                            <span className={`ml-2 text-sndIconColor ${userType !== ''? "text-sm ml-1":"text-md ml-2"}`}>
                                 {
-                                    userData!= undefined? 
+                                    userType !== ""? 
                                         `${ 
-                                            userData.userType !== "user" ?
+                                            userType !== "user" ?
                                             "Dashboard" : "Account"
                                         }`:"Login"
                                 }
