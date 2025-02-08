@@ -44,7 +44,14 @@ const TopStatusBar = () => {
                 </Link>
             </div>
             <div className=''>
-                <Link to={userData!= undefined?"/profile":"/auth"}>
+                <Link to=
+                    {
+                        userData!= undefined? 
+                            `${ 
+                                userData.userType === "user" ? "/profile" : "/admin/dashboard" 
+                            }`: "/auth"
+                    }
+                >
                     <div className={`flex h-[35px] border-2 w-[100px] justify-center items-center rounded-full text-mainIconColor hover:bg-mainIconColor border-sndIconColor hover:text-sndIconColor hover:border-none`}>
                         <div className='flex'>
                             <FaUser 
