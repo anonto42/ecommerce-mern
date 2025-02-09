@@ -15,7 +15,7 @@ const Promis = () => {
 
             (async()=>{
                 // Get user data
-                axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
                 .then( res => dispatch(setUserData(res.data.data)))
                 .catch(err => dispatch(setUserData({
                     name: "...",
@@ -32,12 +32,12 @@ const Promis = () => {
                 })))
     
                 // get the hero section data
-                axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hero`,{withCredentials:true})
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hero`,{withCredentials:true})
                 .then( res => dispatch(setAppHeroData(res.data.data)))
                 .catch(err => console.log(err))
 
                 // get all users for the admin
-                axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
                 .then( res => dispatch(setTotalUserData(res.data)))
                 .catch(err => console.log(err))
                         
