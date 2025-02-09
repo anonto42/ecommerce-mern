@@ -13,7 +13,13 @@ const Promis = () => {
         
         useEffect(()=>{
 
-            (async()=>{
+            (async()=>{ 
+                
+                // get the hero section data
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hero`,{withCredentials:true})
+                .then( res => dispatch(setAppHeroData(res.data.data)))
+                .catch(err => console.log(err))
+
                 // Get user data
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
                 .then( res => dispatch(setUserData(res.data.data)))
@@ -31,11 +37,6 @@ const Promis = () => {
                     userType: undefined,
                 })))
     
-                // get the hero section data
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hero`,{withCredentials:true})
-                .then( res => dispatch(setAppHeroData(res.data.data)))
-                .catch(err => console.log(err))
-
                 // get all users for the admin
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
                 .then( res => dispatch(setTotalUserData(res.data)))
