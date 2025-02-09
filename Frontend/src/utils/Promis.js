@@ -39,7 +39,7 @@ const Promis = () => {
     
                 // get all users for the admin
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
-                .then( res => dispatch(setTotalUserData(res.data)))
+                .then( res => dispatch(setTotalUserData(res.data.data)))
                 .catch(err => console.log(err))
                         
 
