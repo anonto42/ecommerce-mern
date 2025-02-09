@@ -158,7 +158,7 @@ const SetingsComponent = () => {
           >
 
               <h2
-                className='text-xl font-semibold mb-2'
+                className='text-xl font-semibold'
               >Existing images :</h2>
 
               <div
@@ -168,7 +168,7 @@ const SetingsComponent = () => {
                 {/*image box */}
                 {
                   heroData.images.map((item, index) => (
-                    <div key={index} className='w-[160px] border-2 mr-2 h-[110px] relative rounded-md overflow-hidden'>
+                    <div key={index} className='w-[160px] mt-2 border-2 mr-2 h-[110px] relative rounded-md overflow-hidden'>
                       <div
                         className={`w-full h-full bg-slate-100 duration-100 ease-linear absolute ${!imgLoading? "opacity-100":"opacity-0"}`}
                       />
@@ -183,14 +183,14 @@ const SetingsComponent = () => {
                 }
               </div>
 
-              <h2 className='py-3 font-semibold text-xl'>Selected images :</h2>
+              <h2 className='mt-3 font-semibold text-xl'>Selected images :</h2>
 
               <div
                 className='flex flex-wrap'
               >
                 {
                   imgFiles? Array.from(imgFiles).map((item, index) => (
-                    <div key={index} className='w-[160px] border-2 m-2 h-[110px] relative rounded-md overflow-hidden'>
+                    <div key={index} className='w-[160px] border-2 mt-2 mr-2 h-[110px] relative rounded-md overflow-hidden'>
                       <div
                         className={`w-full h-full bg-slate-100 duration-100 ease-linear absolute ${!imgLoading? "opacity-100":"opacity-0"}`}
                       />
