@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const SideBarForMobile = ({on}) => {
-  const data = useSelector( data => data.applicationData.appData )
+  const data = useSelector( data => data.applicationData.userData )
   return (
     <div
       className={ on ? 'w-[200px] min-h-[70px] bg-mainIconColor absolute z-[51] right-[10%] duration-150 ease-linear top-[60px] rounded-md overflow-hidden' : 'w-[200px] min-h-[0px] bg-mainIconColor absolute z-[51] right-[10%] duration-150 ease-linear top-[60px] rounded-md overflow-hidden'}>
@@ -19,7 +19,7 @@ const SideBarForMobile = ({on}) => {
         </h2>
       </Link>
       <Link to={
-                data.userType !== "admin" ? "/profile" : "/admin/dashboard"
+                data.userType === "admin" ? "/admin/dashboard" : "/profile"
             }>
         <h2 className={on?'w-full h-[50px] hover:bg-[green] duration-100 ease-linear font-semibold hover:text-topBarTextColor text-lg border-b-2 flex justify-center items-center':'w-full h-[0px] hover:bg-[green] duration-100 ease-linear font-semibold hover:text-topBarTextColor text-[0px] flex justify-center items-center'}>
           {
