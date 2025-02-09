@@ -27,25 +27,13 @@ const Promis = () => {
                 cart: [],
                 orders: [],
                 wishlist: [],
-                userType: "",
+                userType: undefined,
             })))
 
             // get the hero section data
             axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hero`,{withCredentials:true})
             .then( res => dispatch(setAppHeroData(res.data.data)))
-            .catch(err => dispatch(setUserData({
-                name: "...",
-                email: "...",
-                number: "...",
-                city: "...",
-                thana: "...",
-                area: "...",
-                location: "...",
-                cart: [],
-                orders: [],
-                wishlist: [],
-                userType: "",
-            })))
+            .catch(err => console.log(err))
         
             },[])
         
