@@ -13,6 +13,6 @@ adminRoutes.route("/hero").post( uploader.fields([ { name : "heroImages" , maxCo
 // Get all users
 adminRoutes.route("/users").get( Users );
 // get a user
-adminRoutes.route("/user").get( oneUser ).put( thatUser ).delete( theUser );
+adminRoutes.route("/user").post( oneUser ).put( thatUser ).delete( theUser );
 
 export default adminRoutes;
