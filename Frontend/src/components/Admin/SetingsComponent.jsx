@@ -33,7 +33,6 @@ const SetingsComponent = () => {
           'Access-Control-Allow-Origin': '*' ,
         }
       })
-      console.log(responce)
       
       if (!responce) {
         toast.error(`HTTP error! status: ${responce.status}`);
