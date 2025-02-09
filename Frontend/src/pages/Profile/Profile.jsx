@@ -10,12 +10,12 @@ const Profile = () => {
   const { userType } = useSelector( event => event.applicationData.userData );
   const { userData } = useSelector( event => event.applicationData );
 
-  setTimeout(() => {
-    if (userType === "") return toast.info("Please login!")
-    }, 5000);
+  if(userType === undefined){
+    toast.warning("Please login your account!");
     setTimeout(()=>{
-        window.location.href="/auth"
-    }, 7000);
+      window.location.href = "/auth";
+    },4000)
+  }
   
   const [name , setName] = useState("name...");
   const [email , setEmail] = useState("email...");
@@ -41,7 +41,7 @@ const Profile = () => {
   const updatedUserInformation = async (e) => {
     try {
       e.preventDefault()
-      if ( userData === undefined ) return window.location.href = "/auth"
+      if ( userType === undefined ) return window.location.href = "/auth"
       setLoad(true)
       const updateData = {
         number:phone,
