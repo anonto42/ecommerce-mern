@@ -11,7 +11,7 @@ const adminAuth = async (req,res,next) => {
             return res
                 .status(403)
                 .json(
-                    Responce.error( "You are not authorized! Cook not founded." , false )
+                    Responce.error( "You are not authorized! Cooki not founded." , false )
                 )
         };
         // decode the cookie
