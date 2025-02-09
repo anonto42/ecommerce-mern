@@ -100,7 +100,7 @@ async function heroInformation(req,res){
         return res
          .status(200)
          .json(
-            Responce.success( "Images saved successfully!" , responce , true )
+            Responce.success( "Updated the hero data successfully!" , responce , true )
         )
 
 

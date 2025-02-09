@@ -8,8 +8,8 @@ const SetingsComponent = () => {
   const [ loading , setLoading ] = useState(false);
   const [ imgLoading , setImgLoading ] = useState(false);
   const [ imgFiles , setImgFiles ] = useState();
-  const [ heroText ,setHeroText] = useState("");
   const  { heroData } = useSelector( event => event.applicationData.appData );
+  const [ heroText ,setHeroText] = useState(heroData.topText);
 
 
   const handleHerodataSubmit = async (e) => {
@@ -23,10 +23,9 @@ const SetingsComponent = () => {
       }
       formData.append("topText",heroText)
       
+      // console.log(formData.getAll("heroImages"))
 
-      console.log(formData.getAll("heroImages"))
-
-      await axios.put(`${VITE_REACT_SERVER_API}/admin/hero`,formData,
+      const responce = await axios.put(`${import.meta.env.VITE_REACT_SERVER_API}/admin/hero`,formData,
       {
         withCredentials: true,
         headers: { 
@@ -34,17 +33,14 @@ const SetingsComponent = () => {
           'Access-Control-Allow-Origin': '*' ,
         }
       })
-      .then(response => console.log(response.response.data))
-      .catch(err => console.log(err.response))
-
-      // console.log(response)
+      console.log(responce)
       
-      // if (!response) {
-      //   throw new Error(`HTTP error! status: ${response.status}`);
-      // }
+      if (!responce) {
+        toast.error(`HTTP error! status: ${responce.status}`);
+      }
       
       setLoading(false);
-      toast.success("Hero data updated successfully!");
+      toast.success(responce.data.message);
       
     } catch (error) {
       console.log(error);
@@ -229,7 +225,7 @@ const SetingsComponent = () => {
                       onChange={(e)=>setHeroText(e.target.value)}
                       type="text" 
                       name="" id="" 
-                      placeholder='Update the Quantity'
+                      placeholder='This is the main text of the application header'
                       className='w-[440px] min-h-[70px] pt-1 px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     />
                   </div>
