@@ -114,4 +114,25 @@ async function heroInformation(req,res){
     }
 }
 
-export { getUsers , hearoInformation , heroInformation }
+function Users(req, res) {
+    try {
+
+        const user = UserModel.find({});
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Something wrong!" , user , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { getUsers , hearoInformation , heroInformation , Users }
