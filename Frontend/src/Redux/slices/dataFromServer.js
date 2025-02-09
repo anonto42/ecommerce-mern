@@ -257,7 +257,7 @@ const initialState = {
         userType: "",
     },
     adminData:{
-        totalUsers: 0
+        totalUsers: []
     }
 }
 
