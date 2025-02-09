@@ -4,21 +4,6 @@ import { UserModel } from "../Model/User.model.js"
 import { HeroModel } from './../Model/Hero.model.js';
 
 
-async function getUsers (req,res){
-    try {
-
-        const users = await UserModel.find()
-        return res.status(200).json(users)
-        
-    } catch (error) {
-        return res
-            .status(404)
-            .json(
-                Responce.error( "Somethig was wrong!" , error , false )
-            )
-    }
-}
-
 async function hearoInformation ( req , res ){
     try {
         const { heroImages } = req.files;
@@ -114,17 +99,53 @@ async function heroInformation(req,res){
     }
 }
 
-function Users(req, res) {
+async function Users(req, res) {
     try {
 
-        const user = UserModel.find({});
+        const user = await UserModel.find({});
 
         return res
             .status(200)
             .json(
-                Responce.success( "Something wrong!" , user , true )
+                Responce.success( "Get all user Succesfully." , user , true )
             )
         
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(200)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+async function oneUser(req, res) {
+    try {
+
+        const { email } = req.body
+        if(!email) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide the user email." , false )
+                )
+        }
+
+        const user = await UserModel.findOne({ email });
+        if(!user) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "User not found." , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Got a user succesfully" , user , true )
+            )
     } catch (error) {
         console.log(error)
         return res
@@ -135,4 +156,77 @@ function Users(req, res) {
     }
 }
 
-export { getUsers , hearoInformation , heroInformation , Users }
+async function thatUser(req, res) {
+    try {
+
+        const { email , block } = req.body
+
+        if(!email && !block) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide the user email." , false )
+                )
+        }
+
+        const user = await UserModel.updateOne( { email } , { isBlocked : block } );
+        if(!user) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "User not found." , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Got a user succesfully" , user , true )
+            )
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+async function theUser(req, res) {
+    try {
+
+        const { email } = req.body
+
+        if(!email) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide the user email." , false )
+                )
+        }
+        const user = await UserModel.deleteOne( email );
+        if(!user) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "User not found." , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Delete user succesfully" , user , true )
+            )
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser }
