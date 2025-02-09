@@ -151,16 +151,7 @@ async function updateUserProfile(req,res) {
             location
         }
 
-        const find = await UserModel.findById(user);
-        if(!find) {
-            return res
-            .status(404)
-            .json(
-                Responce.error( "User not exised!" , false )
-            )
-        };
-
-        const userData = await UserModel.findByIdAndUpdate( user , updateData ).selecte("-password");
+        const userData = await UserModel.findByIdAndUpdate( user , updateData );
         if(!userData) {
             return res
             .status(405)
