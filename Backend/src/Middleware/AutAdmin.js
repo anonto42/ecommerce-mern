@@ -11,7 +11,7 @@ const adminAuth = async (req,res,next) => {
             return res
                 .status(403)
                 .json(
-                    Responce.error( "You are not authenticated" , false )
+                    Responce.error( "You are not authorized! Cook not founded." , false )
                 )
         };
         // decode the cookie
@@ -20,7 +20,7 @@ const adminAuth = async (req,res,next) => {
             return res
                 .status(403)
                 .json(
-                    Responce.error( "You are not authenticated" , false )
+                    Responce.error( "You are not authorized. by cooke" , false )
                 )
         };
         // send the data on the rext request
@@ -29,7 +29,7 @@ const adminAuth = async (req,res,next) => {
             return res
                 .status(403)
                 .json(
-                    Responce.error( "You are not Authenticated" , false )
+                    Responce.error( "You accound not founded" , false )
                 )
         };
         // Check if Authorized
