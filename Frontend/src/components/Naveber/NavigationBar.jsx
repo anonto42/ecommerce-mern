@@ -13,7 +13,7 @@ const NavigationBar = () => {
   const [ navTob,setNavBar ] = useState(false);
   const data = useSelector( data => data.applicationData.userData );
 
-  let bar = (window.location.href === import.meta.env.VITE_REACT_DOMAIN_NAME ) || (window.location.href === "http://localhost:5173/")
+  let bar = (window.location.href === `${import.meta.env.VITE_REACT_DOMAIN_NAME}/` ) || (window.location.href === "http://localhost:5173/")
 
   useEffect(()=>{
     ;(()=>window.addEventListener("scroll",function(){
