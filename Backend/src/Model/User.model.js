@@ -64,6 +64,10 @@ const userSchema = new Schema(
             type: String, 
             default: "user",
             enum: ["user", "admin", "seller"] 
+        },
+        isBlocked:{
+            type: Boolean,
+            default: false
         }
     },{
         timestamps: true
