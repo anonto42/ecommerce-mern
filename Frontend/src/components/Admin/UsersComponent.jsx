@@ -10,8 +10,6 @@ const UsersComponent = () => {
     const [email, setSearchInput] = useState('');
     const [user,setUser] = useState('')
 
-    console.log(user)
-
     const SerchUser = async () => {
       try {
         setLoading(true);
@@ -38,10 +36,10 @@ const UsersComponent = () => {
       }
     };
 
-      async function block () {
+    async function block () {
         try {
           setLoading(true);
-          if (email == '') {
+          if (user.email == undefined) {
             return toast.warn("Please enter a email address of user!");
           }
       
@@ -62,11 +60,11 @@ const UsersComponent = () => {
         } finally {
           setLoading(false);
         }
-      }
-      async function unBlock () {
+    }
+    async function unBlock () {
         try {
           setLoading(true);
-          if (email == '') {
+          if (user.email == undefined) {
             return toast.warn("Please enter a email address of user!");
           }
       
@@ -87,18 +85,16 @@ const UsersComponent = () => {
         } finally {
           setLoading(false);
         }
-      }
+    }
 
     const deleteUser = async () => {
         try {
           setLoading(true);
-          if (email == '') {
+          if (user.email == undefined) {
             return toast.warn("Please enter a email address of user!");
           }
       
-          const response = await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/admin/user`, {email}
-            , // Send email in request bodyimport { Hourglass } from 'react-loader-spinner';
-
+          await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/admin/user`, {email},
             { withCredentials: true,
               headers: { 
                 'Content-Type': 'application/json',
@@ -107,15 +103,14 @@ const UsersComponent = () => {
             } // Config object
           );
           toast.success("User Deleted.");
-          setUser(response.data.data); // Assuming you have a setUser state
         } catch (error) {
           toast.error("Something went wrong!");
-          console.log(error);
+          console.log(error.response.data);
         } finally {
           setLoading(false);
         }
     }
-    
+
 
   return (
     <div
@@ -232,9 +227,11 @@ const UsersComponent = () => {
               <p className='text-sm font-mono'>{user.location}</p> )
             </div>
             <h3>Status: <small>{
-                user.isBlocked == "" ?
-                  user.isBlocked != true ? "Unblock":"Block"
-                : "....."}</small></h3>
+                user != undefined ?
+                "....."
+                :
+                user.isBlocked != true ? "Unblock":"Block"
+                }</small></h3>
             <div
               className=''
             >
