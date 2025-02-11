@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Hourglass } from 'react-loader-spinner';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { toast } from "react-toastify";
+import { useSelector } from 'react-redux';
 
 const ShopComponent = () => {
   const [imageFils, setImageFiles] = useState(null);
@@ -14,6 +15,7 @@ const ShopComponent = () => {
   const [quantity,setQuantity] = useState("");
   const [discription,setDiscription] = useState("");
   const [sizeSplitData,setPartsData] = useState();
+  const { allProducts } = useSelector( store => store.applicationData.adminData);
   
   const publicAProduct = async () => {
     try {
@@ -88,183 +90,79 @@ const ShopComponent = () => {
         >
 
           {/* Product's sheat */}
-          <div
-            className='w-[800px] mt-4 min-h-[80px] border-b border-lime-200 mx-auto'
-          >
-            <div
-              className='mx-auto h-auto w-auto'
-            >
-              <img 
-                src="" 
-                alt="" 
-                className='w-[220px] mx-auto h-[300px]'
-              />
+          {
+            allProducts.map((item,index)=>{
+              return(
+                    <div
+                      key={index}
+                        className='w-[800px] mt-4 min-h-[80px] border-b border-lime-200 mx-auto'
+                    >
+                      <div
+                        className='mx-auto h-auto w-auto'
+                      >
+                        <img 
+                          src={item.images[0]} 
+                          alt="" 
+                          className='w-[220px] mx-auto h-[300px]'
+                        />
 
-            </div>
+                      </div>
 
-            <div
-              className='mt-4 md:flex justify-around'
-            >
-              <h3
-                className='text-lg'
-              >
-                Title :<span className='underline font-mono'> {"Title the name of the product"}</span>
-              </h3>
+                  <div
+                    className='mt-4 md:flex justify-around'
+                  >
+                    <h3
+                      className='text-lg'
+                    >
+                      Title:<span className='underline font-mono'> {item.name}</span>
+                    </h3>
 
-              <h3
-                className='text-lg'
-              >Price :<span className='underline font-mono'> {"500"}</span> BDT</h3>
-            </div>
+                    <h3
+                      className='text-lg'
+                    >Sizes:<span className='underline font-mono'> {item.size}</span></h3>
 
-            <div
-              className='mt-4 md:flex justify-around'
-            >
-              <h3
-                className='text-lg'
-              >
-                category : <span className='underline font-mono'>{"T-shirt"} </span>
-              </h3>
+                    <h3
+                      className='text-lg'
+                    >Price:<span className='underline font-mono'> {item.price}</span> BDT</h3>
+                  </div>
 
-              <h3
-                className='text-lg'
-              >Quantity : <span className='underline font-mono'>{"12"}</span>{" "}PCS</h3>
+                  <div
+                    className='mt-4 md:flex justify-around'
+                  >
+                    <h3
+                      className='text-lg'
+                    >
+                      category: <span className='underline font-mono'>{item.category} </span>
+                    </h3>
 
-              <h3
-                className='text-lg'
-              >Created-at : <span className='underline font-mono'>{"12/3/2024"}</span></h3>
-            </div>
+                    <h3
+                      className='text-lg'
+                    >Quantity: <span className='underline font-mono'>{item.quantity}</span>{" "}PCS</h3>
 
-            <div
-              className='mt-4 md:flex justify-around mb-4'
-            >
-              <h3
-                className='text-lg'
-              >
-                ID :  <span className='underline font-mono'>{"sdfaskoi23lk3456ho2543i6"}</span>
-              </h3>
+                    <h3
+                      className='text-lg'
+                    >Created-at: <span className='underline font-mono'>{item.createdAt}</span></h3>
+                  </div>
 
-              <h3
-                className='text-lg'
-              >Created-by : <span className='underline font-mono'>{"Admin-ssddd"}</span></h3>
-            </div>
+                  <div
+                    className='mt-4 md:flex justify-around mb-4'
+                  >
+                    <h3
+                      className='text-lg'
+                    >
+                      ID:  <span className='underline font-mono'>{item._id}</span>
+                    </h3>
 
-          </div>
+                    <h3
+                      className='text-lg'
+                    >Created-by : <span className='underline font-mono'>{item.createdBy}</span></h3>
+                  </div>
 
-          <div
-            className='w-[800px] mt-4 min-h-[80px] border-b border-lime-200 mx-auto'
-          >
-            <div
-              className='mx-auto h-auto w-auto'
-            >
-              <img 
-                src="" 
-                alt="" 
-                className='w-[220px] mx-auto h-[300px]'
-              />
-
-            </div>
-
-            <div
-              className='mt-4 md:flex justify-around'
-            >
-              <h3
-                className='text-lg'
-              >
-                Title :<span className='underline font-mono'> {"Title the name of the product"}</span>
-              </h3>
-
-              <h3
-                className='text-lg'
-              >Price :<span className='underline font-mono'> {"500"}</span> BDT</h3>
-            </div>
-
-            <div
-              className='mt-4 md:flex justify-around'
-            >
-              <h3
-                className='text-lg'
-              >
-                category : <span className='underline font-mono'>{"T-shirt"} </span>
-              </h3>
-
-              <h3
-                className='text-lg'
-              >Created-at : <span className='underline font-mono'>{"12/3/2024"}</span></h3>
-            </div>
-
-            <div
-              className='mt-4 md:flex justify-around mb-4'
-            >
-              <h3
-                className='text-lg'
-              >
-                ID :  <span className='underline font-mono'>{"sdfaskoi23lk3456ho2543i6"}</span>
-              </h3>
-
-              <h3
-                className='text-lg'
-              >Created-by : <span className='underline font-mono'>{"Admin-ssddd"}</span></h3>
-            </div>
-
-          </div>
-
-          <div
-            className='w-[800px] mt-4 min-h-[80px] border-b border-lime-200 mx-auto'
-          >
-            <div
-              className='mx-auto h-auto w-auto'
-            >
-              <img 
-                src="" 
-                alt="" 
-                className='w-[220px] mx-auto h-[300px]'
-              />
-
-            </div>
-
-            <div
-              className='mt-4 md:flex justify-around'
-            >
-              <h3
-                className='text-lg'
-              >
-                Title :<span className='underline font-mono'> {"Title the name of the product"}</span>
-              </h3>
-
-              <h3
-                className='text-lg'
-              >Price :<span className='underline font-mono'> {"500"}</span> BDT</h3>
-            </div>
-
-            <div
-              className='mt-4 md:flex justify-around'
-            >
-              <h3
-                className='text-lg'
-              >
-                category : <span className='underline font-mono'>{"T-shirt"} </span>
-              </h3>
-
-              <h3
-                className='text-lg'
-              >Created-at : <span className='underline font-mono'>{"12/3/2024"}</span></h3>
-            </div>
-
-            <div
-              className='mt-4 md:flex justify-around mb-4'
-            >
-              <h3
-                className='text-lg'
-              >
-                ID :  <span className='underline font-mono'>{"sdfaskoi23lk3456ho2543i6"}</span>
-              </h3>
-
-              <h3
-                className='text-lg'
-              >Created-by : <span className='underline font-mono'>{"Admin-ssddd"}</span></h3>
-            </div>
-
-          </div>
+                </div>
+              )
+            })
+          }
+          
 
 
         </div>
