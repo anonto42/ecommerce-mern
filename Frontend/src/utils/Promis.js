@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData } from "../Redux/slices/dataFromServer";
+import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData, setAllProductsForAdmin } from "../Redux/slices/dataFromServer";
 import axios from "axios";
 
 
@@ -45,6 +45,7 @@ const Promis = () => {
                 // get all products for the admin
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,{withCredentials:true})
                 .then( ({ data }) => dispatch(setProductData((data.data))))
+                .then( ({ data }) => dispatch(setAllProductsForAdmin((data.data))))
                 .catch(err => console.log(err))
                 
                 // // get all catagorys for the admin

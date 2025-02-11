@@ -26,7 +26,8 @@ const initialState = {
         userType: "",
     },
     adminData:{
-        totalUsers: []
+        totalUsers: [],
+        allProducts: [],
     }
 }
 
@@ -54,10 +55,13 @@ const allDatas = createSlice({
         },
         setTotalUserData: ( state , action ) => {
             state.adminData.totalUsers = action.payload;
+        },
+        setAllProductsForAdmin:(state,action)=>{
+            state.adminData.allProducts = action.payload;
         }
     }
 })
 
 
 export default allDatas;
-export const { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData } = allDatas.actions
+export const { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData , setAllProductsForAdmin } = allDatas.actions
