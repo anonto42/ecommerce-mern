@@ -44,8 +44,7 @@ const Promis = () => {
 
                 // get all products for the admin
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,{withCredentials:true})
-                .then( ({ data }) => dispatch(setProductData((data.data))))
-                .then( ({ data }) => dispatch(setAllProductsForAdmin((data.data))))
+                .then( data => dispatch(setAllProductsForAdmin(data.data.data)))
                 .catch(err => console.log(err))
                 
                 // // get all catagorys for the admin
