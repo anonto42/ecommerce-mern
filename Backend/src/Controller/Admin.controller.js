@@ -53,7 +53,7 @@ async function hearoInformation ( req , res ){
     }
 }
 
-async function heroInformation(req,res){
+async function heroInformation(req , res){
     try {
         const { heroImages } = req.files;
         const { topText } = req.body;
@@ -100,7 +100,7 @@ async function heroInformation(req,res){
     }
 }
 
-async function Users(req, res) {
+async function Users(req , res) {
     try {
 
         const user = await UserModel.find({});
@@ -121,7 +121,7 @@ async function Users(req, res) {
     }
 }
 
-async function oneUser(req, res) {
+async function oneUser(req , res) {
     try {
 
         const { email } = req.body
@@ -157,7 +157,7 @@ async function oneUser(req, res) {
     }
 }
 
-async function thatUser(req, res) {
+async function thatUser(req , res) {
     try {
 
         const { email , block } = req.body
@@ -194,7 +194,7 @@ async function thatUser(req, res) {
     }
 }
 
-async function theUser(req, res) {
+async function theUser(req , res) {
     try {
 
         const { email } = req.body
@@ -230,7 +230,7 @@ async function theUser(req, res) {
     }
 }
 
-async function product(req,res) {
+async function product(req , res) {
     try {
 
         const { size , quantity , category, description , price , name } = req.body;
@@ -298,4 +298,32 @@ async function product(req,res) {
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product }
+async function GProduct(req , res) {
+    try {
+
+        const product = await ProductModel.find();
+        if(!product){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Failed to create product." , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Product get successfully!" , product , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct }

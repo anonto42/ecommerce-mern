@@ -41,6 +41,19 @@ const Promis = () => {
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
                 .then( res => dispatch(setTotalUserData(res.data.data)))
                 .catch(err => console.log(err))
+
+                // get all products for the admin
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,{withCredentials:true})
+                .then( ({ data }) => dispatch(setProductData((data.data))))
+                .catch(err => console.log(err))
+                
+                // // get all catagorys for the admin
+                // await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/catagorys`,{withCredentials:true})
+                // .then( res => dispatch(setCatagorysData(res.data.data)))
+                // .catch(err => console.log(err))
+                
+                // // get all best selling products for the admin
+                // await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/bestselling`,{withCredentials:true})
                         
 
             })();
