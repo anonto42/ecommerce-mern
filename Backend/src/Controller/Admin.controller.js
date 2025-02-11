@@ -229,4 +229,19 @@ async function theUser(req, res) {
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser }
+async function product(req,res) {
+    try {
+
+        const { } = req.body;
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product }
