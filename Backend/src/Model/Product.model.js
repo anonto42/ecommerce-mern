@@ -14,7 +14,7 @@ const productSchema = new Schema(
             type: String,
             required: true,
         },
-        image: [
+        images: [
             {
                 type: String,
                 required: true,
@@ -33,7 +33,12 @@ const productSchema = new Schema(
                 type: String,
                 required: true,
             }
-        ]
+        ],
+        createdBy:{
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        }
     },
     { timestamps: true }
 )
