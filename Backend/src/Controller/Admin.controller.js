@@ -2,6 +2,7 @@ import Responce from "../Lib/Responce.js";
 import { uploadOnCloudinary } from "../Middleware/Cloudnary.js";
 import { UserModel } from "../Model/User.model.js"
 import { HeroModel } from './../Model/Hero.model.js';
+import { ProductModel } from './../Model/Product.model.js';
 
 
 async function hearoInformation ( req , res ){
@@ -232,7 +233,60 @@ async function theUser(req, res) {
 async function product(req,res) {
     try {
 
-        const { } = req.body;
+        const { size , quantity , category, description , price , name } = req.body;
+        const { images } = req.files;
+        const { _id } = req.user;
+
+        if( !size && !quantity && category && !description && !price && !name ){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide all the product details." , false )
+                )
+        }
+        if(!images) {
+            return res
+               .status(404)
+               .json(
+                    Responce.error( "No image founded!" , false )
+                )
+        };
+
+        const files = images.map( file => file.path );
+        const cldResponse = await uploadOnCloudinary(files);
+        if(!cldResponse){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Can't upload files in the cloud." , false )
+                )
+        }
+        // uploadable data 
+        const Data = { 
+            size, 
+            quantity, 
+            category, 
+            images : cldResponse, 
+            description, 
+            price, 
+            name,
+            createdBy: _id
+        }
+
+        const product = await ProductModel.create( Data );
+        if(!product){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Failed to create product." , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Product created successfully!" , product , true )
+            )
         
     } catch (error) {
         console.log(error)

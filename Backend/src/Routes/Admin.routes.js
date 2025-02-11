@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { hearoInformation, heroInformation, oneUser, thatUser, theUser, Users } from "../Controller/Admin.controller.js";
+import { hearoInformation, heroInformation, oneUser, product, thatUser, theUser, Users } from "../Controller/Admin.controller.js";
 import adminAuth from "../Middleware/AutAdmin.js";
 import { uploader } from './../Middleware/Multer.js';
 
@@ -14,5 +14,7 @@ adminRoutes.route("/hero").post( uploader.fields([ { name : "heroImages" , maxCo
 adminRoutes.route("/users").get( Users );
 // get a user
 adminRoutes.route("/user").post( oneUser ).put( thatUser ).delete( theUser );
+// create product
+adminRoutes.route("/product").post(  uploader.fields([ { name : "images" , maxCount: 3 } ]) , product );
 
 export default adminRoutes;
