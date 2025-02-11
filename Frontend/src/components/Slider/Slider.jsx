@@ -4,6 +4,7 @@ import { RotatingLines } from "react-loader-spinner"
 const Slider = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loadedImages, setLoadedImages] = useState({});
+    const [loading, setLoading] = useState(false);
 
     // Automatically slide to the next image every 5 seconds
     useEffect(() => {
@@ -56,35 +57,31 @@ const Slider = ({ images }) => {
                 {images.map((image, idx) => (
                     <div
                         key={idx}
-                        className="flex-shrink-0 w-full bg-[#f0f0f0] h-full bg-center bg-cover relative"
+                        className='w-full h-full bg-center bg-cover relative flex-shrink-0 bg-[#f0f0f0] flex'
                     >
-                        <img
+                        <img 
+                            className={`w-full h-full object-cover transition-opacity duration-500 ease-in ${loading? "opacity-100" : "opacity-0"}`}
+                            src={image} 
+                            alt="Not found"
                             loading='lazy'
-                            src={image}
-                            alt={`Slide ${idx + 1}`}
-                            className={
-                                `w-full h-full object-cover transition-opacity duration-500 ease-in ${
-                                loadedImages[idx] ? 'opacity-100' : 'opacity-0'
-                                }`
-                            }
-                            onLoad={() => handleImageLoad(idx)}
+                            onLoad={()=>setLoading(true)}
                         />
-                        {!loadedImages[idx] && (
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <RotatingLines
-                                    visible={true}
-                                    height="90"
-                                    width="90"
-                                    color="#7F8289"
-                                    strokeWidth="5"
-                                    animationDuration="0.75"
-                                    ariaLabel="rotating-lines-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClass=""
-                                />
-                            </div>
-                        )}
-                    </div>
+                        {
+                            !loading?(
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <RotatingLines
+                                        visible={true}
+                                        height="50"
+                                        width="50"
+                                        color="#7F8289"
+                                        strokeWidth="5"
+                                        animationDuration="0.75"
+                                        ariaLabel="rotating-lines-loading"
+                                    />
+                                </div>
+                            ):(<></>)
+                        }
+                </div>
                 ))}
             </div>
         </div>
