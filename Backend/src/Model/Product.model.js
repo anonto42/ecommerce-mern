@@ -69,6 +69,11 @@ const productSchema = new Schema(
         brand:{
             type: String,
             defualt:"S-Brand"
+        },
+        tagOfEvent:{
+            type: String,
+            default:"Hot-Item",
+            enum:["Special-Offers","Best-Selling","Hot-Item","ALL"]
         }
     },
     { timestamps: true }
