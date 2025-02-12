@@ -13,11 +13,12 @@ const UsersComponent = () => {
     const SerchUser = async () => {
       try {
         setLoading(true);
-        if (email == '') {
+        const finalEmail = email.trim();
+        if (finalEmail == '') {
           return toast.warn("Please enter a email address of user!");
         }
     
-        const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/user`, {email}
+        const response = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/user`, {email:finalEmail}
           , // Send email in request body
           { withCredentials: true,
             headers: { 
@@ -90,11 +91,12 @@ const UsersComponent = () => {
     const deleteUser = async () => {
         try {
           setLoading(true);
-          if (user.email == undefined) {
+          const finalEmail = email.trim();
+          if (finalEmail == '') {
             return toast.warn("Please enter a email address of user!");
           }
       
-          await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/admin/user`, {email},
+          await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/duser`, {email:finalEmail},
             { withCredentials: true,
               headers: { 
                 'Content-Type': 'application/json',
@@ -108,9 +110,9 @@ const UsersComponent = () => {
           console.log(error.response.data);
         } finally {
           setLoading(false);
+          toast.warn("Please Refresh the page!")
         }
     }
-
 
   return (
     <div
@@ -227,7 +229,7 @@ const UsersComponent = () => {
               <p className='text-sm font-mono'>{user.location}</p> )
             </div>
             <h3>Status: <small>{
-                user != undefined ?
+                user.isBlocked === '' ?
                 "....."
                 :
                 user.isBlocked != true ? "Unblock":"Block"
