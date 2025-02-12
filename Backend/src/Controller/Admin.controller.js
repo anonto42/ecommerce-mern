@@ -233,7 +233,7 @@ async function theUser(req , res) {
 async function product(req , res) {
     try {
 
-        const { size , quantity , category, description , price , name } = req.body;
+        const { size , quantity , category, description , price , name , tag } = req.body;
         const { images } = req.files;
         const { _id } = req.user;
 
@@ -270,7 +270,8 @@ async function product(req , res) {
             description, 
             price, 
             name,
-            createdBy: _id
+            createdBy: _id,
+            tagOfEvent : tag
         }
 
         const product = await ProductModel.create( Data );
