@@ -1,8 +1,5 @@
 import React from 'react'
 import Slider from '../Slider/Slider';
-import Image1 from "/hero.jpg";
-import Image2 from "/hero2.jpg";
-import Image3 from "/hero3.jpg";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
