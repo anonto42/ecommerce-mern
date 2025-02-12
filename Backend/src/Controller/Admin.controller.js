@@ -392,26 +392,54 @@ async function SProduct(req , res){
 
 async function UProduct(req , res) {
     try {
-        const { _id , size , quantity , category, description , price , name , tag } = req.body; 
+        const { id , size , quantity , category, description , price , name , tag } = req.body; 
         const { images } = req.files;
-        if( !_id || !name ){
+        if( !name ){
             return res
                 .status(404)
                 .json(
                     Responce.error( "Please provide the product id or name." , false )
                 )
+            }
+
+        let cldResponse;
+
+        if(images) {
+            const files = images.map( file => file.path );
+            cldResponse = await uploadOnCloudinary(files); 
         }
-        const product = await ProductModel.findOne(
+            
+        const data = images?
+        {
+            size,
+            quantity,
+            category,
+            images : cldResponse,
+            description,
+            price,
+            name,
+            tagOfEvent : tag
+        }:{
+            size,
+            quantity,
+            category,
+            description,
+            price,
+            name,
+            tagOfEvent : tag
+        }
+        const product = await ProductModel.updateOne(
             {
                 $or:[
                     { 
-                        _id
+                        _id:id
                     },
                     {
                         name
                     }
                 ]
-            }
+            },
+            data
         );
         if(!product){
             return res
@@ -420,11 +448,6 @@ async function UProduct(req , res) {
                     Responce.error( "Product not exiest." , false )
                 )
         }
-        res
-        .status(200)
-        .json(
-            Responce.success( "Product found successfully!" , product , true )
-        )
 
         return res
             .status(200)

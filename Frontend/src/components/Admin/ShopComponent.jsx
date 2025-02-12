@@ -28,7 +28,7 @@ const ShopComponent = () => {
   const [Ucatagory,UsetCatagory] = useState("");
   const [Uquantity,UsetQuantity] = useState("");
   const [Udiscription,UsetDiscription] = useState("");
-  const [selectedImage,setSelectedImages] = useState(false);
+  const [selectedImage,setSelectedImages] = useState();
   // get the data from backend
   const { allProducts } = useSelector( store => store.applicationData.adminData);
   
@@ -92,7 +92,7 @@ const ShopComponent = () => {
           'Access-Control-Allow-Origin': '*' // This is for CORS
         }
       })
-      
+
       setUImageFiles(rs.data.data.images)
       UsetPrice(rs.data.data.price)
       UsetSize(rs.data.data.size)
@@ -113,11 +113,11 @@ const ShopComponent = () => {
 
   const updateProductHandaler = async () => {
     try {
-      setSelectedImages(true)
+      setSerchLoading(true)
 
       const dataForUpdate = new FormData();
       for(const files of UimageFils){
-        formData.append('images',files);
+        dataForUpdate.append('images',files);
       }
       dataForUpdate.append("name",Utitle);
       dataForUpdate.append("price",Uprice);
@@ -127,12 +127,13 @@ const ShopComponent = () => {
       dataForUpdate.append("quantity", Uquantity);
       dataForUpdate.append("description", Udiscription);
 
-      const rs = await axios.put(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`, dataForUpdate ,{withCredentials: true,
+      const rs = await axios.put(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,dataForUpdate,{
+        withCredentials: true,
         headers: { 
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*' // This is for CORS
-        }
-      })
+          'Content-Type':'multipart/form-data',
+          'Access-Control-Allow-Origin': '*' ,
+        }}
+      )
       
       setUImageFiles(rs.data.data.images)
       UsetPrice(rs.data.data.price)
@@ -144,9 +145,11 @@ const ShopComponent = () => {
       UsetDiscription(rs.data.data.description)
 
       toast.success("Product Updated Successfully",{position:"bottom-center"})
+      setSerchLoading(false)
       setSelectedImages(false)
     } catch (error) {
       setSerchLoading(false)
+      setSelectedImages(false)
       console.log(error)
       toast.error("Something went wrong! Please try again",{position:"bottom-center"});
     }
@@ -345,7 +348,9 @@ const ShopComponent = () => {
           <div
             className='p-3 min-w-[900px] border overflow-auto rounded-xl'
           >
-            <div>
+            <div
+              className='w-full h-full'
+            >
               <div
                 className='flex justify-around'
               >
