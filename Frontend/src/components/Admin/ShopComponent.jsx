@@ -101,12 +101,72 @@ const ShopComponent = () => {
       UsetCatagory(rs.data.data.category)
       UsetQuantity(rs.data.data.quantity)
       UsetDiscription(rs.data.data.description)
-      console.log(rs.data.data)
-
-
 
       toast.success("Product Found Successfully",{position:"bottom-center"}) 
       setSerchLoading(false);
+    } catch (error) {
+      setSerchLoading(false)
+      console.log(error)
+      toast.error("Something went wrong! Please try again",{position:"bottom-center"});
+    }
+  }
+
+  const updateProductHandaler = async () => {
+    try {
+      setSelectedImages(true)
+
+      const dataForUpdate = new FormData();
+      for(const files of UimageFils){
+        formData.append('images',files);
+      }
+      dataForUpdate.append("name",Utitle);
+      dataForUpdate.append("price",Uprice);
+      dataForUpdate.append("size",Usize);
+      dataForUpdate.append("tag",Utag);
+      dataForUpdate.append("category",Ucatagory);
+      dataForUpdate.append("quantity", Uquantity);
+      dataForUpdate.append("description", Udiscription);
+
+      const rs = await axios.put(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`, dataForUpdate ,{withCredentials: true,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*' // This is for CORS
+        }
+      })
+      
+      setUImageFiles(rs.data.data.images)
+      UsetPrice(rs.data.data.price)
+      UsetSize(rs.data.data.size)
+      UsetTile(rs.data.data.name)
+      UsetTag(rs.data.data.tagOfEvent)
+      UsetCatagory(rs.data.data.category)
+      UsetQuantity(rs.data.data.quantity)
+      UsetDiscription(rs.data.data.description)
+
+      toast.success("Product Updated Successfully",{position:"bottom-center"})
+      setSelectedImages(false)
+    } catch (error) {
+      setSerchLoading(false)
+      console.log(error)
+      toast.error("Something went wrong! Please try again",{position:"bottom-center"});
+    }
+  }
+
+
+  const deleteProductHandaler = async () => {
+    try {
+      setSelectedImages(true)
+
+      await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product` , {} ,{withCredentials: true,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*' // This is for CORS
+        }
+      })
+
+      toast.success("Product Deleted Successfully!",{position:"bottom-center"})
+      toast.warn("Please refresh the page!")
+      setSelectedImages(false)
     } catch (error) {
       setSerchLoading(false)
       console.log(error)
@@ -393,9 +453,11 @@ const ShopComponent = () => {
                 className='flex justify-center mt-5'
               >
                 <button
+                  onClick={()=>updateProductHandaler()}
                   className='w-[80px] h-[40px] bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 active:scale-105 mr-4'
                 >Update</button>
                 <button
+                  onClick={()=>deleteProductHandaler()}
                   className='w-[80px] h-[40px] bg-red-500 text-white font-bold rounded-md hover:bg-red-600 active:scale-105'
                 >Delete</button>
               </div>
