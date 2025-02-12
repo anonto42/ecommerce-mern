@@ -2,6 +2,7 @@ import Responce from "../Lib/Responce.js";
 import { cookieOption, jwtToken } from "../Lib/SendJwtToken.js";
 import { UserModel } from "../Model/User.model.js";
 import { HeroModel } from './../Model/Hero.model.js';
+import { ProductModel } from './../Model/Product.model.js';
 
 
 async function register (req,res) {
@@ -204,4 +205,92 @@ async function Heros (req,res){
     }
 }
 
-export { login , register , userProfile , logout , updateUserProfile , Heros }
+async function specialOffers(req,res) {
+    try {
+
+        const products = await ProductModel.find();
+        if(!products) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Something wrong!", false )
+                )
+        }
+        
+        const filltredOffers = products.filter( data => data.tagOfEvent === "Special-Offers");
+
+        return res
+                .status(200)
+                .json(
+                    Responce.success( "Get the offerd products", filltredOffers , false )
+                )
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+async function bestSellingProduct(req,res) {
+    try {
+
+        const products = await ProductModel.find();
+        if(!products) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Something wrong!", false )
+                )
+        }
+        
+        const filltredOffers = products.filter( data => data.tagOfEvent === "Best-Selling");
+
+        return res
+                .status(200)
+                .json(
+                    Responce.success( "Get the Best-Selling products", filltredOffers , false )
+                )
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+async function hotItem(req,res) {
+    try {
+
+        const products = await ProductModel.find();
+        if(!products) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Something wrong!", false )
+                )
+        }
+
+        const filltredOffers = products.filter( data => data.tagOfEvent === "Hot-Item");
+
+        return res
+                .status(200)
+                .json(
+                    Responce.success( "Get the Hot-Item products", filltredOffers , false )
+                )
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem }
