@@ -7,7 +7,7 @@ const initialState = {
             topText:"",
             images:[]
         },
-        catagorys:["...","..","."],
+        catagorys:[],
         bestSellingProducts:[],
         specialOffersDiscounts:[],
         products : []
