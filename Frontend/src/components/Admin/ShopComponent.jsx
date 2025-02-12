@@ -17,8 +17,7 @@ const ShopComponent = () => {
   const [quantity,setQuantity] = useState("");
   const [discription,setDiscription] = useState("");
   const [sizeSplitData,setPartsData] = useState();
-  // this variable is if the update product 
-  const [serchArgument,setArgument] = useState("");
+  // this variable is if the update product \
   const [serchLoading,setSerchLoading] = useState(false);
   const [UimageFils, setUImageFiles] = useState([]);
   const [Utitle,UsetTile] = useState("");
@@ -26,6 +25,7 @@ const ShopComponent = () => {
   const [Usize,UsetSize] = useState("");
   const [Utag,UsetTag] = useState("");
   const [Ucatagory,UsetCatagory] = useState("");
+  const [PID,setPID] = useState("");
   const [Uquantity,UsetQuantity] = useState("");
   const [Udiscription,UsetDiscription] = useState("");
   const [selectedImage,setSelectedImages] = useState();
@@ -86,7 +86,7 @@ const ShopComponent = () => {
     try {
       setSerchLoading(true);
       
-      const rs = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/sproduct`,{ name : serchArgument },{withCredentials: true,
+      const rs = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/sproduct`,{ id : PID },{withCredentials: true,
         headers: { 
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*' // This is for CORS
@@ -120,6 +120,7 @@ const ShopComponent = () => {
         dataForUpdate.append('images',files);
       }
       dataForUpdate.append("name",Utitle);
+      dataForUpdate.append("id",PID);
       dataForUpdate.append("price",Uprice);
       dataForUpdate.append("size",Usize);
       dataForUpdate.append("tag",Utag);
@@ -155,12 +156,11 @@ const ShopComponent = () => {
     }
   }
 
-
   const deleteProductHandaler = async () => {
     try {
-      setSelectedImages(true)
+      setSerchLoading(true)
 
-      await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product` , {} ,{withCredentials: true,
+      await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/dproduct` , { id: PID } ,{withCredentials: true,
         headers: { 
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*' // This is for CORS
@@ -169,7 +169,7 @@ const ShopComponent = () => {
 
       toast.success("Product Deleted Successfully!",{position:"bottom-center"})
       toast.warn("Please refresh the page!")
-      setSelectedImages(false)
+      setSerchLoading(false)
     } catch (error) {
       setSerchLoading(false)
       console.log(error)
@@ -308,10 +308,10 @@ const ShopComponent = () => {
           >
             <input 
               type="text" 
-              value={serchArgument}
-              onChange={(e)=>setArgument(e.target.value)}
+              value={PID}
+              onChange={(e)=>setPID(e.target.value)}
               className='h-full outline-none px-4 text-lg w-[80%] text-textDarkColor'
-              placeholder='Search Product by Title or ID'
+              placeholder='Search Product by ID'
               />
             <button
               onClick={()=>getAProductForUpdate()}

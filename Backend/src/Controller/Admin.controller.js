@@ -394,7 +394,7 @@ async function UProduct(req , res) {
     try {
         const { id , size , quantity , category, description , price , name , tag } = req.body; 
         const { images } = req.files;
-        if( !name ){
+        if( !id ){
             return res
                 .status(404)
                 .json(
@@ -465,4 +465,50 @@ async function UProduct(req , res) {
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct }
+async function DProduct(req , res){
+    try {
+        const { id , name } = req.body; 
+        if( id == "" || name == "" ){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide the product id or name." , false )
+                )
+        }
+        const product = await ProductModel.deleteOne(
+            {
+                $or:[
+                    { 
+                        _id:id
+                    },
+                    {
+                        name
+                    }
+                ]
+            }
+        );
+        if(!product){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Product not exiest." , false )
+                )
+        }
+        
+        return res
+        .status(200)
+        .json(
+                Responce.success( "Product was deleted successfully!" , product , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct , DProduct }

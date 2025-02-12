@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { GProduct, hearoInformation, heroInformation, oneUser, product, SProduct, thatUser, theUser, UProduct, Users } from "../Controller/Admin.controller.js";
+import { DProduct, GProduct, hearoInformation, heroInformation, oneUser, product, SProduct, thatUser, theUser, UProduct, Users } from "../Controller/Admin.controller.js";
 import adminAuth from "../Middleware/AutAdmin.js";
 import { uploader } from './../Middleware/Multer.js';
 
@@ -15,7 +15,9 @@ adminRoutes.route("/users").get( Users );
 // user opations
 adminRoutes.route("/user").post( oneUser ).put( thatUser ).delete( theUser );
 // product opations
-adminRoutes.route("/product").get( GProduct ).post(  uploader.fields([ { name : "images" , maxCount: 3 } ]) , product ).put( uploader.fields([ { name : "images" , maxCount: 3 } ]) , UProduct);
+adminRoutes.route("/product").get( GProduct ).post(  uploader.fields([ { name : "images" , maxCount: 3 } ]) , product ).put( uploader.fields([ { name : "images" , maxCount: 3 } ]) , UProduct)
+// delete product
+adminRoutes.route("/dproduct").post( DProduct );
 // get a singel product
 adminRoutes.route("/sproduct").post( SProduct )
 
