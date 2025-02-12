@@ -28,12 +28,10 @@ const productSchema = new Schema(
             type: Number,
             required: true,
         },
-        size: [
-            {
-                type: String,
-                required: true,
-            }
-        ],
+        size:{
+            type: String,
+            required: true,
+        },
         createdBy:{
             type: Schema.Types.ObjectId,
             ref: "User",
