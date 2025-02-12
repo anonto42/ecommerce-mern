@@ -17,6 +17,19 @@ const ShopComponent = () => {
   const [quantity,setQuantity] = useState("");
   const [discription,setDiscription] = useState("");
   const [sizeSplitData,setPartsData] = useState();
+  // this variable is if the update product 
+  const [serchArgument,setArgument] = useState("");
+  const [serchLoading,setSerchLoading] = useState(false);
+  const [UimageFils, setUImageFiles] = useState([]);
+  const [Utitle,UsetTile] = useState("");
+  const [Uprice,UsetPrice] = useState("");
+  const [Usize,UsetSize] = useState("");
+  const [Utag,UsetTag] = useState("");
+  const [Ucatagory,UsetCatagory] = useState("");
+  const [Uquantity,UsetQuantity] = useState("");
+  const [Udiscription,UsetDiscription] = useState("");
+  const [selectedImage,setSelectedImages] = useState(false);
+  // get the data from backend
   const { allProducts } = useSelector( store => store.applicationData.adminData);
   
   const publicAProduct = async () => {
@@ -64,6 +77,38 @@ const ShopComponent = () => {
       
     } catch (error) {
       setLoading(false)
+      console.log(error)
+      toast.error("Something went wrong! Please try again",{position:"bottom-center"});
+    }
+  }
+
+  const getAProductForUpdate = async () => {
+    try {
+      setSerchLoading(true);
+      
+      const rs = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/admin/sproduct`,{ name : serchArgument },{withCredentials: true,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*' // This is for CORS
+        }
+      })
+      
+      setUImageFiles(rs.data.data.images)
+      UsetPrice(rs.data.data.price)
+      UsetSize(rs.data.data.size)
+      UsetTile(rs.data.data.name)
+      UsetTag(rs.data.data.tagOfEvent)
+      UsetCatagory(rs.data.data.category)
+      UsetQuantity(rs.data.data.quantity)
+      UsetDiscription(rs.data.data.description)
+      console.log(rs.data.data)
+
+
+
+      toast.success("Product Found Successfully",{position:"bottom-center"}) 
+      setSerchLoading(false);
+    } catch (error) {
+      setSerchLoading(false)
       console.log(error)
       toast.error("Something went wrong! Please try again",{position:"bottom-center"});
     }
@@ -193,17 +238,21 @@ const ShopComponent = () => {
         className='text-2xl'>Update Product :</h1>
 
         {/* Serch Product */}
-        <div>
+        <div className=''>
+          
           <div
             className='md:w-[350px] w-[250px] h-[50px] mt-4 rounded-lg overflow-hidden font-serif'
           >
             <input 
               type="text" 
+              value={serchArgument}
+              onChange={(e)=>setArgument(e.target.value)}
               className='h-full outline-none px-4 text-lg w-[80%] text-textDarkColor'
-              placeholder='Search Product by Title'
+              placeholder='Search Product by Title or ID'
               />
             <button
-              className='w-[20%] h-[53px] bg-blue-400 text-white hover:bg-blue-500'
+              onClick={()=>getAProductForUpdate()}
+              className='w-[20%] h-[53px] bg-blue-400 active:bg-blue-600 ease-linear duration-150 text-white hover:bg-blue-500'
             >Search</button>
           </div>
         </div>
@@ -211,8 +260,22 @@ const ShopComponent = () => {
 
         {/* serch resuld */}
         <div
-          className='overflow-x-auto min-h-[440px]'
+          className='overflow-x-auto min-h-[440px] relative'
         >
+          {
+            serchLoading?(
+              <div className='absolute h-full w-full z-40 bg-[#272525a4] flex justify-center items-center rounded-xl'>
+                <Hourglass
+                  visible={true}
+                  height="60"
+                  width="60"
+                  ariaLabel="hourglass-loading"
+                  wrapperClass=""
+                  colors={['#2db12d', '#72a1ed']}
+                />
+              </div>
+            ):(<></>)
+          }
           {/* Dufalt value */}
           <h1
             className='text-xl p-4'
@@ -227,68 +290,103 @@ const ShopComponent = () => {
                 className='flex justify-around'
               >
                 <div>
-                  <img 
-                    src="" 
-                    className='w-[110px] h-[150px]'
-                  />
+                  <div
+                    className='flex h-[150px]'
+                  >
+                    {
+                      UimageFils?
+                      selectedImage?
+                      Array.from(UimageFils).map((item, index) =>{
+                        return(
+                          <img 
+                            src={URL.createObjectURL(item) || item} 
+                            key={index}
+                            className='w-[110px] h-[150px] mr-1'
+                          />
+                        )
+                      }):(
+                        UimageFils.map((item, index) =>{
+                          return(
+                            <img 
+                              src={item} 
+                              key={index}
+                              className='w-[110px] h-[150px] mr-1'
+                            />
+                          )
+                        })
+                      ):<></>
+                    }
+                  </div>
+                  {/* Image files for updatet the product images */}
                   <input 
+                    onChange={e =>{ return setUImageFiles(e.target.files) , setSelectedImages(true)} }
                     className='mt-2'
                     placeholder='Change the Main file'
                     type="file"
+                    multiple
                   />
                   <h2
                     className='mt-3 font-semibold'
-                  >Quantity <span className='text-xl'>{"11"}</span></h2>
+                  >Quantity <span className='text-xl'>{Uquantity}</span></h2>
                   <input 
                     type="text" 
-                    name="" id="" 
+                    value={Uquantity}
+                    onChange={(e)=>UsetQuantity(e.target.value)}
                     placeholder='Update the Quantity'
                     className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
                   />
                 </div>
                 <div>
-                  <h3>Title : {"The name of the product"}</h3>
+                  <h3>Title: {Utitle}</h3>
                   <input 
                     className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     type="text" 
                     placeholder='The name of the product.'
-                    name="" id="" 
+                    value={Utitle}
+                    onChange={(e)=>UsetTile(e.target.value)}
                   />
-                  <h3>Price : {"399"} BDT</h3>
+                  <h3>Price: {Uprice}</h3>
                   <input 
                     className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     type="text" 
                     placeholder='The price of the product.'
-                    name="" id="" 
+                    value={Uprice}
+                    onChange={e => UsetPrice(e.target.value)} 
                   />
-                  <h3>Category : {"T-shirt"}</h3>
+                  <h3>Category: {Ucatagory}</h3>
                   <input 
                     className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     type="text" 
                     placeholder='Category of the product.'
-                    name="" id=""/>
+                    value={Ucatagory}
+                    onChange={(e)=>UsetCatagory(e.target.value)}  
+                  />
                 </div>
                 <div>
-                  <h3>Size: {"m l xl"}</h3>
+                  <h3>Size: {Usize}</h3>
                   <input 
                     className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     type="text" 
                     placeholder='Size of product.'
-                    name="" id="" 
+                    value={Usize}
+                    onChange={ e=> UsetSize(e.target.value)} 
                   />
-                  <h3>Tag: {"tag"}</h3>
+                  <h3>Tag: {Utag}</h3>
                   <input 
                     className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     type="text" 
                     placeholder='Tag for show'
-                    name="" id="" 
+                    value={Utag}
+                    onChange={e=> UsetTag(e.target.value)}  
                   />
                   <h3>Driscription:</h3>
                   <textarea
                     className='w-[240px] min-h-[60px] pt-1 px-3 rounded-xl my-2 outline-none text-textDarkColor'
                     type="text"
                     placeholder='Driscription.'
-                    name="" id=""/>
+                    onChange={e=> UsetDiscription(e.target.value)}
+                    value={Udiscription}
+                    />
                 </div>
               </div>
               <div

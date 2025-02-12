@@ -17,7 +17,7 @@ adminRoutes.route("/user").post( oneUser ).put( thatUser ).delete( theUser );
 // product opations
 adminRoutes.route("/product").get( GProduct ).post(  uploader.fields([ { name : "images" , maxCount: 3 } ]) , product ).put( uploader.fields([ { name : "images" , maxCount: 3 } ]) , UProduct);
 // get a singel product
-adminRoutes.route("/sproduct").get( SProduct )
+adminRoutes.route("/sproduct").post( SProduct )
 
 
 
