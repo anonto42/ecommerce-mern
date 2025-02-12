@@ -206,7 +206,7 @@ async function theUser(req , res) {
                     Responce.error( "Please provide the user email." , false )
                 )
         }
-        const user = await UserModel.deleteOne( email );
+        const user = await UserModel.deleteOne( { email } );
         if(!user) {
             return res
                 .status(404)
@@ -220,6 +220,7 @@ async function theUser(req , res) {
             .json(
                 Responce.success( "Delete user succesfully" , user , true )
             )
+            
     } catch (error) {
         console.log(error)
         return res

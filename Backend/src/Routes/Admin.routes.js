@@ -13,7 +13,8 @@ adminRoutes.route("/hero").post( uploader.fields([ { name : "heroImages" , maxCo
 // Get all users
 adminRoutes.route("/users").get( Users );
 // user opations
-adminRoutes.route("/user").post( oneUser ).put( thatUser ).delete( theUser );
+adminRoutes.route("/user").post( oneUser ).put( thatUser )
+adminRoutes.route("/duser").post( theUser );
 // product opations
 adminRoutes.route("/product").get( GProduct ).post(  uploader.fields([ { name : "images" , maxCount: 3 } ]) , product ).put( uploader.fields([ { name : "images" , maxCount: 3 } ]) , UProduct)
 // delete product
