@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { Hourglass } from 'react-loader-spinner';
-import axios, { all } from 'axios';
+import axios from 'axios';
 import { toast } from "react-toastify";
 import { useSelector } from 'react-redux';
 
 const ShopComponent = () => {
   const [imageFils, setImageFiles] = useState(null);
   const [imgLoading,setImgLoading] = useState(false);
+  const [allImgLoading,setAllImgLoading] = useState(false);
   const [loading,setLoading] = useState(false);
   const [title,setTitle] = useState("");
   const [price,setPrice] = useState("");
   const [size,setSize] = useState("");
+  const [tag,setTag] = useState("");
   const [catagory,setCatagory] = useState("");
   const [quantity,setQuantity] = useState("");
   const [discription,setDiscription] = useState("");
@@ -33,6 +35,7 @@ const ShopComponent = () => {
       formData.append("name",title);
       formData.append("price",price);
       formData.append("size",sizeSplitData);
+      formData.append("tag",tag);
       formData.append("category",catagory);
       formData.append("quantity", quantity);
       formData.append("description", discription);
@@ -54,6 +57,7 @@ const ShopComponent = () => {
       setSize("");
       setQuantity("");
       setDiscription("");
+      setTag("");
       setImageFiles(null);
       setLoading(false);
       
@@ -100,11 +104,18 @@ const ShopComponent = () => {
                       <div
                         className='mx-auto h-auto w-auto'
                       >
-                        <img 
-                          src={item.images[0]} 
-                          alt="" 
-                          className='w-[220px] mx-auto h-[300px]'
-                        />
+                        <div
+                          className='w-[220px] mx-auto h-[300px] relative'
+                        >
+                          <div className={`absolute w-[220px] mx-auto h-[300px] bg-slate-50 duration-100 ease-linear ${!allImgLoading?"opacity-100":"opacity-0"}`}></div>
+                          <img 
+                            src={item.images[0]} 
+                            alt="" 
+                            loading='lazy'
+                            onLoad={()=>setAllImgLoading(true)}
+                            className='w-full h-full'
+                          />
+                        </div>
 
                       </div>
 
@@ -155,7 +166,13 @@ const ShopComponent = () => {
 
                     <h3
                       className='text-lg'
-                    >Created-by : <span className='underline font-mono'>{item.createdBy}</span></h3>
+                    >
+                      Tag:  <span className='underline font-mono'>{item.tagOfEvent}</span>
+                    </h3>
+
+                    <h3
+                      className='text-lg'
+                    >Created-by : <span className='underline font-mono'>{item.creator}</span></h3>
                   </div>
 
                 </div>
@@ -176,7 +193,7 @@ const ShopComponent = () => {
         className='text-2xl'>Update Product :</h1>
 
         {/* Serch Product */}
-        <form action="">
+        <div>
           <div
             className='md:w-[350px] w-[250px] h-[50px] mt-4 rounded-lg overflow-hidden font-serif'
           >
@@ -189,12 +206,12 @@ const ShopComponent = () => {
               className='w-[20%] h-[53px] bg-blue-400 text-white hover:bg-blue-500'
             >Search</button>
           </div>
-        </form>
+        </div>
 
 
         {/* serch resuld */}
         <div
-          className='w-full h-[440px]'
+          className='overflow-x-auto min-h-[440px]'
         >
           {/* Dufalt value */}
           <h1
@@ -203,11 +220,11 @@ const ShopComponent = () => {
 
           {/* Product */}
           <div
-            className='p-3 border overflow-auto w-full rounded-xl'
+            className='p-3 min-w-[900px] border overflow-auto rounded-xl'
           >
-            <form action="" >
+            <div>
               <div
-                className='flex'
+                className='flex justify-around'
               >
                 <div>
                   <img 
@@ -251,6 +268,28 @@ const ShopComponent = () => {
                     placeholder='Category of the product.'
                     name="" id=""/>
                 </div>
+                <div>
+                  <h3>Size: {"m l xl"}</h3>
+                  <input 
+                    className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
+                    type="text" 
+                    placeholder='Size of product.'
+                    name="" id="" 
+                  />
+                  <h3>Tag: {"tag"}</h3>
+                  <input 
+                    className='w-[240px] h-[40px] px-3 rounded-xl my-2 outline-none text-textDarkColor'
+                    type="text" 
+                    placeholder='Tag for show'
+                    name="" id="" 
+                  />
+                  <h3>Driscription:</h3>
+                  <textarea
+                    className='w-[240px] min-h-[60px] pt-1 px-3 rounded-xl my-2 outline-none text-textDarkColor'
+                    type="text"
+                    placeholder='Driscription.'
+                    name="" id=""/>
+                </div>
               </div>
               <div
                 className='flex justify-center mt-5'
@@ -262,13 +301,12 @@ const ShopComponent = () => {
                   className='w-[80px] h-[40px] bg-red-500 text-white font-bold rounded-md hover:bg-red-600 active:scale-105'
                 >Delete</button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Create Product */}
-
       <h1
         className='text-2xl p-4 font-semibold'
       >Upload Product...</h1>
@@ -348,6 +386,16 @@ const ShopComponent = () => {
                 value={size}
                 onChange={ e => setSize(e.target.value)} 
                 placeholder='Inter the sizes'
+                className='w-[250px] xl:w-[350px] h-[40px] rounded-md outline-none px-2 mt-2'
+              />
+            </div>
+            {/* Event tag of the product */}
+            <div>
+              <input 
+                type="text" 
+                value={tag}
+                onChange={ e => setTag(e.target.value)} 
+                placeholder='Tag for the product'
                 className='w-[250px] xl:w-[350px] h-[40px] rounded-md outline-none px-2 mt-2'
               />
             </div>
