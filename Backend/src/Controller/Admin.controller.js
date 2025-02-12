@@ -301,7 +301,24 @@ async function product(req , res) {
 async function GProduct(req , res) {
     try {
 
-        const product = await ProductModel.find();
+        const product = await ProductModel.aggregate(
+            [
+                {
+                    $lookup: {
+                      from: "users",
+                      localField: "createdBy",
+                      foreignField: "_id",
+                      as: "creator",
+                    },
+                  },
+                  {
+                    $set: {
+                      creator: { $arrayElemAt: ["$creator.name", 0] },
+                    },
+                  },
+              
+            ]
+        );
         if(!product){
             return res
                 .status(404)
@@ -326,4 +343,33 @@ async function GProduct(req , res) {
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct }
+async function UProduct(req , res) {
+    try {
+        const { _id , title } = req.body; 
+
+        const product = await ProductModel.findOne( {} );
+        if(!product){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Failed to create product." , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Product Updated successfully!" , product , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct }
