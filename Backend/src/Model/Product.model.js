@@ -71,7 +71,7 @@ const productSchema = new Schema(
         tagOfEvent:{
             type: String,
             default:"Hot-Item",
-            enum:["Special-Offers","Best-Selling","Hot-Item","ALL"]
+            enum:["Special-Offers","Best-Selling","Hot-Item"]
         }
     },
     { timestamps: true }
