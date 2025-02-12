@@ -344,18 +344,87 @@ async function GProduct(req , res) {
     }
 }
 
-async function UProduct(req , res) {
+async function SProduct(req , res){
     try {
-        const { _id , title } = req.body; 
-
-        const product = await ProductModel.findOne( {} );
+        const { id , name } = req.body; 
+        if( id == "" || name == "" ){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide the product id or name." , false )
+                )
+        }
+        const product = await ProductModel.findOne(
+            {
+                $or:[
+                    { 
+                        _id:id
+                    },
+                    {
+                        name
+                    }
+                ]
+            }
+        );
         if(!product){
             return res
                 .status(404)
                 .json(
-                    Responce.error( "Failed to create product." , false )
+                    Responce.error( "Product not exiest." , false )
                 )
         }
+        
+        return res
+        .status(200)
+        .json(
+                Responce.success( "Product found successfully!" , product , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+async function UProduct(req , res) {
+    try {
+        const { _id , size , quantity , category, description , price , name , tag } = req.body; 
+        const { images } = req.files;
+        if( !_id || !name ){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Please provide the product id or name." , false )
+                )
+        }
+        const product = await ProductModel.findOne(
+            {
+                $or:[
+                    { 
+                        _id
+                    },
+                    {
+                        name
+                    }
+                ]
+            }
+        );
+        if(!product){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Product not exiest." , false )
+                )
+        }
+        res
+        .status(200)
+        .json(
+            Responce.success( "Product found successfully!" , product , true )
+        )
 
         return res
             .status(200)
@@ -373,4 +442,4 @@ async function UProduct(req , res) {
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct }
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct }
