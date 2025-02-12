@@ -292,5 +292,35 @@ async function hotItem(req,res) {
     }
 }
 
+async function catagorys(req,res) {
+    try {
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem }
+        const products = await ProductModel.find();
+        if(!products) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Something wrong!", false )
+                )
+        }
+
+        const uniqueCategories = [...new Set(products.map(p => p.category))];
+
+        return res
+                .status(200)
+                .json(
+                    Responce.success( "Geted all the catagorys", uniqueCategories , false )
+                )
+                
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys}

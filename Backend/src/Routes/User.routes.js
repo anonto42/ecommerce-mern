@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { bestSellingProduct, Heros, hotItem, login , logout, register, specialOffers, updateUserProfile, userProfile } from "../Controller/User.controller.js";
+import { bestSellingProduct, catagorys, Heros, hotItem, login , logout, register, specialOffers, updateUserProfile, userProfile } from "../Controller/User.controller.js";
 import tokenCheck from "../Middleware/Aut.js";
 
 const userRoute = Router();
@@ -21,6 +21,8 @@ userRoute.route("/special").get( specialOffers );
 userRoute.route("/bestselling").get( bestSellingProduct );
 // get Hot-Item
 userRoute.route("/hotItem").get( hotItem );
+// get all catagorys
+userRoute.route("/catagorys").get( catagorys )
 
 
 export default userRoute;
