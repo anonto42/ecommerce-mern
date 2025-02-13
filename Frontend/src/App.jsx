@@ -29,7 +29,7 @@ const App = () => {
           <Route path='/auth' element={<Auth/>} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/product/:id' element={<ProductPage />} />
+          <Route path='/product' element={<ProductPage />} />
           <Route path='*' element={<Nopage />} />
         </Routes>
       <Footer />
