@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { MdStar } from "react-icons/md";
 import { RotatingLines } from 'react-loader-spinner';
 
-const ShowCaseCart = ({price,title,images,reviews,count,mr=false}) => {
+const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description,id}) => {
     const [hover,setHover] = useState(1);
-    const [load,setLoad] = useState(false)
+    const [load,setLoad] = useState(false);
   return (
     <div
         title='Click to view details'
@@ -78,6 +78,13 @@ const ShowCaseCart = ({price,title,images,reviews,count,mr=false}) => {
                 }
             </span> )
         </div>
+        <small className='px-2 h-[10px] overflow-hidden font-light'>
+            {
+                description.length > 28 ?
+                    description.substring(0, 28) + "..."
+                    : description + "."
+            }
+        </small>
         <div 
             className='w-full h-[60px] bg-whit flex justify-center items-center'
         >
