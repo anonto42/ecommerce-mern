@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from "react-router-dom"
-import { useSelector } from 'react-redux'
-import { MdStar, MdStarHalf, MdStarOutline, MdStarRate } from 'react-icons/md'
+import { MdStarHalf, MdStarOutline, MdStarRate } from 'react-icons/md'
 import axios from 'axios';
 import { RotatingLines } from 'react-loader-spinner';
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
-  let img = []
   const [productData , setProductData] = useState({})
-
   const [imgLoaction,setImageLocation] = useState(1)
   const [load,setLoad] = useState(false)
   const [searchParams] = useSearchParams();
@@ -40,6 +38,45 @@ const ProductPage = () => {
       productData?.images?.length > 0 ? setImage(productData.images[0]) : ""
   }, [productData]);
 
+  const addToCartHandler = async () => {
+    try {
+      if( selectedSize === "") return toast.warning("Please select the size to add!")
+      
+
+        const product = {
+          id: productData._id,
+          size: selectedSize
+        }
+
+        const responce = await axios.post(
+          `${import.meta.env.VITE_REACT_SERVER_API}/user/cart`,
+          product,
+          { withCredentials: true }
+        )
+        if (!responce) {
+          toast.error(`HTTP error! status: ${responce.status}`);
+          return;
+        }
+
+        console.log(responce)
+        toast.success(
+          <div>
+              Cart added successfully.
+              <button 
+                  onClick={() => window.location.href = "/cart"}
+                  className="ml-4 px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-all"
+              >
+                  Go to Cart
+              </button>
+          </div>,
+          { autoClose: 5000 } // Closes after 5 seconds
+      );
+
+    } catch (error) {
+      console.log(error.response);
+      toast.error("Failed to add product to cart. Please try again",{position:"bottom-center"});
+    }
+  }
   
   return (
     <div
@@ -160,7 +197,7 @@ const ProductPage = () => {
                   <div
                     onClick={()=>setSelectedSize(item)}
                     key={i}
-                    className={`w-[30px] h-[30px] border flex justify-center items-center text-xs my-2  mr-2 uppercase ${ selectedSize === item ? "bg-[#5bff1a3b]" : "bg-transparent"}`}
+                    className={`w-[30px] h-[30px] border flex justify-center items-center text-xs my-2  mr-2 uppercase ${ selectedSize === item ? "bg-[#5bff1a3b]" : "bg-transparent"} cursor-pointer`}
                   >
                     {item}
                 </div>
@@ -195,6 +232,7 @@ const ProductPage = () => {
             className='w-full flex justify-center items-center'
           >
             <button
+              onClick={()=>addToCartHandler()}
               className=' w-[150px] h-[55px] rounded-md text-lg font-semibold mb-4 active:scale-95 bg-mainIconColor duration-100 ease-in-out'
             >Add to cart</button>
           </div>
