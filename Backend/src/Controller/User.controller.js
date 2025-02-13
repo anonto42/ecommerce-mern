@@ -322,5 +322,41 @@ async function catagorys(req,res) {
     }
 }
 
+async function AProduct(req , res) {
+    try {
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys}
+        const { id } = req.body;
+        if(!id) {
+            return res
+                .status(400)
+                .json(
+                    Responce.error( "Please provide product id" , false )
+                )
+        }
+        const product = await ProductModel.findById({ _id:id });
+        if(!product) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Product not found" , false )
+                )
+        }
+        
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Get the product", product , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct}
