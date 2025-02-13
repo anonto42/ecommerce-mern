@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MdStar } from "react-icons/md";
 import { RotatingLines } from 'react-loader-spinner';
 
-const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description,id}) => {
+const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description}) => {
     const [hover,setHover] = useState(1);
     const [load,setLoad] = useState(false);
   return (
