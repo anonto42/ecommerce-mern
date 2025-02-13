@@ -11,9 +11,8 @@ const Promis = () => {
     const dispatch = useDispatch();
     try {
 
-        const data = useSelector( data => data.applicationData.appData)
+        // const data = useSelector( data => data.applicationData.appData)
         
-        console.log(data)
         useEffect(()=>{
             
             
