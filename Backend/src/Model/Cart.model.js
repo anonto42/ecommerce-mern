@@ -12,6 +12,10 @@ const cartSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Product',
             required: true
+        },
+        size:{
+            type: String,
+            required: true,
         }
     }
 )
