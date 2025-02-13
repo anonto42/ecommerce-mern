@@ -3,6 +3,7 @@ import { cookieOption, jwtToken } from "../Lib/SendJwtToken.js";
 import { UserModel } from "../Model/User.model.js";
 import { HeroModel } from './../Model/Hero.model.js';
 import { ProductModel } from './../Model/Product.model.js';
+import { CartModel } from './../Model/Cart.model.js';
 
 
 async function register (req,res) {
@@ -358,5 +359,57 @@ async function AProduct(req , res) {
     }
 }
 
+async function ACart(req , res) {
+    try {
+        const { id,size } = req.body;
+        const { _id } = req.user;
+        if(!_id) {
+            return res
+                .status(400)
+                .json(
+                    Responce.error( "Please login your accout first!" , false )
+                )
+        }
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct}
+        const cart = await CartModel.findOne({ product:id });
+        if(cart) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Product was also added" , false )
+                )
+        }
+
+        const cartCreate = await CartModel.create(
+            {
+                product:id,
+                user:_id,
+                size
+            }
+        )
+        if(!cartCreate) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "something was wrong!" , false )
+                )
+        }
+        
+        return res
+            .status(200)
+            .json(
+                Responce.success( "added the product on cart", cartCreate , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart}
