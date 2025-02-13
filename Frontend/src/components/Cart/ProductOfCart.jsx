@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const ProductOfCart = ({shopNow,shop,items}) => {
+const ProductOfCart = ({shopNow,shop,data}) => {
     const[image,setImage] = useState(false)
   return (
     <div
-      className={items?'w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto mb-8':'w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto'}
+      className={'w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto mb-8'}
     >
       <div
         className='w-full h-[80px] border-b-2 border-topBarTextColor flex justify-between px-4 text-topBarTextColor font-medium'
@@ -24,9 +24,12 @@ const ProductOfCart = ({shopNow,shop,items}) => {
           <div
             className='w-[50px] h-[65px] mr-3 overflow-hidden rounded-md relative'
           >
-            <div
-                className={`absolute w-full h-full bg-slate-200 ${!image?"opacity-100":"opacity-0"} duration-100 ease-linear`}
-            />
+            {
+              !image?<div
+              className={`absolute w-full h-full bg-slate-200 duration-100 ease-linear`}
+            />:<></>
+            }
+            
             <img 
                 className='w-full h-full'
                 src="" 
