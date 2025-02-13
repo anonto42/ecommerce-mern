@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ShowCaseCart from '../Cart/ShowCaseCart';
 import { Link } from 'react-router-dom';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
+import { RotatingLines } from 'react-loader-spinner';
 
 const ShowcaseSlider = ({cart}) => {
     const [on,setOn] = useState(false);
@@ -19,6 +20,7 @@ const ShowcaseSlider = ({cart}) => {
         // if( position < 1 ) setPosition(cart.length - 1 );
         else setPosition(position - 1);
     }
+    const data = [1,2,3,4,5,6,7];
   return (
     <div 
         onMouseEnter={()=>setOn(true)}
@@ -38,6 +40,18 @@ const ShowcaseSlider = ({cart}) => {
 
 
         {
+            cart.length === 0 ?
+            (
+                data.map( (item , index)=>{
+
+                    return <div key={index}>
+                            <div className='flex justify-center items-center w-[215px] h-[360px] rounded-xl bg-slate-100 mr-2'>
+                                <RotatingLines color="#16b916" width='40px' />
+                            </div>
+                        </div>
+                }) 
+            )
+             : ( 
             cart.map((data,index)=>{
                 const {price,title,images,reviews,description,_id} = data;
                 return (
@@ -56,7 +70,7 @@ const ShowcaseSlider = ({cart}) => {
                         />
                     </Link>
                 )
-            })
+            }))
         }
     </div>
   )
