@@ -10,11 +10,13 @@ const ShowcaseSlider = ({cart}) => {
     const fixedSize = Math.floor(windowsSize / 205)
 
     const increment = () => {
-        if( position > ( cart.length - fixedSize))setPosition(1);
+        if( position > ( cart.length - fixedSize))setPosition(0);
+        // if( position > ( cart.length - fixedSize))setPosition(1);
         else setPosition(position + 1);
     }
     const decrement = () => {
-        if( position < 1 ) setPosition(cart.length - 1 );
+        if( position < 1 ) setPosition(0);
+        // if( position < 1 ) setPosition(cart.length - 1 );
         else setPosition(position - 1);
     }
   return (
@@ -37,11 +39,11 @@ const ShowcaseSlider = ({cart}) => {
 
         {
             cart.map((data,index)=>{
-                const {price,title,images,reviews} = data;
+                const {price,title,images,reviews,description,_id} = data;
                 return (
                     <Link 
                         key={index} 
-                        to={`/product/${title}`}
+                        to={`/product?id=${_id}`}
                         >
                         <ShowCaseCart 
                             mr={true}
@@ -50,6 +52,7 @@ const ShowcaseSlider = ({cart}) => {
                             images={images || defualtImage}
                             reviews={reviews}
                             count={position}
+                            description={description}
                         />
                     </Link>
                 )
