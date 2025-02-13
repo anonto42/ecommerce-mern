@@ -35,9 +35,6 @@ const ShopComponent = () => {
   const publicAProduct = async () => {
     try {
       setLoading(true);
-      setPartsData(
-        size.split(" ")
-      )
       if (!imageFils || title === "" || price === "" || size === "" || catagory === "" || quantity === "" || discription === "") {
         return toast.error("All fields are required!") , setLoading(false);
       }
@@ -47,7 +44,7 @@ const ShopComponent = () => {
       }
       formData.append("name",title);
       formData.append("price",price);
-      formData.append("size",sizeSplitData);
+      formData.append("size",size);
       formData.append("tag",tag);
       formData.append("category",catagory);
       formData.append("quantity", quantity);
