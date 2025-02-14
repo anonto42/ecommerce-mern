@@ -73,8 +73,8 @@ const ProductPage = () => {
       );
 
     } catch (error) {
-      console.log(error.response);
-      toast.error("Failed to add product to cart. Please try again",{position:"bottom-center"});
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message,{position:"bottom-center"});
     }
   }
   
