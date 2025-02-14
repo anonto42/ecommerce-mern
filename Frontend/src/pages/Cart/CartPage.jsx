@@ -8,7 +8,7 @@ const CartPage = () => {
   const [checkOut,setCheckOut] = useState(false)
 
   const user = useSelector( user => user.applicationData.userData)
-  console.log(user)
+  
   return (
     <div
         className='w-full min-h-[60svh] relative pb-8'
