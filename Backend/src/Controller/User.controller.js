@@ -484,5 +484,45 @@ async function ACart(req , res) {
     }
 }
 
+async function DCartItem(req,res){
+    try {
+        const { id } = req.body;
+        console.log(id)
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart}
+        const cart = await CartModel.findOne({ _id:id });
+        console.log(cart)
+        if(!cart) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Cart not found!" , false )
+                )
+        }
+
+        const deletedCart = await CartModel.deleteOne( { _id:cart._id } )
+        if(!deletedCart) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "something was wrong!" , false )
+                )
+        }
+        
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Successfuly deleted the cart item", true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart , DCartItem }

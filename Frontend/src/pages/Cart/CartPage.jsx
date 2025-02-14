@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import { Hourglass } from 'react-loader-spinner';
 
 const CartPage = () => {
-  const [checkOut,setCheckOut] = useState(false)
-
-  const user = useSelector( user => user.applicationData.userData)
+  const [checkOut,setCheckOut] = useState(false);
+  const [buyProductData,setProductData] = useState({});
+  const user = useSelector( user => user.applicationData.userData);
   
   return (
     <div

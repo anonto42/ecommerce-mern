@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
-const ProductOfCart = ({shopNow,shop,data}) => {
-    const[image,setImage] = useState(false)
+const ProductOfCart = ({shopNow,data}) => {
+    const[image,setImage] = useState(false);
+    const { product } = data;
+    const[quantity,setQuantity] = useState(1);
+
+    const deleteCartItemHandler = async () => {
+      try {
+        
+        const responce = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/dcart`,{ id:data._id});
+
+        toast.success(`${responce.data.message}`)
+        toast.warn("please refresh the page!")
+      } catch (error) {
+        console.log(error)
+        toast.error(error.response.data.message)
+      }
+    }
   return (
     <div
       className={'w-full max-w-[900px] min-h-[300px] border-2 border-topBarTextColor rounded-xl bg-[#80808023] mx-auto mb-8'}
@@ -32,7 +49,7 @@ const ProductOfCart = ({shopNow,shop,data}) => {
             
             <img 
                 className='w-full h-full'
-                src="" 
+                src={product?.images?.[0]} 
                 alt=""
                 loading='lazy'
                 onLoad={()=>setImage(true)}
@@ -42,10 +59,10 @@ const ProductOfCart = ({shopNow,shop,data}) => {
           >
             <h2
                 className='text-[14px] w-[56px] sm:w-auto'
-            >{"Title of the Product"}</h2>
+            >{product?.name}</h2>
             <h3
               className='md:text-sm text-[12px]'
-            >Size: {"M"}</h3>
+            >Size: {product?.size}</h3>
           </div>
         </div>
 
@@ -64,7 +81,7 @@ const ProductOfCart = ({shopNow,shop,data}) => {
         <div
           className='w-[50%] h-full flex justify-end items-center'
         >
-            <h2>{"99.99"} BDT</h2>
+            <h2>{product?.price} BDT</h2>
         </div>
 
       </div>
@@ -86,21 +103,22 @@ const ProductOfCart = ({shopNow,shop,data}) => {
                 className='flex items-center'
             >
                 <CiCircleMinus
-                    className='text-4xl active:scale-95 duration-100 ease-in-out cursor-pointer'
+                  onClick={()=>setQuantity( e => e - 1)}
+                  className='text-4xl active:scale-95 duration-100 ease-in-out cursor-pointer'
                 />
                 <span 
-                    className='mx-4'
+                  className='mx-4'
                 >
-                    {"99.99"} 
+                  {quantity} 
                 </span>
                 <CiCirclePlus 
-                    className='text-4xl active:scale-95 duration-100 ease-in-out cursor-pointer'
+                  onClick={()=>setQuantity( e => e + 1)}
+                  className='text-4xl active:scale-95 duration-100 ease-in-out cursor-pointer'
                 />
             </div>
         </div>
 
       </div>
-
 
       <div
         className='w-full h-[80px] border-b-2 border-topBarTextColor flex justify-between px-4 text-topBarTextColor font-medium'
@@ -116,9 +134,9 @@ const ProductOfCart = ({shopNow,shop,data}) => {
           className='w-[50%] h-full flex justify-end items-center'
         >
             <div
-                className='flex items-center'
+              className='flex items-center'
             >
-                <h2>{"99.99"} BDT</h2>
+              <h2>{product?.price * quantity} BDT</h2>
             </div>
         </div>
 
@@ -135,6 +153,7 @@ const ProductOfCart = ({shopNow,shop,data}) => {
 
 
         <div
+          onClick={()=>deleteCartItemHandler()}
           className='w-[50%] h-full flex justify-end items-center'
         >
             <div
