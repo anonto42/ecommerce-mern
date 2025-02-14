@@ -113,9 +113,82 @@ function logout (req,res){
 async function userProfile(req,res) {
     try {
         // get user id from middleware
-        const user = req.user ;
+        const user = req.user;
         // get user data
-        const userData = await UserModel.findById( user._id ).select("-password");
+        const userData = await UserModel.aggregate(
+            [
+                {
+                    $match:{
+                        _id: user._id
+                    }
+                },
+                {
+                    $project:{
+                        password:0
+                    }
+                },
+                {
+                    $lookup: {
+                      from: "carts",
+                      localField: "_id",
+                      foreignField: "user",
+                      as: "cart"
+                    }
+                },
+                {
+                  $unwind: "$cart"
+                },
+                {
+                  $lookup: {
+                    from: "products",
+                    localField: "cart.product",
+                    foreignField: "_id",
+                    as: "cart.product"
+                  }
+                },
+                {
+                  $project: {
+                    _id: 1,
+                    number:1,
+                    city:1,
+                    name: 1,
+                    thana:1,
+                    area:1,
+                    location:1,
+                    orders:1,
+                    wishlist:1,
+                    userType:1,
+                    isBlocked:1,
+                    email: 1,
+                    cart: {
+                      _id: 1,
+                      user: 1,
+                      product: 1,
+                      size: 1,
+                      product: { $arrayElemAt: ["$cart.product", 0] }
+                    }
+                  }
+                },
+                {
+                    $group: {
+                      _id: "$_id", // Group by user idnumber:1,
+                      city:{ $first: "$city" },
+                      thana:{ $first: "$thana" },
+                      area:{ $first: "$area" },
+                      location:{ $first: "$location" },
+                      orders:{ $first: "$orders" },
+                      wishlist:{ $first: "$wishlist" },
+                      userType:{ $first: "$userType" },
+                      isBlocked:{ $first: "$isBlocked" },
+                      name: { $first: "$name" },
+                      email: { $first: "$email" },
+                      cart: { $push: "$cart" } // Push the cart back into the array
+                    }
+                }
+                
+            ]
+        )
+
         if(!userData){
             return res
                 .status(404)
@@ -127,7 +200,7 @@ async function userProfile(req,res) {
         return res
             .status(200)
             .json(
-                Responce.success( "Done to get the profile" , user , true )
+                Responce.success( "Done to get the profile" , userData[0] , true )
             )
         
     } catch (error) {
