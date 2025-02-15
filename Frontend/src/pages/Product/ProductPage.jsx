@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { MdStarHalf, MdStarOutline, MdStarRate } from 'react-icons/md'
 import axios from 'axios';
 import { RotatingLines } from 'react-loader-spinner';
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const ProductPage = () => {
   const [productData , setProductData] = useState({})
   const [imgLoaction,setImageLocation] = useState(1)
+  const Navigate = useNavigate()
   const [load,setLoad] = useState(false)
   const [searchParams] = useSearchParams();
   const productID = searchParams.get("id")
@@ -63,7 +64,7 @@ const ProductPage = () => {
           <div>
               Cart added successfully.
               <button 
-                  onClick={() => window.location.href = "/cart"}
+                  onClick={() => Navigate("/cart")}
                   className="ml-4 px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-all"
               >
                   Go to Cart
