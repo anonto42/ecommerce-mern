@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData, setAllProductsForAdmin, orders } from "../Redux/slices/dataFromServer";
+import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData, setAllProductsForAdmin, orders , totalVisitors} from "../Redux/slices/dataFromServer";
 import axios from "axios";
 
 
@@ -12,7 +12,7 @@ const Promis = () => {
     try {
         
         const data = useSelector( data => data.applicationData.userData)
-
+        
         useEffect(()=>{
             
             
@@ -58,8 +58,8 @@ const Promis = () => {
                 // get catagory's
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/catagorys`)
                 .then( res => dispatch(setCatagorysData(res.data.data)))
-                
                 .catch(err => console.log(err))
+                
                 // get all users for the admin
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
                 .then( res => dispatch(setTotalUserData(res.data.data)))
@@ -73,6 +73,11 @@ const Promis = () => {
                 // get orders
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/orders`,{ withCredentials: true})
                 .then( res => dispatch(orders(res.data.data)))
+                .catch(err => console.log(err))
+
+                // get visitors
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/visitors`,{ withCredentials: true})
+                .then( res => dispatch(totalVisitors(res.data.data)))
                 .catch(err => console.log(err))
             })();
         
