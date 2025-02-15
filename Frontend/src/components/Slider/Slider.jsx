@@ -3,7 +3,7 @@ import { RotatingLines } from "react-loader-spinner"
 
 const Slider = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [loadedImages, setLoadedImages] = useState({});
+    const [loadedCart, setLoadedCart] = useState(false);
     const [loading, setLoading] = useState(false);
 
     // Automatically slide to the next image every 5 seconds
@@ -28,11 +28,6 @@ const Slider = ({ images }) => {
         );
     };
 
-    // Handle image load
-    const handleImageLoad = (idx) => {
-        setLoadedImages((prevState) => ({ ...prevState, [idx]: true }));
-    };
-
     return (
         <div className="relative w-full h-full overflow-hidden">
             {/* Overlay for click navigation */}
@@ -48,6 +43,9 @@ const Slider = ({ images }) => {
             </div>
 
             {/* Slider */}
+            {
+                !loadedCart?(<div className='w-full h-full bg-[#f0f0f0]'/>):(<></>)
+            }
             <div
                 className="w-full h-full flex transition-transform duration-1000 ease-in-out"
                 style={{
@@ -56,6 +54,7 @@ const Slider = ({ images }) => {
             >
                 {images.map((image, idx) => (
                     <div
+                        onLoad={()=>setLoadedCart(true)}
                         key={idx}
                         className='w-full h-full bg-center bg-cover relative flex-shrink-0 bg-[#f0f0f0] flex'
                     >
