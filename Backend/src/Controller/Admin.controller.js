@@ -569,6 +569,7 @@ async function totalVisitors(req,res) {
     try {
 
         const data = await VisitorsModel.find();
+        
         if(!data){
             return res
                 .status(404)
@@ -593,4 +594,4 @@ async function totalVisitors(req,res) {
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct , DProduct , orders }
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct , DProduct , orders , totalVisitors }

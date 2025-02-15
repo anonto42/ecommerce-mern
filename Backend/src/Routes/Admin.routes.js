@@ -1,8 +1,7 @@
 import { Router } from "express";
-import { DProduct, GProduct, hearoInformation, heroInformation, oneUser, orders, product, SProduct, thatUser, theUser, UProduct, Users } from "../Controller/Admin.controller.js";
+import { DProduct, GProduct, hearoInformation, heroInformation, oneUser, orders, product, SProduct, thatUser, theUser, UProduct, Users , totalVisitors } from "../Controller/Admin.controller.js";
 import adminAuth from "../Middleware/AutAdmin.js";
 import { uploader } from './../Middleware/Multer.js';
-import { totalVisitors } from "../../../Frontend/src/Redux/slices/dataFromServer.js";
 
 const adminRoutes = Router();
 
