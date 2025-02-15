@@ -3,29 +3,31 @@ import { model, Schema } from "mongoose";
 
 const orderSchema = new Schema(
     {
-        user: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
         },
-        products: [
-            {
-                product: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Product',
-                    required: true
-                },
-                quantity: {
-                    type: Number,
-                    required: true
-                },
-                price: {
-                    type: Number,
-                    required: true
-                }
+        product:{
+            productId: {
+                type: Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            size:{
+                type: String,
+                required: true
             }
-        ],
-        total: {
+        },
+        quantity: {
+            type: Number,
+            required: true
+        },
+        productPrice: {
+            type: Number,
+            required: true
+        },
+        totalPriceWithDelivery: {
             type: Number,
             required: true
         },
@@ -35,7 +37,7 @@ const orderSchema = new Schema(
             default: 'Pending'
         },
         shippingAddress: {
-            type: String,
+            type: Object,
             required: true
         },
         paymentMethod: {
@@ -44,7 +46,8 @@ const orderSchema = new Schema(
         },
         paymentStatus: {
             type: String,
-            required: true
+            enum: ['Pending', 'Cancelled', 'Payed'],
+            defualt:"Pending"
         }
     },
     {

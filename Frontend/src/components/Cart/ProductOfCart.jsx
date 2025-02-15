@@ -3,11 +3,15 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const ProductOfCart = ({shopNow,data}) => {
+const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
     const[image,setImage] = useState(false);
     const { product } = data;
+    const Navigate = useNavigate()
     const[quantity,setQuantity] = useState(1);
+    const user = useSelector( user => user.applicationData.userData);
 
     const deleteCartItemHandler = async () => {
       try {
@@ -20,6 +24,27 @@ const ProductOfCart = ({shopNow,data}) => {
         console.log(error)
         toast.error(error.response.data.message)
       }
+    }
+    
+    const shopHandler = () => {
+      setDataForOrder(
+        {
+          cartId:data._id,
+          productPrice: ( product?.price * quantity ),
+          quantity: quantity ,
+          userId:user._id,
+          product:{
+            name:product.name,
+            productId:product._id,
+            size:product.size
+          },
+          totalPriceWithDelivery:( user?.city.toLowerCase() === "dhaka" ? ( (product?.price * quantity) + 60 ) : ( (product?.price * quantity ) + 120 ) ),
+          shippingAddress:( user?.location == "DEFAULT! Please enter yours..." ? null : { city : user.city , thana: user.thana , location: user.location } ),
+          productImage: product?.images?.[0],
+          paymentMethod:"",
+          orderStatus:""
+        }
+      )
     }
   return (
     <div
@@ -174,7 +199,7 @@ const ProductOfCart = ({shopNow,data}) => {
           className='w-[50%] h-full flex items-center '
         >
           <button
-            onClick={()=>window.location.href ="/"}
+            onClick={()=>Navigate("/")}
             className='w-[120px] h-[45px] text-sm text-textDarkColor rounded-full shadow-md cursor-pointer font-semibold active:scale-95 shadow-[#000000d0] bg-mainIconColor'
           >Continue Shopping</button>
         </div>
@@ -184,7 +209,7 @@ const ProductOfCart = ({shopNow,data}) => {
           className='w-[50%] h-full flex justify-end items-center'
         >
           <button
-              onClick={()=>shopNow( e => !e )}
+              onClick={()=>{return shopNow( e => !e ) , shopHandler()}}
               className='w-[120px] h-[45px] text-sm text-textDarkColor rounded-full shadow-md cursor-pointer font-semibold active:scale-95 shadow-[#000000d0] bg-mainIconColor'
           >Shop Now</button>
         </div>
