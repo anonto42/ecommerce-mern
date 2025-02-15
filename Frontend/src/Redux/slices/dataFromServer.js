@@ -28,6 +28,8 @@ const initialState = {
     adminData:{
         totalUsers: [],
         allProducts: [],
+        orders: [],
+        totalVisitors: [],
     }
 }
 
@@ -58,10 +60,16 @@ const allDatas = createSlice({
         },
         setAllProductsForAdmin:(state,action)=>{
             state.adminData.allProducts = action.payload;
+        },
+        orders:(state,action)=>{
+            state.adminData.orders = action.payload;
+        },
+        totalVisitors:(state,action)=>{
+            state.adminData.totalVisitors = action.payload;
         }
     }
 })
 
 
 export default allDatas;
-export const { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData , setAllProductsForAdmin } = allDatas.actions
+export const { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData , setAllProductsForAdmin , orders , totalVisitors } = allDatas.actions
