@@ -105,7 +105,31 @@ async function heroInformation(req , res){
 async function Users(req , res) {
     try {
 
-        const user = await UserModel.find({});
+        const user = await UserModel.aggregate(
+            [
+                {
+                  $lookup: {
+                    from: "orders",
+                    localField: "_id",
+                    foreignField: "userId",
+                    as: "orders"
+                  }
+                },
+                {
+                    $project:{
+                        password:0
+                    }
+                },
+                {
+                    $lookup: {
+                      from: "carts",
+                      localField: "_id",
+                      foreignField: "user",
+                      as: "cart"
+                    }
+                  },
+              ]
+        );
 
         return res
             .status(200)
