@@ -4,6 +4,7 @@ import { UserModel } from "../Model/User.model.js"
 import { HeroModel } from './../Model/Hero.model.js';
 import { ProductModel } from './../Model/Product.model.js';
 import { OrderModel } from './../Model/Order.model.js';
+import { VisitorsModel } from "../Model/Visitors.model.js";
 
 
 async function hearoInformation ( req , res ){
@@ -553,6 +554,33 @@ async function orders(req,res) {
             .status(200)
             .json(
                 Responce.success( "Get Order's successfully!" , data , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+async function totalVisitors(req,res) {
+    try {
+
+        const data = await VisitorsModel.find();
+        if(!data){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Something wrong on the geting the visitor's!" , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Get visitor's successfully!" , data , true )
             )
         
     } catch (error) {

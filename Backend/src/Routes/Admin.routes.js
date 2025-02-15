@@ -2,6 +2,7 @@ import { Router } from "express";
 import { DProduct, GProduct, hearoInformation, heroInformation, oneUser, orders, product, SProduct, thatUser, theUser, UProduct, Users } from "../Controller/Admin.controller.js";
 import adminAuth from "../Middleware/AutAdmin.js";
 import { uploader } from './../Middleware/Multer.js';
+import { totalVisitors } from "../../../Frontend/src/Redux/slices/dataFromServer.js";
 
 const adminRoutes = Router();
 
@@ -23,6 +24,8 @@ adminRoutes.route("/dproduct").post( DProduct );
 adminRoutes.route("/sproduct").post( SProduct );
 // all orders
 adminRoutes.route("/orders").get( orders );
+// all visitors
+adminRoutes.route("/visitors").get( totalVisitors );
 
 
 
