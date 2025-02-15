@@ -2,8 +2,11 @@ import React from 'react';
 import { FaCalendarCheck, FaEye } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { GiNotebook } from "react-icons/gi";
+import { useSelector } from 'react-redux';
 
 const DeshbordComponent = () => {
+  const data = useSelector( e => e.applicationData.adminData )
+  console.log(data)
   return (
     <div
       className='w-full h-full p-6'
@@ -40,7 +43,7 @@ const DeshbordComponent = () => {
               <div>
                 <h1
                   className='text-2xl font-semibold'
-                >{"1,223"}</h1>
+                >{data?.orders?.length}</h1>
                 <h3
                   className='text-sm'
                 >Order's</h3>
@@ -92,7 +95,7 @@ const DeshbordComponent = () => {
               <div>
                 <h1
                   className='text-2xl font-semibold'
-                >{"1,223"}</h1>
+                >{data?.orders?.reduce((total, item) => total + item.productPrice, 0)}</h1>
                 <h3
                   className='text-sm'
                 >Total Sale's</h3>
@@ -109,10 +112,10 @@ const DeshbordComponent = () => {
         className='w-full h-[400px] bg-navebarBgColor mt-8 overflow-x-auto overscroll-y-auto rounded-xl'
       >
 
+        
         <div
           className='w-[800px] h-full mx-auto'
         >
-
           {/*Title */}
           <div
             className='w-full h-[90px] border-b-2 border-[#80808073] text-topBarTextColor flex justify-start  pl-4 xl:pl-0'
@@ -147,82 +150,32 @@ const DeshbordComponent = () => {
           </div>
 
           {/* Order's */}
-          <div
-            className='w-full h-[50px] border-b border-[#80808018] text-topBarTextColor flex justify-between items-center pl-4 xl:pl-0'
-          >
-            <div
-              className='w-[332px] h-full flex items-center'
-            >
-              Sohidul islam Anonto
-            </div>
-            <div
-              className='w-[266px] h-full flex items-center justify-center'
-            >
-              12/12/2022
-            </div>
-            <div
-              className='w-[200px] h-full flex items-center justify-start'
-            >
-              Deleved
-            </div>
-          </div>
-          <div
-            className='w-full h-[50px] border-b border-[#80808018] text-topBarTextColor flex justify-between items-center pl-4 xl:pl-0'
-          >
-            <div
-              className='w-[332px] h-full flex items-center'
-            >
-              Sohidul islam Anonto
-            </div>
-            <div
-              className='w-[266px] h-full flex items-center justify-center'
-            >
-              12/12/2022
-            </div>
-            <div
-              className='w-[200px] h-full flex items-center justify-start'
-            >
-              Deleved
-            </div>
-          </div>
-          <div
-            className='w-full h-[50px] border-b border-[#80808018] text-topBarTextColor flex justify-between items-center pl-4 xl:pl-0'
-          >
-            <div
-              className='w-[332px] h-full flex items-center'
-            >
-              Sohidul islam Anonto
-            </div>
-            <div
-              className='w-[266px] h-full flex items-center justify-center'
-            >
-              12/12/2022
-            </div>
-            <div
-              className='w-[200px] h-full flex items-center justify-start'
-            >
-              Deleved
-            </div>
-          </div>
-          <div
-            className='w-full h-[50px] border-b border-[#80808018] text-topBarTextColor flex justify-between items-center pl-4 xl:pl-0'
-          >
-            <div
-              className='w-[332px] h-full flex items-center'
-            >
-              Sohidul islam Anonto
-            </div>
-            <div
-              className='w-[266px] h-full flex items-center justify-center'
-            >
-              12/12/2022
-            </div>
-            <div
-              className='w-[200px] h-full flex items-center justify-start'
-            >
-              Deleved
-            </div>
-          </div>
+          {
+          data?.orders.length > 0 ? data?.orders?.map((item,index)=>{
+            return(
+              <div
+                key={index}
+                className='w-full h-[50px] border-b border-[#80808018] text-topBarTextColor flex justify-between items-center pl-4 xl:pl-0'
+              >
+                <div
+                  className='w-[332px] h-full flex items-center'
+                >
+                  { item.buyer.name }
+                </div>
+                <div
+                  className='w-[266px] h-full flex items-center justify-center'
+                >
+                  { item.createdAt}
+                </div>
+                <div
+                  className='w-[200px] h-full flex items-center justify-start'
+                >
+                  { item.status }
+                </div>
+              </div>
+            )
+          }):<></>
+        }
 
         </div>
       </div>

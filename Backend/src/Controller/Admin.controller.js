@@ -3,6 +3,7 @@ import { uploadOnCloudinary } from "../Middleware/Cloudnary.js";
 import { UserModel } from "../Model/User.model.js"
 import { HeroModel } from './../Model/Hero.model.js';
 import { ProductModel } from './../Model/Product.model.js';
+import { OrderModel } from './../Model/Order.model.js';
 
 
 async function hearoInformation ( req , res ){
@@ -512,4 +513,56 @@ async function DProduct(req , res){
     }
 }
 
-export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct , DProduct }
+async function orders(req,res) {
+    try {
+
+        const data = await OrderModel.aggregate(
+            [
+                {
+                  $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "buyer"
+                  }
+                },
+                {
+                  $project: {
+                    "buyer.password":0,
+                    "buyer.userType":0
+                  }
+                },
+                {
+                  $addFields: {
+                    buyer: {
+                      $arrayElemAt:["$buyer",0]
+                    }
+                  }
+                }
+              ]
+        );
+        if(!data){
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Something wrong on the geting the Order's!" , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Get Order's successfully!" , data , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+export { hearoInformation , heroInformation , Users , oneUser , thatUser , theUser , product , GProduct , UProduct , SProduct , DProduct , orders }

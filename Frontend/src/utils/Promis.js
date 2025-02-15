@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData, setAllProductsForAdmin } from "../Redux/slices/dataFromServer";
+import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData, setAllProductsForAdmin, orders } from "../Redux/slices/dataFromServer";
 import axios from "axios";
 
 
@@ -10,9 +10,9 @@ import axios from "axios";
 const Promis = () => {
     const dispatch = useDispatch();
     try {
-
-        // const data = useSelector( data => data.applicationData.appData)
         
+        const data = useSelector( data => data.applicationData.userData)
+
         useEffect(()=>{
             
             
@@ -40,6 +40,26 @@ const Promis = () => {
                     userType: undefined,
                 })))
     
+                // get Special offers products
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/special`)
+                .then( res => dispatch(setSpecialOffersDiscountsData(res.data.data)))
+                .catch(err => console.log(err))
+                
+                // get Best-selling product products
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/bestselling`)
+                .then( res => dispatch(setBestSellingProductsData(res.data.data)))
+                .catch(err => console.log(err))
+                
+                // get All hot-Item
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hotItem`)
+                .then( res => dispatch(setProductData(res.data.data)))
+                .catch(err => console.log(err))
+                
+                // get catagory's
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/catagorys`)
+                .then( res => dispatch(setCatagorysData(res.data.data)))
+                
+                .catch(err => console.log(err))
                 // get all users for the admin
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
                 .then( res => dispatch(setTotalUserData(res.data.data)))
@@ -49,27 +69,11 @@ const Promis = () => {
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,{withCredentials:true})
                 .then( data => dispatch(setAllProductsForAdmin(data.data.data)))
                 .catch(err => console.log(err))
-
-                // get Special offers products
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/special`)
-                .then( res => dispatch(setSpecialOffersDiscountsData(res.data.data)))
-                .catch(err => console.log(err))
-
-                // get Best-selling product products
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/bestselling`)
-                .then( res => dispatch(setBestSellingProductsData(res.data.data)))
-                .catch(err => console.log(err))
-
-                // get All hot-Item
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hotItem`)
-                .then( res => dispatch(setProductData(res.data.data)))
-                .catch(err => console.log(err))
-
-                // get catagory's
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/catagorys`)
-                .then( res => dispatch(setCatagorysData(res.data.data)))
-                .catch(err => console.log(err))
                 
+                // get orders
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/orders`,{ withCredentials: true})
+                .then( res => dispatch(orders(res.data.data)))
+                .catch(err => console.log(err))
             })();
         
             },[])
