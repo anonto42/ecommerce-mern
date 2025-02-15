@@ -6,8 +6,19 @@ import { Hourglass } from 'react-loader-spinner';
 
 const CartPage = () => {
   const [checkOut,setCheckOut] = useState(false);
-  const [buyProductData,setProductData] = useState({});
   const user = useSelector( user => user.applicationData.userData);
+  
+  const [dataForOrder,setDataForOrder] = useState ({
+    productPrice:"",
+    quantity:"",
+    userId:"",
+    product:{},
+    totalPriceWithDelivery:"",
+    shippingAddress:"",
+    paymentMethod:"",
+    paymentStatus:"",
+    cartId:""
+  })
   
   return (
     <div
@@ -39,7 +50,7 @@ const CartPage = () => {
             {
               user.cart.map((item,index)=>{
                 return(
-                  <ProductOfCart key={index} data={item} shopNow={setCheckOut} />
+                  <ProductOfCart setDataForOrder={setDataForOrder} key={index} data={item} shopNow={setCheckOut} />
                 )
               })
             }
@@ -51,7 +62,7 @@ const CartPage = () => {
 
         {
           checkOut?(
-            <Checkout allData={[]} shopNowSet={setCheckOut} />
+            <Checkout allData={dataForOrder} shopNowSet={setCheckOut} />
           ):(<></>)
         }
 
