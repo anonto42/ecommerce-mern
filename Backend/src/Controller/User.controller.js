@@ -5,6 +5,7 @@ import { HeroModel } from './../Model/Hero.model.js';
 import { ProductModel } from './../Model/Product.model.js';
 import { CartModel } from './../Model/Cart.model.js';
 import { OrderModel } from "../Model/Order.model.js";
+import { VisitorsModel } from "../Model/Visitors.model.js";
 
 
 async function register (req,res) {
@@ -572,5 +573,80 @@ async function orderWithCashOnDelavary(req,res){
     }
 }
 
+async function orderWithBkashPayment(req,res){
+    try {
+        const { userId , product , quantity , productPrice , totalPriceWithDelivery , paymentMethod , paymentStatus , shippingAddress} = req.body;
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart , DCartItem , orderWithCashOnDelavary }
+        if(!userId && !product && !quantity && !productPrice && !totalPriceWithDelivery && !paymentMethod && !paymentStatus) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Sommting was missing to place the order!" , false )
+                )
+        }
+
+        const order = await OrderModel.create(
+            {
+                userId,
+                product,
+                quantity,
+                productPrice,
+                totalPriceWithDelivery,
+                shippingAddress,
+                paymentMethod:"Cash-On-Delivery"
+            }
+        )
+        if(!order) {
+            return res
+                .status(500)
+                .json(
+                    Responce.error( "Sommting was error on place the order!" , false )
+                )
+        }
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Order placed successfully" , order , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+async function vesite(req,res){
+    try {
+        
+        const visitorIP = req.ip;
+        if (!visitorIP) return;
+
+        const visitor = await VisitorsModel.findOne({ ip:visitorIP });
+        if (visitor) return;
+
+        const newVisitor = await VisitorsModel.create({ ip: visitorIP });
+        if (!newVisitor) return;
+
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Visitor Logged" , newVisitor , true )
+            )
+
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart , DCartItem , orderWithCashOnDelavary , orderWithBkashPayment , vesite}
