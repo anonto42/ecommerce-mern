@@ -158,7 +158,7 @@ const UsersComponent = () => {
                 >{user.email}</h1>
                 <h1
                   className='italic w-[325px] font-mono flex justify-start'
-                >{user.number}</h1>
+                >{user.number === "DEFAULT! Please enter yours..." ? "Not given": user.number}</h1>
                 <h1
                   className='italic w-[300px] font-mono flex justify-start'
                 >{user.orders.length}</h1>
