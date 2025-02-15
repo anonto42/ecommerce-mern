@@ -3,11 +3,13 @@ import { IoIosCall } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const TopStatusBar = () => {
     const { userType } = useSelector( event => event.applicationData.userData );
+    const Navigatior = useNavigate();
+    const data = useSelector( e => e.applicationData.userData.cart);
   return (
     <div className={`w-full bg-mainBg`}>
         <div className='flex mx-auto h-[60px] max-w-[1400px] justify-between items-center px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out'>
@@ -32,13 +34,13 @@ const TopStatusBar = () => {
                 </Link>
                 <Link to="/cart" className='lg:hidden'>
                     <div 
-                        onClick={()=>window.location.href = "/cart"}
+                        onClick={()=>Navigatior("/cart")}
                         className="border-2 border-sndIconColor hover:border-none hover:bg-mainIconColor w-[35px] h-[35px] rounded-full flex justify-center items-center text-mainIconColor hover:text-sndIconColor ease-in-out duration-100 cursor-pointer mr-3 xl:mr-1 relative"
                         title="Cart"
                     >
                         <FaShoppingCart size={21} />
                         <div className={`absolute -top-2 left-4 w-[20px] flex items-center justify-center h-[20px] bg-[red] rounded-full`}>
-                            <span className={`text-sndIconColor font-semibold`}>{'0'}</span>
+                            <span className={`text-sndIconColor font-semibold text-[11px]`}>{data.length}</span>
                         </div>
                     </div>
                 </Link>
