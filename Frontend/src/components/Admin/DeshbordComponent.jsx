@@ -69,7 +69,7 @@ const DeshbordComponent = () => {
               <div>
                 <h1
                   className='text-2xl font-semibold'
-                >{"1,223"}</h1>
+                >{data?.totalVisitors?.length}</h1>
                 <h3
                   className='text-sm'
                 >Total visitor's</h3>
