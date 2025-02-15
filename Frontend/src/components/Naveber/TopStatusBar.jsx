@@ -40,7 +40,7 @@ const TopStatusBar = () => {
                     >
                         <FaShoppingCart size={21} />
                         <div className={`absolute -top-2 left-4 w-[20px] flex items-center justify-center h-[20px] bg-[red] rounded-full`}>
-                            <span className={`text-sndIconColor font-semibold text-[11px]`}>{data.length}</span>
+                            <span className={`text-sndIconColor font-semibold text-[11px]`}>{data?.length}</span>
                         </div>
                     </div>
                 </Link>
