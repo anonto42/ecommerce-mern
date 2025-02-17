@@ -25,7 +25,19 @@ const Promis = () => {
 
                 // Get user data
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
-                .then( res => dispatch(setUserData(res.data.data)))
+                .then( res => dispatch(setUserData({
+                    name: res.data.data.name,
+                    email: res.data.data.email,
+                    number: res.data.data.phone,
+                    city: res.data.data.city,
+                    thana: res.data.data.thana,
+                    area: res.data.data.area,
+                    location: res.data.data.location,
+                    cart: res.data.data.cart.length > 0 ? res.data.data.cart : [],
+                    orders:  res.data.data.orders.length > 0 ? res.data.data.orders : [],
+                    wishlist:  res.data.data.wishlist.length > 0 ? res.data.data.wishlist : [],
+                    userType:  res.data.data.userType,
+                })))
                 .catch(err => dispatch(setUserData({
                     name: "...",
                     email: "...",
@@ -37,7 +49,7 @@ const Promis = () => {
                     cart: [],
                     orders: [],
                     wishlist: [],
-                    userType: '',
+                    userType: undefined,
                 })))
     
                 // get Special offers products
