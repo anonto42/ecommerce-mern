@@ -642,7 +642,7 @@ async function payOnline(req,res){
         const delavaryCharge = shippingAddress.city.toLowerCase() === "dhaka" ? 80 :  160
         const store_id = process.env.SSL_STORE_ID
         const store_passwd = process.env.SOTRE_PASSWORD
-        const isLive = false
+        const isLive = process.env.IS_LIVE === "true" ? true : false
         const totalAmount = (delavaryCharge + ( productData.price * quantity ));
 
         const data = {
