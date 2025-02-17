@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navigato from '../Navigator/Navigato';
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 import SideBarForMobile from './SideBarForMobile';
 import { IoClose as IoMdCloseCircle } from "react-icons/io5";
-import NavigatorForMobile from '../Navigator/NavigatorForMobir';
 import TopStatusBar from './TopStatusBar';
 import { useSelector } from 'react-redux';
 
@@ -49,11 +47,11 @@ const NavigationBar = () => {
               </h2>
             </Link>
             <Link to={
-                  data.userType !== "admin" ? "/profile" : "/admin/dashboard"
+                  data?.userType !== "admin" ? "/profile" : "/admin/dashboard"
                 }>
               <h2 className='text-topBarTextColor text-[18px] hover:scale-105 duration-150 hover:text-[white]'>
                 {
-                  data.userType !== "admin" ? "Account" : "Dashboard"
+                  data?.userType !== "admin" ? "Account" : "Dashboard"
                 }
               </h2>
             </Link>

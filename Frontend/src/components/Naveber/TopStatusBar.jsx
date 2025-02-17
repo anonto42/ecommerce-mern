@@ -48,7 +48,7 @@ const TopStatusBar = () => {
             <div className=''>
                 <Link to=
                     {
-                        userType !== undefined? 
+                        userType !== ''? 
                             `${ 
                                 userType === "admin" ? "/admin/dashboard" : "/profile" 
                             }`: "/auth"
@@ -58,11 +58,11 @@ const TopStatusBar = () => {
                         <div className='flex'>
                             <FaUser 
                                 size={20} 
-                                className={`mt-1.5px ${userType !== undefined ? "hidden" : "block"}`} 
+                                className={`mt-1.5px ${userType !== '' ? "hidden" : "block"}`} 
                             />
-                            <span className={`ml-2 text-sndIconColor ${userType !== undefined? "text-sm ml-1":"text-md ml-2"}`}>
+                            <span className={`ml-2 text-sndIconColor ${userType !== ''? "text-sm ml-1":"text-md ml-2"}`}>
                                 {
-                                    userType !== undefined? 
+                                    userType !== ''? 
                                         `${ 
                                             userType !== "user" ?
                                             "Dashboard" : "Account"
