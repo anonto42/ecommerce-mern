@@ -3,13 +3,15 @@ import { MdStar } from "react-icons/md";
 import { RotatingLines } from 'react-loader-spinner';
 
 const Product = ({price,title,images,reviews,count}) => {
-    const [hover,setHover] = useState(1);
-    const [load,setLoad] = useState(false)
+    const [hover,setHover] = useState(0);
+    const [load,setLoad] = useState(false);
+    console.log(title,price)
+    console.log(images)
   return (
     <div
         title='Click to view details'
-        onMouseEnter={()=>setHover(2)}
-        onMouseLeave={()=>setHover(1)}
+        onMouseEnter={()=>setHover(1)}
+        onMouseLeave={()=>setHover(0)}
         className={`w-full sm:w-[220px] lg:w-[200px] xl:w-[250px] h-[360px] bg-[#646464] m-2 rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] text-topBarTextColor hover:scale-[1.01]`}
         style={
             {

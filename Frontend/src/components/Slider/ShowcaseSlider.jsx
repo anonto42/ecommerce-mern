@@ -21,6 +21,7 @@ const ShowcaseSlider = ({cart}) => {
         else setPosition(position - 1);
     }
     const data = [1,2,3,4,5,6,7];
+
   return (
     <div 
         onMouseEnter={()=>setOn(true)}
@@ -53,7 +54,7 @@ const ShowcaseSlider = ({cart}) => {
             )
              : ( 
             cart.map((data,index)=>{
-                const {price,title,images,reviews,description,_id} = data;
+                const {price,name,images,reviews,description,_id} = data;
                 return (
                     <Link 
                         key={index} 
@@ -62,7 +63,7 @@ const ShowcaseSlider = ({cart}) => {
                         <ShowCaseCart 
                             mr={true}
                             price={price}
-                            title={title}
+                            title={name}
                             images={images || defualtImage}
                             reviews={reviews}
                             count={position}

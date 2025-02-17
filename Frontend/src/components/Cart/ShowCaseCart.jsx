@@ -3,14 +3,14 @@ import { MdStar } from "react-icons/md";
 import { RotatingLines } from 'react-loader-spinner';
 
 const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description}) => {
-    const [hover,setHover] = useState(1);
+    const [hover,setHover] = useState(0);
     const [load,setLoad] = useState(false);
   return (
     <div
         title='Click to view details'
-        onMouseEnter={()=>setHover(2)}
-        onMouseLeave={()=>setHover(1)}
-        className={`w-[215px] h-[360px] bg-[#646464] ${mr?"mr-2 sm:mr-3 md:mr-4":"mr-0"} rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] text-topBarTextColor hover:scale-[1.01]`}
+        onMouseEnter={()=>setHover( images.length > 1? 1 : 0)}
+        onMouseLeave={()=>setHover(0)}
+        className={`w-[215px] h-[390px] bg-[#646464] ${mr?"mr-2 sm:mr-3 md:mr-4":"mr-0"} rounded-lg overflow-hidden cursor-pointer hover:-translate-y-2 duration-150 ease-in-out hover:shadow-lg hover:shadow-[#000000] text-topBarTextColor hover:scale-[1.01]`}
         style={
             {
                 transform:`translateX(-${count * 100}%)`
@@ -78,10 +78,10 @@ const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description}) =
                 }
             </span> )
         </div>
-        <small className='px-2 h-[10px] overflow-hidden font-light'>
+        <small className='px-2 font-light'>
             {
-                description.length > 28 ?
-                    description.substring(0, 28) + "..."
+                description.length > 24 ?
+                    description.substring(0, 24) + "..."
                     : description + "."
             }
         </small>
