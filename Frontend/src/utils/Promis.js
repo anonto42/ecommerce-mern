@@ -37,7 +37,7 @@ const Promis = () => {
                     cart: [],
                     orders: [],
                     wishlist: [],
-                    userType: undefined,
+                    userType: '',
                 })))
     
                 // get Special offers products
