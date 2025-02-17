@@ -120,7 +120,7 @@ async function userProfile(req,res) {
     try {
         // get user id from middleware
         const user = req.user;
-        // get user data
+        // get user datalFirst)
         const userData = await UserModel.aggregate(
             [
                 {
@@ -142,38 +142,53 @@ async function userProfile(req,res) {
                     }
                 },
                 {
-                  $unwind: "$cart"
+                    $unwind: {
+                    path:"$cart",
+                    preserveNullAndEmptyArrays: true}
                 },
                 {
-                  $lookup: {
-                    from: "products",
-                    localField: "cart.product",
-                    foreignField: "_id",
-                    as: "cart.product"
-                  }
-                },
-                {
-                  $project: {
-                    _id: 1,
-                    number:1,
-                    city:1,
-                    name: 1,
-                    thana:1,
-                    area:1,
-                    location:1,
-                    orders:1,
-                    wishlist:1,
-                    userType:1,
-                    isBlocked:1,
-                    email: 1,
-                    cart: {
-                      _id: 1,
-                      user: 1,
-                      product: 1,
-                      size: 1,
-                      product: { $arrayElemAt: ["$cart.product", 0] }
+                    $lookup: {
+                        from: "products",
+                        localField: "cart.product",
+                        foreignField: "_id",
+                        as: "cart.product"
                     }
-                  }
+                },
+                // {
+                //     $unwind: {
+                //     path:"$orders",
+                //     preserveNullAndEmptyArrays: true}
+                // },
+                // {
+                //     $lookup: {
+                //         from: "orders",
+                //         localField: "orders.userId",
+                //         foreignField: "_id",
+                //         as: "orders"
+                //     }
+                // },
+                {
+                    $project: {
+                      _id: 1,
+                      number:1,
+                      city:1,
+                      name: 1,
+                      thana:1,
+                      area:1,
+                      location:1,
+                      orders:1,
+                      wishlist:1,
+                      userType:1,
+                      isBlocked:1,
+                      email: 1,
+                      cart: {
+                        _id: 1,
+                        user: 1,
+                        product: 1,
+                        size: 1,
+                        product: { $arrayElemAt: ["$cart.product", 0] }
+                      }
+                    }
                 },
                 {
                     $group: {
@@ -190,11 +205,10 @@ async function userProfile(req,res) {
                       email: { $first: "$email" },
                       cart: { $push: "$cart" } // Push the cart back into the array
                     }
-                }
                 
+                }
             ]
         )
-
         if(!userData){
             return res
                 .status(404)
