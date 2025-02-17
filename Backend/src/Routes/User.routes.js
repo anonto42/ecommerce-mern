@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ACart, AProduct, bestSellingProduct, catagorys, DCartItem, Heros, hotItem, login , logout, orderWithBkashPayment, orderWithCashOnDelavary, register, specialOffers, updateUserProfile, userProfile, vesite } from "../Controller/User.controller.js";
+import { ACart, AProduct, bestSellingProduct, catagorys, DCartItem, Heros, hotItem, login , logout, payOnline, order, register, specialOffers, updateUserProfile, userProfile, vesite, canseld, paied, faild } from "../Controller/User.controller.js";
 import tokenCheck from "../Middleware/Aut.js";
 
 const userRoute = Router();
@@ -29,11 +29,18 @@ userRoute.route("/product").post( AProduct );
 userRoute.route("/cart").post( tokenCheck , ACart )
 userRoute.route("/dcart").post( DCartItem );
 // order product
-userRoute.route("/orderoncash").post( tokenCheck , orderWithCashOnDelavary );
+userRoute.route("/order").post( tokenCheck , order );
 // order with Bkash payment
-userRoute.route("/bkashPayment").post( orderWithBkashPayment );
+userRoute.route("/onliepay").post( tokenCheck , payOnline );
+// payed updated
+userRoute.route("/payed").post( tokenCheck , paied );
+// payed updated
+userRoute.route("/cansled").post( tokenCheck , canseld );
+// payed updated
+userRoute.route("/failed").post( tokenCheck , faild );
 // visitor
 userRoute.route("/visitor").get( vesite );
 
 
 export default userRoute;
+

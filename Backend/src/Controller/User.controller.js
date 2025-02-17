@@ -6,6 +6,10 @@ import { ProductModel } from './../Model/Product.model.js';
 import { CartModel } from './../Model/Cart.model.js';
 import { OrderModel } from "../Model/Order.model.js";
 import { VisitorsModel } from "../Model/Visitors.model.js";
+import { v4 as uuidv4 } from 'uuid';
+import SSLCommerzPayment from 'sslcommerz-lts';
+import bcrypt from 'bcrypt';
+
 
 
 async function register (req,res) {
@@ -526,7 +530,7 @@ async function DCartItem(req,res){
     }
 }
 
-async function orderWithCashOnDelavary(req,res){
+async function order(req,res){
     try {
         const { userId , product , quantity , productPrice , totalPriceWithDelivery , paymentMethod , paymentStatus , shippingAddress} = req.body;
 
@@ -573,15 +577,36 @@ async function orderWithCashOnDelavary(req,res){
     }
 }
 
-async function orderWithBkashPayment(req,res){
+async function payOnline(req,res){
     try {
-        const { userId , product , quantity , productPrice , totalPriceWithDelivery , paymentMethod , paymentStatus , shippingAddress} = req.body;
+        const { userId , cartId , product , quantity , productPrice , totalPriceWithDelivery , paymentMethod , paymentStatus , shippingAddress} = req.body;
 
-        if(!userId && !product && !quantity && !productPrice && !totalPriceWithDelivery && !paymentMethod && !paymentStatus) {
+        const unicTran = uuidv4();
+        const hashedTran = await bcrypt.hash( unicTran , 5 )
+
+        if(!userId && !product && !shippingAddress && !quantity && !productPrice && !totalPriceWithDelivery && !paymentMethod && !paymentStatus) {
             return res
                 .status(404)
                 .json(
                     Responce.error( "Sommting was missing to place the order!" , false )
+                )
+        }
+
+        const theCart = await CartModel.findById({_id:cartId}) 
+        if(!theCart) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "cart not exist!" , false )
+                )
+        }
+
+        const productData = await ProductModel.findById({_id:theCart.product})
+        if(productData.quantity <= 0 ) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "prodcuct was stock out!" , false )
                 )
         }
 
@@ -593,7 +618,8 @@ async function orderWithBkashPayment(req,res){
                 productPrice,
                 totalPriceWithDelivery,
                 shippingAddress,
-                paymentMethod:"Cash-On-Delivery"
+                paymentMethod:"Online Payment",
+                tran_id: hashedTran
             }
         )
         if(!order) {
@@ -604,11 +630,63 @@ async function orderWithBkashPayment(req,res){
                 )
         }
 
-        return res
-            .status(200)
-            .json(
-                Responce.success( "Order placed successfully" , order , true )
-            )
+        const user = await UserModel.findById({_id:userId})
+        if(!user) {
+            return res
+                .status(500)
+                .json(
+                    Responce.error( "Sommting was error on place the order!" , false )
+                )
+        }
+
+        const delavaryCharge = shippingAddress.city.toLowerCase() === "dhaka" ? 80 :  160
+        const store_id = process.env.SSL_STORE_ID
+        const store_passwd = process.env.SOTRE_PASSWORD
+        const isLive = false
+        const totalAmount = (delavaryCharge + ( productData.price * quantity ));
+
+        const data = {
+            total_amount: totalAmount,
+            currency: 'BDT',
+            tran_id: hashedTran.toString(), // use unique tran_id for each api call
+            success_url: `${process.env.SERVER_URL}/api/user/payed?tran_id=${unicTran}&id=${order._id}&cartId=${cartId}`,
+            fail_url: `${process.env.SERVER_URL}/api/user/failed?tran_id=${unicTran}&id=${order._id}`,
+            cancel_url: `${process.env.SERVER_URL}/api/user/cansled?tran_id=${unicTran}&id=${order._id}`,
+            ipn_url: 'http://localhost:3030/ipn',
+            shipping_method: 'Courier',
+            product_name: `${productData.name}`,
+            product_category: `${productData.category}` ,
+            product_profile: `${productData.brand}`,
+            cus_name: `${user.name}`,
+            cus_email: `${user.email}`,
+            cus_add1: `${user.city}`,
+            cus_add2: 'Dhaka',
+            cus_city: `${user.city}`,
+            cus_state: `${user.city}`,
+            cus_postcode: '1000',
+            cus_country: 'Bangladesh',
+            cus_phone: `${user.number}`,
+            cus_fax: `${user.number}`,
+            ship_name: `${user.name}`,
+            ship_add1: `${user.location}`,
+            ship_add2: `${user.thana}`,
+            ship_city: `${user.city}`,
+            ship_state: 'Dhaka',
+            ship_postcode: 1000,
+            ship_country: 'Bangladesh',
+        };
+
+        const sslcz = new SSLCommerzPayment(store_id, store_passwd, isLive)
+
+        await sslcz.init(data).then(apiResponse => {
+
+            let GatewayPageURL = apiResponse.GatewayPageURL
+            
+            res.status(200).json({ paymentUrl : GatewayPageURL})
+
+        });
+
+        return;
         
     } catch (error) {
         console.log(error)
@@ -620,16 +698,16 @@ async function orderWithBkashPayment(req,res){
     }
 }
 
-async function vesite(req,res){
+function vesite(req,res){
     try {
         
         const visitorIP = req.ip;
         if (!visitorIP) return;
 
-        const visitor = await VisitorsModel.findOne({ ip:visitorIP });
+        const visitor = VisitorsModel.findOne({ ip:visitorIP });
         if (visitor) return;
 
-        const newVisitor = await VisitorsModel.create({ ip: visitorIP });
+        const newVisitor = VisitorsModel.create({ ip: visitorIP });
         if (!newVisitor) return;
 
         return res
@@ -648,5 +726,91 @@ async function vesite(req,res){
     }
 }
 
+async function paied(req,res) {
+    try {
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart , DCartItem , orderWithCashOnDelavary , orderWithBkashPayment , vesite}
+        const { tran_id , id , cartId } = req.query;
+        
+        if (!tran_id && !id && !cartId) return res.send("Somting wrong on update the product data...");
+
+        const order = await OrderModel.findOne({_id:id});
+        if(!order) {
+            return res
+                .status(404)
+                .send("Order not found!")
+        };
+        const hashedTran = await bcrypt.compare( tran_id , order.tran_id )
+        if(!hashedTran) {
+            return res
+                .status(404)
+                .send("Invalid Transaction ID!")
+        };
+        await OrderModel.findByIdAndUpdate( {_id:order._id} , {paymentStatus : "Payed"});
+        
+        await CartModel.deleteOne({_id:cartId})
+        
+        return res.send(`
+                            <html>
+                                <head>
+                                    <title>Payment Status</title>
+                                </head>
+                                <body>
+                                    <h1>Payment Successful</h1>
+                                    <a href="${process.env.ORIGIN}" style="display: inline-block; margin-top: 10px;">Go to Home</a>
+                                    <br>
+                                    <button onclick="window.location.href='${process.env.ORIGIN}'" style="margin-top: 10px;">Go Back</button>
+                                </body>
+                            </html>
+                        `)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function canseld(req,res) {
+    try {
+
+        return res.send(`
+            <html>
+                <head>
+                    <title>Payment cancelled!</title>
+                </head>
+                <body>
+                    <h1>Payment </h1>
+                    <a href="${process.env.ORIGIN}" style="display: inline-block; margin-top: 10px;">Go to Home</a>
+                    <br>
+                    <button onclick="window.location.href='${process.env.ORIGIN}'" style="margin-top: 10px;">Go Back</button>
+                </body>
+            </html>
+        `)
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function faild(req,res) {
+    try {
+
+        return res.send(`
+            <html>
+                <head>
+                    <title>Payment cancelled!</title>
+                </head>
+                <body>
+                    <h1>Payment was faild</h1>
+                    <a href="${process.env.ORIGIN}" style="display: inline-block; margin-top: 10px;">Go to Home</a>
+                    <br>
+                    <button onclick="window.location.href='${process.env.ORIGIN}'" style="margin-top: 10px;">Go Back</button>
+                </body>
+            </html>
+        `)
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart , DCartItem , order , payOnline , vesite , paied , canseld , faild}
