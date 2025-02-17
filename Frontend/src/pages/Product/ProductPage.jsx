@@ -103,7 +103,7 @@ const ProductPage = () => {
 
             <img 
               src={image} 
-              alt="#" 
+              alt="#alternative" 
               loading='lazy'
               className='w-full h-full'
             />
@@ -133,7 +133,7 @@ const ProductPage = () => {
                       }
                       <img 
                         src={item} 
-                        alt="" 
+                        alt="#alternative" 
                         loading='lazy'
                         onLoad={()=>setLoad(true)}
                         className='w-full h-full'
@@ -158,17 +158,20 @@ const ProductPage = () => {
             className='flex text-[#FACA51] my-2 text-lg mr-2'
           >
             {
-              productData?.reviews?.length === 0 ? (<>
+              productData?.reviews?.length === 0 ? <>
                 <MdStarHalf />
                 <MdStarOutline />
                 <MdStarOutline />
                 <MdStarOutline />
                 <MdStarOutline />
               </>
-                ):(
-                <MdStarRate />
-              )
-            }
+                :
+                productData?.reviews?.map( (item, index ) => 
+                    <MdStarRate
+                      key={index}
+                    />)
+              }
+              
             <span className='text-center font-semibold text-topBarTextColor text-sm'>
                 (  
                   <small>
