@@ -47,7 +47,13 @@ const orderSchema = new Schema(
         paymentStatus: {
             type: String,
             enum: ['Pending', 'Cancelled', 'Payed'],
-            defualt:"Pending"
+            defualt:"Pending",
+            required:true
+        },
+        tran_id:{
+            type: String,
+            required: true,
+            unique: true
         }
     },
     {
