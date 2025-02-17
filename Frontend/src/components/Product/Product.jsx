@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdStar } from "react-icons/md";
+import { MdStar, MdStarHalf, MdStarOutline, MdStarRate } from "react-icons/md";
 import { RotatingLines } from 'react-loader-spinner';
 
 const Product = ({price,title,images,reviews,count}) => {
@@ -68,11 +68,20 @@ const Product = ({price,title,images,reviews,count}) => {
             <div 
                 className='text-[#FACA51] flex text-xl mr-2'
             >
-                <MdStar />
-                <MdStar />
-                <MdStar />
-                <MdStar />
-                <MdStar />
+                {
+                    reviews?.length === 0 ? <>
+                      <MdStarHalf />
+                      <MdStarOutline />
+                      <MdStarOutline />
+                      <MdStarOutline />
+                      <MdStarOutline />
+                    </>
+                      :
+                    reviews?.map( (item, index ) => 
+                          <MdStarRate
+                            key={index}
+                          />)
+                }
             </div>
             ( <span className='text-center font-semibold'>
                 {

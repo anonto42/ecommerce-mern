@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdStar } from "react-icons/md";
+import { MdStarHalf , MdStarRate , MdStarOutline } from "react-icons/md";
 import { RotatingLines } from 'react-loader-spinner';
 
 const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description}) => {
@@ -66,11 +66,20 @@ const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description}) =
             <div 
                 className='text-[#FACA51] flex text-xl mr-2'
             >
-                <MdStar />
-                <MdStar />
-                <MdStar />
-                <MdStar />
-                <MdStar />
+                {
+                    reviews?.length === 0 ? <>
+                      <MdStarHalf />
+                      <MdStarOutline />
+                      <MdStarOutline />
+                      <MdStarOutline />
+                      <MdStarOutline />
+                    </>
+                      :
+                    reviews?.map( (item, index ) => 
+                          <MdStarRate
+                            key={index}
+                          />)
+                }
             </div>
             ( <span className='text-center font-semibold'>
                 {
