@@ -7,19 +7,19 @@ import userRoute from './Routes/User.routes.js';
 import connectDB from './DB/ConnectDB.js';
 import adminRoutes from './Routes/Admin.routes.js';
 
-
-const app = express();
-const port = process.env.PORT || 3500;
-
-// configarations
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(cookieParser());
 dotenv.config(
     {
         path:"./.env"
     }
 );
+
+const app = express();
+const port = process.env.PORT;
+
+// configarations
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(cors(
     {
         origin:process.env.ORIGIN,
