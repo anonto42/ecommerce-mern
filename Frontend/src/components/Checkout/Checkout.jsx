@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Hourglass } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({allData,shopNowSet}) => {
   const[load,setLoad] = useState(false);
-  const[orderLoad,setOrderLoad] = useState(false);
+  const[orderLoad,setOrderLoad] = useState(null);
+  const navigate = useNavigate()
 
   const handleCashOndelivery = async () => {
     try {
@@ -37,13 +39,30 @@ const Checkout = ({allData,shopNowSet}) => {
       toast.error(`${error.message}`);
     }
    }
-
-   const handleBkashPayment = async () => {
+   const onlinePayment = async () => {
     try {
-      
+      setOrderLoad(true);
+
+      if (!allData.shippingAddress) return toast.error("Please add shipping address.") , setOrderLoad(false);
+
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_REACT_SERVER_API}/user/onliepay`,
+        allData,
+        { withCredentials: true }
+      );
+
+      setOrderLoad(false);
+
+      if (data.paymentUrl == "") {
+        return toast.error("Please add payment method") , setOrderLoad(false);  
+      }
+
+      window.location.href = `${data.paymentUrl}`
+
     } catch (error) {
+      setOrderLoad(false);
       console.log(error)
-      axios.error(`${error.messge}`)
+      toast.error(`${error.response.data.messge}`)
     }
    }
   return (
@@ -63,7 +82,7 @@ const Checkout = ({allData,shopNowSet}) => {
         />
         {
           orderLoad ?
-          <div className='absolute w-full bg-[#00000050] h-[60%] mt-[120px] rounded-full flex justify-center items-center'>
+          <div className='absolute z-20 w-full h-[60%] mt-[120px] flex justify-center items-center'>
             <Hourglass
               visible={true}
               height="80"
@@ -149,15 +168,6 @@ const Checkout = ({allData,shopNowSet}) => {
             
           </div>
 
-          {/* <span
-            className='text-sm font-serif text-red-500 pl-3'
-          >
-            At first you should must add the delivery location. {" "}
-            <a 
-              className='text-blue-700 underline px-[4%]'
-            href="/profile">Add</a>
-          </span> */}
-
           <div
             className='flex absolute bottom-0 justify-between items-center px-4 w-full h-[60px] border-t border-textDarkColor'
           >
@@ -166,9 +176,9 @@ const Checkout = ({allData,shopNowSet}) => {
               className='w-[90px] bg-green-700 text-white text-sm shadow-sm shadow-black duration-100 ease-linear active:scale-95 active:bg-mainIconColor h-[45px] font-semibold font-serif rounded-lg'
             >Cash On <br /> Delivery</button>
             <button
-              onClick={()=>handleBkashPayment()}
+              onClick={()=>onlinePayment()}
               className='w-[90px] bg-green-700 text-white text-sm shadow-sm shadow-black duration-100 ease-linear active:scale-95 active:bg-mainIconColor h-[45px] font-semibold font-serif rounded-lg'
-            >Bkash<br />Payment</button>
+            >Online<br />Payment</button>
           </div>
 
         </div>
