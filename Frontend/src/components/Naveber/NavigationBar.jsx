@@ -31,8 +31,8 @@ const NavigationBar = () => {
         <div className='max-w-[1400px] mx-auto px-6 sm:px-8 md:px-10  xl:px-0 duration-150 ease-in-out flex justify-between items-center h-full relative'>
           <SideBarForMobile on={items} item={items} />
           <div className='w-full h-full flex items-center'>
-            <Link to="/" className='w-[145px]'>
-              <img src="/logo.png" className='w-full h-full' alt="" />
+            <Link to="/" className='w-[54px]'>
+              <img src="/favicon.svg" className='w-full h-full' alt="" />
             </Link>
           </div>
           <div className='lg:flex justify-between items-center w-[800px] h-full hidden'>
