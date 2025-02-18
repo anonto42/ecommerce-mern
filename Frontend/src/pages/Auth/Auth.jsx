@@ -20,7 +20,7 @@ const Auth = () => {
       setLoading(true);
       e.preventDefault();
 
-      if( email && password === "" ) return toast.warning("Email and password must not be empty!")
+      if( email && password === "" ) return setLoading(false) , toast.warning("Email and password must not be empty!")
       
       const data =  await axios.post(`${server}/user/login`, {email,password} , {withCredentials:true} );
       setEmail("");
@@ -46,9 +46,9 @@ const Auth = () => {
       e.preventDefault();
 
 
-      if( email && password === "" ) return toast.warning("All fields ar required!")
+      if( email && password === "" ) return setLoading(false) , toast.warning("All fields ar required!")
 
-      if( password != confirmPassword ) return toast.error("Please check the confirm password");
+      if( password != confirmPassword ) return setLoading(false) , toast.error("Please check the confirm password");
 
       const data = {
         name,
