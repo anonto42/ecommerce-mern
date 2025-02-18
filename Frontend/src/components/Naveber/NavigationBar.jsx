@@ -10,6 +10,7 @@ const NavigationBar = () => {
   const [items,setBar] = useState(false);
   const [ navTob,setNavBar ] = useState(false);
   const data = useSelector( data => data.applicationData.userData );
+  console.log(data.cart  )
 
   let bar = (window.location.href === `${import.meta.env.VITE_REACT_DOMAIN_NAME}/` ) || (window.location.href === "http://localhost:5173/")
 
@@ -67,7 +68,7 @@ const NavigationBar = () => {
                  >
                     <FaShoppingCart size={21} />
                     <div className={`absolute -top-2 left-4 w-[20px] flex items-center justify-center h-[20px] bg-[red] rounded-full`}>
-                      <span className={`text-sndIconColor font-semibold`}>{'0'}</span>
+                      <span className={`text-sndIconColor font-semibold`}>{data.cart.length}</span>
                     </div>
                   </div>
             </Link>
