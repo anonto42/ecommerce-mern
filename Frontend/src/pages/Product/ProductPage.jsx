@@ -58,8 +58,6 @@ const ProductPage = () => {
           toast.error(`HTTP error! status: ${responce.status}`);
           return;
         }
-
-        console.log(responce)
         toast.success(
           <div>
               Cart added successfully.
