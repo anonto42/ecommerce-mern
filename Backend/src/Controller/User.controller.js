@@ -47,7 +47,7 @@ async function register (req,res) {
             .status(200)
             .cookie( "eCommUserData" , jwtToken( newUser ) , cookieOption )
             .json(
-                Responce.success( "User created successfully" , true )
+                Responce.success( "User created successfully" , data , true )
             )
 
 
@@ -95,7 +95,7 @@ async function login (req,res) {
             .status(200)
             .cookie( "eCommUserData" , jwtToken( user ) , cookieOption )
             .json(
-                Responce.success( "User login successfully" , true )
+                Responce.success( "User login successfully" , user , true )
             )
     } catch (error) {
         console.log(error.message)
