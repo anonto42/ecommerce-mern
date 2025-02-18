@@ -20,10 +20,10 @@ const initialState = {
         thana: "DEFAULT! Please enter yours...",
         area: "DEFAULT! Please enter yours...",
         location: "DEFAULT! Please enter yours...",
-        cart: undefined,
+        cart: [],
         orders: [],
         wishlist: [],
-        userType: "",
+        userType: undefined,
     },
     adminData:{
         totalUsers: [],
