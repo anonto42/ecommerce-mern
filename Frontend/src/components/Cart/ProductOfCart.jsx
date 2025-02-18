@@ -13,6 +13,8 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
     const[quantity,setQuantity] = useState(1);
     const user = useSelector( user => user.applicationData.userData);
 
+    // console.log(user._id)
+    // console.log( data )
     const deleteCartItemHandler = async () => {
       try {
         
@@ -32,7 +34,7 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
           cartId:data._id,
           productPrice: ( product?.price * quantity ),
           quantity: quantity ,
-          userId:user._id,
+          userId:data.user,
           product:{
             name:product.name,
             productId:product._id,

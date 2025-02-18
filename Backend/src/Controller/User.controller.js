@@ -559,6 +559,8 @@ async function order(req,res){
                 )
         }
 
+        const tran_id = uuidv4().toString()
+
         const order = await OrderModel.create(
             {
                 userId,
@@ -567,6 +569,7 @@ async function order(req,res){
                 productPrice,
                 totalPriceWithDelivery,
                 shippingAddress,
+                tran_id,
                 paymentMethod:"Cash-On-Delivery"
             }
         )

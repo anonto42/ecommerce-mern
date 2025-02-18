@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Hourglass } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 const Checkout = ({allData,shopNowSet}) => {
   const[load,setLoad] = useState(false);
   const[orderLoad,setOrderLoad] = useState(null);
-  const navigate = useNavigate()
+
+  // console.log(allData)
 
   const handleCashOndelivery = async () => {
     try {
@@ -18,10 +18,11 @@ const Checkout = ({allData,shopNowSet}) => {
       if (!allData.shippingAddress) return toast.error("Please add shipping address.") , setOrderLoad(false);
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_REACT_SERVER_API}/user/orderoncash`,
+        `${import.meta.env.VITE_REACT_SERVER_API}/user/order`,
         allData,
         { withCredentials: true }
       );
+      console.log(data)
 
       const responce = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/dcart`,{ id:allData.cartId});
 
@@ -32,7 +33,7 @@ const Checkout = ({allData,shopNowSet}) => {
       
       setTimeout(() => {
         window.location.href = "/cart"
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.log(error);
       setOrderLoad(false);
@@ -51,6 +52,7 @@ const Checkout = ({allData,shopNowSet}) => {
         { withCredentials: true }
       );
 
+      console.log(data)
       setOrderLoad(false);
 
       if (data.paymentUrl == "") {
