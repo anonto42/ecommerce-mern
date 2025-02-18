@@ -19,7 +19,6 @@ const CartPage = () => {
     paymentStatus:"",
     cartId:""
   })
-  
   return (
     <div
         className='w-full min-h-[60svh] relative pb-8'
@@ -29,7 +28,7 @@ const CartPage = () => {
       >
 
         {
-          user.cart === undefined ? <div className='w-full h-[40vh] flex justify-center items-center'>
+          user?.cart?.length === 0 ? <div className='w-full h-[40vh] flex justify-center items-center'>
             <Hourglass
               visible={true}
               height="80"
@@ -39,7 +38,7 @@ const CartPage = () => {
               colors={['#2db12d', '#72a1ed']}
             />
           </div>:
-          user.cart.length == 0?
+          Object.keys(user.cart[0]).length === 0?
           <div
           className='max-w-[800px] h-[120px] border-2 mx-auto rounded-xl border-topBarTextColor flex justify-center items-center'
         >
