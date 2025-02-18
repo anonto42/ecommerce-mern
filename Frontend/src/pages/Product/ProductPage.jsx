@@ -62,7 +62,7 @@ const ProductPage = () => {
           <div>
               Cart added successfully.
               <button 
-                  onClick={() => Navigate("/cart")}
+                  onClick={() => window.location.href = "/cart"}
                   className="ml-4 px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-all"
               >
                   Go to Cart
