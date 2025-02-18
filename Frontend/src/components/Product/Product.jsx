@@ -5,8 +5,6 @@ import { RotatingLines } from 'react-loader-spinner';
 const Product = ({price,title,images,reviews,count}) => {
     const [hover,setHover] = useState(0);
     const [load,setLoad] = useState(false);
-    console.log(title,price)
-    console.log(images)
   return (
     <div
         title='Click to view details'
