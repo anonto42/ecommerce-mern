@@ -215,7 +215,7 @@ const ShopComponent = () => {
                           <div className={`absolute w-[220px] mx-auto h-[300px] bg-slate-50 duration-100 ease-linear ${!allImgLoading?"opacity-100":"opacity-0"}`}></div>
                           <img 
                             src={item.images[0]} 
-                            alt="" 
+                            alt="#" 
                             loading='lazy'
                             onLoad={()=>setAllImgLoading(true)}
                             className='w-full h-full'
@@ -361,6 +361,8 @@ const ShopComponent = () => {
                       Array.from(UimageFils).map((item, index) =>{
                         return(
                           <img 
+                            alt='#'
+                            loading='lazy'
                             src={URL.createObjectURL(item) || item} 
                             key={index}
                             className='w-[110px] h-[150px] mr-1'
@@ -370,6 +372,8 @@ const ShopComponent = () => {
                         UimageFils.map((item, index) =>{
                           return(
                             <img 
+                              alt='#'
+                              loading='lazy'
                               src={item} 
                               key={index}
                               className='w-[110px] h-[150px] mr-1'
