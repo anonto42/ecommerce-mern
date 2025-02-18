@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { Hourglass } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
+import bcryptjs from 'bcryptjs';
+
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +25,9 @@ const Auth = () => {
       if( email && password === "" ) return setLoading(false) , toast.warning("Email and password must not be empty!")
       
       const data =  await axios.post(`${server}/user/login`, {email,password} , {withCredentials:true} );
+
+      authForAdmin(data.data.data.userType)
+
       setEmail("");
       setPassword("");
       setLoading(false);
@@ -35,7 +40,7 @@ const Auth = () => {
     } catch (error) {
       console.log(error)
       setLoading(false)
-      toast.error("Couldn't login")
+      toast.error(error.response.data.message)
     }
   }
 
@@ -58,6 +63,8 @@ const Auth = () => {
 
       const respons = await axios.post(`${server}/user/register`, data , {withCredentials:true} );
 
+      authForAdmin(respons.data.data.userType)
+
       setName("")
       setEmail("");
       setPassword("");
@@ -76,7 +83,11 @@ const Auth = () => {
     }
   }
 
-
+  const authForAdmin = async (props) => {
+    if (props !== "admin") return ;
+    const hash = await bcryptjs.hash( props , 5 );
+    localStorage.setItem( "_store_", hash)
+  }
 
   return (
       <div className="flex items-center justify-center min-h-[70svh] relative">
