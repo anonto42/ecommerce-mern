@@ -32,8 +32,9 @@ const Deshbord = () => {
       setLogOut(false)
       toast.success("Logged out successfully");
       setTimeout(() => {
-        window.location.href = "/";
-      }, 4000);
+      localStorage.removeItem("_store_")
+      window.location.href = "/";
+      }, 2000);
     } catch (error) {
       toast.error("Couldn't log out. try again")
       setLogOut(false)
