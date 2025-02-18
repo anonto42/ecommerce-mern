@@ -143,8 +143,9 @@ async function userProfile(req,res) {
                 },
                 {
                     $unwind: {
-                    path:"$cart",
-                    preserveNullAndEmptyArrays: true}
+                     path:"$cart",
+                     preserveNullAndEmptyArrays: true
+                    }
                 },
                 {
                     $lookup: {
