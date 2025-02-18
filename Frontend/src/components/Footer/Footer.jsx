@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { FaFacebookSquare , FaTwitterSquare , FaLinkedin} from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
-
-    const productsCatagory = ["T-shirt", "polo T-shirt", "Hoodie", "Guiter" , "AllProducts"]
-    const Sortcuts = ["Cart", "Products Wishlist", "Registration", "Contact Us"]
-    const PolicyInfo = ["Privacy Policy", "Terms of Sevices", "Refund Policy", "Express Delivery"]
-
+    const { catagorys } = useSelector( e => e.applicationData.appData);
+    const Sortcuts = ["products", "profile", "auth", "contact"];
+    const PolicyInfo = ["Privacy Policy", "Terms of Sevices", "Refund Policy", "Express Delivery"];
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   return (
     <div
         className='w-full min-h-[300px] bg-navebarBgColor text-topBarTextColor'
@@ -27,7 +27,7 @@ const Footer = () => {
                         className='flex w-[450px] xl:w-[550px] h-[50px] md:h-[55px] rounded-lg justify-center text-topBarTextColor items-center overflow-hidden'
                     >
                         <input 
-                            type="text" 
+                            type="email" 
                             className='w-full h-full px-4 text-sm md:text-lg font-semibold bg-[#222222ad]'
                             placeholder='Enter your Email'    
                         />
@@ -50,14 +50,24 @@ const Footer = () => {
                         className='sm:w-[90%] mb-4 sm:text-center'
                     >
                         <h2 className='text-2xl text-topBarTextColor font-semibold mb-3'>Company Info</h2>
-                        <p className='text-sm text-sndTextColor'>S-Brand, We Design our Tshirts for young generation, we keep positive footprint on all of our items. We are working to bringing a new sense of fashion design and style.</p>
+                        <p className='text-sm text-sndTextColor'>S-Brand, We Design our product for young generation, we keep positive footprint on all of our items. We are working to bringing a new sense of fashion design and style.</p>
                     </div>
                     <div
                         className='mb-4 sm:text-center'
                     >
                         <h2 className='text-2xl text-topBarTextColor font-semibold mb-3'>Products Info</h2>
                         {
-                            productsCatagory.map((item,i)=>{
+                            catagorys?.length > 4 ? 
+                            catagorys.slice(0,5).map((item,i)=>{
+                                return (
+                                    <div key={i}>
+                                        <Link to={`/products?cat=${item}`}>
+                                            <p className='text-sm text-sndTextColor hover:text-[gray] mb-1'>{capitalize(item)}</p>
+                                        </Link>
+                                    </div>
+                                )
+                            })
+                            : catagorys.map((item,i)=>{
                                 return (
                                     <Link to={`/cat/${item}`} key={i}>
                                         <p className='text-sm text-sndTextColor hover:text-[gray] mb-1'>{item}</p>
@@ -65,6 +75,9 @@ const Footer = () => {
                                 )
                             })
                         }
+                        <Link to={`/products?cat="all"`}>
+                                <p className='text-sm text-sndTextColor hover:text-[gray] mb-1'>All Products</p>
+                        </Link>
                     </div>
                     <div 
                         className='mb-4 sm:text-center'
@@ -73,8 +86,14 @@ const Footer = () => {
                         {
                             Sortcuts.map((item,i)=>{
                                 return (
-                                    <Link to={`/${item}`} key={i}>
-                                        <p className='text-sm text-sndTextColor hover:text-[gray] mb-1'>{item}</p>
+                                    <Link to={`/${item.toLowerCase()}`} key={i}>
+                                        <p className='text-sm text-sndTextColor hover:text-[gray] mb-1'>{ 
+                                            item === "contact"?
+                                            "Contact Us" : 
+                                            item === "auth" ?
+                                            "Registration":
+                                            capitalize(item)
+                                        }</p>
                                     </Link>
                                 )
                             })
@@ -101,18 +120,18 @@ const Footer = () => {
                     <div
                         className='w-[200px] items-center h-full flex justify-between'
                     >
-                        <Link to={"/"} className='text-[#1877F2]'>
+                        <a to={"/"} className='text-[#1877F2]'>
                             <FaFacebookSquare />
-                        </Link>
-                        <Link to={"/"} className='text-[#962fbf]'>
+                        </a>
+                        <a to={"/"} className='text-[#962fbf]'>
                             <FaSquareInstagram />
-                        </Link>
-                        <Link to={"/"} className='text-[#0077B5]'>
+                        </a>
+                        <a to={"/"} className='text-[#0077B5]'>
                             <FaLinkedin />
-                        </Link>
-                        <Link to={"/"} className='text-[#1DA1F2]'>
+                        </a>
+                        <a to={"/"} className='text-[#1DA1F2]'>
                             <FaTwitterSquare />
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </div>
