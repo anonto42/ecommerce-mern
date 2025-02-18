@@ -10,7 +10,6 @@ const NavigationBar = () => {
   const [items,setBar] = useState(false);
   const [ navTob,setNavBar ] = useState(false);
   const data = useSelector( data => data.applicationData.userData );
-  console.log(data.cart  )
 
   let bar = (window.location.href === `${import.meta.env.VITE_REACT_DOMAIN_NAME}/` ) || (window.location.href === "http://localhost:5173/")
 

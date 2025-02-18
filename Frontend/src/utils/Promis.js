@@ -74,7 +74,6 @@ const Promis = () => {
                 
                 // send visitor
                 await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/visitor`)
-                .then( res )
                 .catch(err => console.log("error in sending visitor"))
 
                 if( data?.userType === "admin" ){
