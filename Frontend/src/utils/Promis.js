@@ -72,28 +72,37 @@ const Promis = () => {
                 .then( res => dispatch(setCatagorysData(res.data.data)))
                 .catch(err => console.log(err))
                 
-                // get all users for the admin
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
-                .then( res => dispatch(setTotalUserData(res.data.data)))
-                .catch(err => console.log(err))
+                // send visitor
+                await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/visitor`)
+                .then( res => console.log(res.data))
+                .catch(err => console.log("error in sending visitor"))
 
-                // get all products for the admin
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,{withCredentials:true})
-                .then( data => dispatch(setAllProductsForAdmin(data.data.data)))
-                .catch(err => console.log(err))
-                
-                // get orders
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/orders`,{ withCredentials: true})
-                .then( res => dispatch(orders(res.data.data)))
-                .catch(err => console.log(err))
+                if( data?.userType === "admin" ){
 
-                // get visitors
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/visitors`,{ withCredentials: true})
-                .then( res => dispatch(totalVisitors(res.data.data)))
-                .catch(err => console.log(err))
+                    // get all users for the admin
+                    await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/users`,{withCredentials:true})
+                    .then( res => dispatch(setTotalUserData(res.data.data)))
+                    .catch(err => console.log(err))
+            
+                    // get all products for the admin
+                    await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/product`,{withCredentials:true})
+                    .then( data => dispatch(setAllProductsForAdmin(data.data.data)))
+                    .catch(err => console.log(err))
+                    
+                    // get orders
+                    await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/orders`,{ withCredentials: true})
+                    .then( res => dispatch(orders(res.data.data)))
+                    .catch(err => console.log(err))
+            
+                    // get visitors
+                    await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/visitors`,{ withCredentials: true})
+                    .then( res => dispatch(totalVisitors(res.data.data)))
+                    .catch(err => console.log(err))
+                }
+
             })();
-        
-            },[])
+            
+        },[])
         
     } catch (error) {
         console.error(error)

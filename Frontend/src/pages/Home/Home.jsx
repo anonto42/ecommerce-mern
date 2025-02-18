@@ -6,8 +6,6 @@ import WhyUs from '../../components/WhyUs/WhyUs'
 
 const Home = () => {
   const { bestSellingProducts , specialOffersDiscounts , products } = useSelector( data => data.applicationData.appData )
-  const data = useSelector( data => data.applicationData.appData )
-  // console.log(data)
   return (
     <div className='min-h-svh w-full'>
       <HeroSection />

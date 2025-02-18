@@ -39,7 +39,7 @@ userRoute.route("/cansled").post( tokenCheck , canseld );
 // payed updated
 userRoute.route("/failed").post( tokenCheck , faild );
 // visitor
-userRoute.route("/visitor").get( vesite );
+userRoute.route("/visitor").post( vesite );
 
 
 export default userRoute;

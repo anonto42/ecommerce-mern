@@ -274,6 +274,8 @@ async function updateUserProfile(req,res) {
 async function Heros (req,res){
     try {
         const responce = await HeroModel.findById( "67a50aeb81e26bbdb35d5354" );
+
+        const ip = req.ip;
         if(!responce) {
             return res
                .status(404)
@@ -712,34 +714,6 @@ async function payOnline(req,res){
     }
 }
 
-function vesite(req,res){
-    try {
-        
-        const visitorIP = req.ip;
-        if (!visitorIP) return;
-
-        const visitor = VisitorsModel.findOne({ ip:visitorIP });
-        if (visitor) return;
-
-        const newVisitor = VisitorsModel.create({ ip: visitorIP });
-        if (!newVisitor) return;
-
-        return res
-            .status(200)
-            .json(
-                Responce.success( "Visitor Logged" , newVisitor , true )
-            )
-
-    } catch (error) {
-        console.log(error)
-        return res
-            .status(404)
-            .json(
-                Responce.error( "Something wrong!" , error , false )
-            )
-    }
-}
-
 async function paied(req,res) {
     try {
 
@@ -782,16 +756,33 @@ async function paied(req,res) {
     }
 }
 
-function canseld(req,res) {
+async function vesite(req,res){
+    const visitorIP = req.ip;
+    try {
+        if (!visitorIP) return res.json({ User : "No user found!"});
+
+        const visitor = await VisitorsModel.findOne({ ip:visitorIP });
+        if (visitor) return res.json({ oldUser : "old user found!"});
+
+        const newVisitor = await VisitorsModel.create({ ip: visitorIP });
+        if (!newVisitor) return res.json({ newUser : "new user created!"});
+
+        return res.json({ message: "visitor created."});        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function faild(req,res) {
     try {
 
         return res.send(`
             <html>
                 <head>
-                    <title>Payment cancelled!</title>
+                    <title>Payment faild!</title>
                 </head>
                 <body>
-                    <h1>Payment </h1>
+                    <h1>Payment was faild</h1>
                     <a href="${process.env.ORIGIN}" style="display: inline-block; margin-top: 10px;">Go to Home</a>
                     <br>
                     <button onclick="window.location.href='${process.env.ORIGIN}'" style="margin-top: 10px;">Go Back</button>
@@ -804,7 +795,7 @@ function canseld(req,res) {
     }
 }
 
-function faild(req,res) {
+function canseld(req,res) {
     try {
 
         return res.send(`
@@ -813,7 +804,7 @@ function faild(req,res) {
                     <title>Payment cancelled!</title>
                 </head>
                 <body>
-                    <h1>Payment was faild</h1>
+                    <h1>Payment was cancelled</h1>
                     <a href="${process.env.ORIGIN}" style="display: inline-block; margin-top: 10px;">Go to Home</a>
                     <br>
                     <button onclick="window.location.href='${process.env.ORIGIN}'" style="margin-top: 10px;">Go Back</button>
