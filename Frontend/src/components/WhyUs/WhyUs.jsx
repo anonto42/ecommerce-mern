@@ -1,5 +1,7 @@
 import React from 'react';
 import { MdHighQuality } from "react-icons/md";
+import { TfiHeadphoneAlt } from "react-icons/tfi";
+import { TbTruckDelivery } from "react-icons/tb";
 
 const WhyUs = () => {
   return (
@@ -42,16 +44,16 @@ const WhyUs = () => {
                     <div
                         className='text-5xl'
                     >
-                        <MdHighQuality />
+                        <TfiHeadphoneAlt />
                     </div>
                     <div>
                         <h2
                             className='text-xl font-semibold font-serif my-1'
-                        >High Quality</h2>
+                        >Support</h2>
                         <p
                             className='text-sm font-light'
                         >
-                            Our products are made with the highest quality materials and crafted by skilled craftsmen.
+                            12/6 support means a support service that is provided 12 hours a day and 6 days a week.
                         </p>
                     </div>
                 </div>
@@ -61,16 +63,16 @@ const WhyUs = () => {
                     <div
                         className='text-5xl'
                     >
-                        <MdHighQuality />
+                        <TbTruckDelivery />
                     </div>
                     <div>
                         <h2
                             className='text-xl font-semibold font-serif my-1'
-                        >High Quality</h2>
+                        >Delivery</h2>
                         <p
                             className='text-sm font-light'
                         >
-                            Our products are made with the highest quality materials and crafted by skilled craftsmen.
+                            We promise fast, reliable delivery for every order. Your satisfaction is our priority, ensuring secure packaging and timely arrival. Whether near or far, we deliver with care, so you can enjoy our products hassle-free. Quality service, right to your door!
                         </p>
                     </div>
                 </div>
@@ -81,16 +83,16 @@ const WhyUs = () => {
                     <div
                         className='text-5xl'
                     >
-                        <MdHighQuality />
+                        <TbTruckDelivery />
                     </div>
                     <div>
                         <h2
                             className='text-xl font-semibold font-serif my-1'
-                        >High Quality</h2>
+                        >Delivery</h2>
                         <p
                             className='text-sm font-light'
                         >
-                            Our products are made with the highest quality materials and crafted by skilled craftsmen.
+                            We promise fast, reliable delivery for every order. Your satisfaction is our priority, ensuring secure packaging and timely arrival. Whether near or far, we deliver with care, so you can enjoy our products hassle-free. Quality service, right to your door!
                         </p>
                     </div>
                 </div>
