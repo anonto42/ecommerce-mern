@@ -33,13 +33,13 @@ userRoute.route("/order").post( tokenCheck , order );
 // order with Bkash payment
 userRoute.route("/onliepay").post( tokenCheck , payOnline );
 // payed updated
-userRoute.route("/payed").post( tokenCheck , paied );
+userRoute.route("/payed").get( tokenCheck , paied );
 // payed updated
-userRoute.route("/cansled").post( tokenCheck , canseld );
+userRoute.route("/cansled").get( tokenCheck , canseld );
 // payed updated
-userRoute.route("/failed").post( tokenCheck , faild );
+userRoute.route("/failed").get( tokenCheck , faild );
 // visitor
-userRoute.route("/visitor").post( vesite );
+userRoute.route("/visitor").get( vesite );
 
 
 export default userRoute;

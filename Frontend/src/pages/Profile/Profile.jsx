@@ -16,6 +16,7 @@ const Profile = () => {
       window.location.href = "/auth";
     },4000)
   }
+  console.log(userData)
   
   const [name , setName] = useState("name...");
   const [email , setEmail] = useState("email...");

@@ -124,27 +124,21 @@ async function userProfile(req,res) {
         const userData = await UserModel.aggregate(
             [
                 {
-                    $match:{
+                    $match: {
                         _id: user._id
                     }
                 },
                 {
-                    $project:{
-                        password:0
+                    $project: {
+                        password: 0
                     }
                 },
                 {
                     $lookup: {
-                      from: "carts",
-                      localField: "_id",
-                      foreignField: "user",
-                      as: "cart"
-                    }
-                },
-                {
-                    $unwind: {
-                     path:"$cart",
-                     preserveNullAndEmptyArrays: true
+                        from: "carts",
+                        localField: "_id",
+                        foreignField: "user",
+                        as: "cart"
                     }
                 },
                 {
@@ -152,63 +146,87 @@ async function userProfile(req,res) {
                         from: "products",
                         localField: "cart.product",
                         foreignField: "_id",
-                        as: "cart.product"
+                        as: "cart_products"
                     }
                 },
-                // {
-                //     $unwind: {
-                //     path:"$orders",
-                //     preserveNullAndEmptyArrays: true}
-                // },
-                // {
-                //     $lookup: {
-                //         from: "orders",
-                //         localField: "orders.userId",
-                //         foreignField: "_id",
-                //         as: "orders"
-                //     }
-                // },
+                {
+                    $lookup: {
+                        from: "orders",
+                        localField: "_id",
+                        foreignField: "userId",
+                        as: "orders"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "products",
+                        localField: "orders.product.productId",
+                        foreignField: "_id",
+                        as: "order_products"
+                    }
+                },
                 {
                     $project: {
-                      _id: 1,
-                      number:1,
-                      city:1,
-                      name: 1,
-                      thana:1,
-                      area:1,
-                      location:1,
-                      orders:1,
-                      wishlist:1,
-                      userType:1,
-                      isBlocked:1,
-                      email: 1,
-                      cart: {
                         _id: 1,
-                        user: 1,
-                        product: 1,
-                        size: 1,
-                        product: { $arrayElemAt: ["$cart.product", 0] }
-                      }
+                        number: 1,
+                        city: 1,
+                        name: 1,
+                        thana: 1,
+                        area: 1,
+                        location: 1,
+                        wishlist: 1,
+                        userType: 1,
+                        isBlocked: 1,
+                        email: 1,
+                        orders: {
+                            tran_id: 1,
+                            paymentStatus: 1,
+                            paymentMethod: 1,
+                            shippingAddress: 1,
+                            status: 1,
+                            totalPriceWithDelivery: 1,
+                            productPrice: 1,
+                            quantity: 1,
+                            product: "$order_products",
+                            userId: 1
+                        },
+                        cart: {
+                            $map: {
+                                input: "$cart",
+                                as: "c",
+                                in: {
+                                    _id: "$$c._id",
+                                    user: "$$c.user",
+                                    product: {
+                                        $arrayElemAt: [
+                                            "$cart_products",
+                                            { $indexOfArray: ["$cart.product", "$$c.product"] }
+                                        ]
+                                    },
+                                    size: "$$c.size"
+                                }
+                            }
+                        }
                     }
                 },
                 {
                     $group: {
-                      _id: "$_id", // Group by user idnumber:1,
-                      city:{ $first: "$city" },
-                      thana:{ $first: "$thana" },
-                      area:{ $first: "$area" },
-                      location:{ $first: "$location" },
-                      orders:{ $first: "$orders" },
-                      wishlist:{ $first: "$wishlist" },
-                      userType:{ $first: "$userType" },
-                      isBlocked:{ $first: "$isBlocked" },
-                      name: { $first: "$name" },
-                      email: { $first: "$email" },
-                      cart: { $push: "$cart" } // Push the cart back into the array
+                        _id: "$_id",
+                        city: { $first: "$city" },
+                        thana: { $first: "$thana" },
+                        area: { $first: "$area" },
+                        location: { $first: "$location" },
+                        orders: { $first: "$orders" }, 
+                        wishlist: { $first: "$wishlist" },
+                        userType: { $first: "$userType" },
+                        isBlocked: { $first: "$isBlocked" },
+                        name: { $first: "$name" },
+                        email: { $first: "$email" },
+                        cart: { $first: "$cart" } // Keep cart unchanged
                     }
-                
                 }
             ]
+            
         )
         if(!userData){
             return res

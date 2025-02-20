@@ -8,8 +8,6 @@ const Checkout = ({allData,shopNowSet}) => {
   const[load,setLoad] = useState(false);
   const[orderLoad,setOrderLoad] = useState(null);
 
-  // console.log(allData)
-
   const handleCashOndelivery = async () => {
     try {
       setOrderLoad(true);
@@ -22,11 +20,8 @@ const Checkout = ({allData,shopNowSet}) => {
         allData,
         { withCredentials: true }
       );
-      console.log(data)
 
-      const responce = await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/dcart`,{ id:allData.cartId});
-
-      console.log("Cart deleted successfully.", responce)
+      await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/dcart`,{ id:allData.cartId});
 
       toast.success(data.message);
       setOrderLoad(false);

@@ -26,6 +26,7 @@ const Promis = () => {
                 // Get user data
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/user`,{withCredentials:true})
                 .then( res => dispatch(setUserData({
+                    _id: res.data.data._id, 
                     name: res.data.data.name,
                     email: res.data.data.email,
                     number: res.data.data.phone,
