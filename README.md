@@ -55,4 +55,4 @@ This project is part of my portfolio. If you like it or want to collaborate, fee
 
 📧 Contact: anontom90@gmail.com
 
-🌐 Portfolio: (https://sohidul-islam-ananto.netlify.app/)
+🌐 Portfolio: [sohiduldev](https://sohidul-islam-ananto.netlify.app/)
