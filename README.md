@@ -33,7 +33,7 @@ This is a full-stack e-commerce application built using the MERN (MongoDB, Expre
    cd client && npm install
    ```
 4. Set up environment variables:
-   - Create a `.env` file in the root directory and add necessary environment variables from .env.sample.
+   - Create a `.env` file in the root directory and add necessary environment variables from `.env.sample`
 5. Start the development server:
    ```bash
    npm run dev
