@@ -39,7 +39,8 @@ const orderSchema = new Schema(
         },
         paymentStatus: {
             type: String,
-            defualt:"Pending"
+            defualt:"Pending",
+            required: true
         },
         tran_id:{
             type: String,

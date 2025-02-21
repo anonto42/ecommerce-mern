@@ -157,14 +157,14 @@ async function userProfile(req,res) {
                         as: "orders"
                     }
                 },
-                {
-                    $lookup: {
-                        from: "products",
-                        localField: "orders.product.productId",
-                        foreignField: "_id",
-                        as: "order_products"
-                    }
-                },
+                // {
+                //     $lookup: {
+                //         from: "products",
+                //         localField: "orders.product.productId",
+                //         foreignField: "_id",
+                //         as: "order_products"
+                //     }
+                // },
                 {
                     $project: {
                         _id: 1,
@@ -187,7 +187,7 @@ async function userProfile(req,res) {
                             totalPriceWithDelivery: 1,
                             productPrice: 1,
                             quantity: 1,
-                            product: "$order_products",
+                            product: 1,
                             userId: 1
                         },
                         cart: {
@@ -587,6 +587,7 @@ async function order(req,res){
                 totalPriceWithDelivery,
                 shippingAddress,
                 tran_id,
+                paymentStatus:"Cash",
                 paymentMethod:"Cash-On-Delivery"
             }
         )

@@ -25,7 +25,7 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
         toast.error(error.response.data.message)
       }
     }
-    console.log(product)
+    
     const shopHandler = () => {
       setDataForOrder(
         {
@@ -35,8 +35,9 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
           userId:data.user,
           product:{
             name:product.name,
-            productImage:product._id,
-            size:product.size
+            productImage:product.images[0],
+            size:product.size,
+            productId:product._id
           },
           totalPriceWithDelivery:( user?.city.toLowerCase() === "dhaka" ? ( (product?.price * quantity) + 60 ) : ( (product?.price * quantity ) + 120 ) ),
           shippingAddress:( user?.location == "DEFAULT! Please enter yours..." ? null : { city : user.city , thana: user.thana , location: user.location } ),

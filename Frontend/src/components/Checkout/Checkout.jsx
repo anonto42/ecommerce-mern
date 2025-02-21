@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const Checkout = ({allData,shopNowSet}) => {
   const[load,setLoad] = useState(false);
   const[orderLoad,setOrderLoad] = useState(null);
-
+console.log(allData)
   const handleCashOndelivery = async () => {
     try {
       setOrderLoad(true);
@@ -47,7 +47,8 @@ const Checkout = ({allData,shopNowSet}) => {
         { withCredentials: true }
       );
 
-      console.log(data)
+      await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/dcart`,{ id:allData.cartId});
+      
       setOrderLoad(false);
 
       if (data.paymentUrl == "") {
