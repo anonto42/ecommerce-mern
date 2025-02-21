@@ -22,8 +22,8 @@ const ShopComponent = () => {
   const [UimageFils, setUImageFiles] = useState([]);
   const [Utitle,UsetTile] = useState("");
   const [Uprice,UsetPrice] = useState("");
-  const [sizeU] = useState( [...(Usize?.split(" ").filter(Boolean) || [])]);
   const [Usize,UsetSize] = useState("");
+  const [sizeU] = useState( [...(Usize?.split(" ").filter(Boolean) || [])]);
   const [Utag,UsetTag] = useState("");
   const [Ucatagory,UsetCatagory] = useState("");
   const [PID,setPID] = useState("");
