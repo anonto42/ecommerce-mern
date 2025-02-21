@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { MdStarHalf, MdStarOutline, MdStarRate } from 'react-icons/md'
 import axios from 'axios';
 import { RotatingLines } from 'react-loader-spinner';
@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 const ProductPage = () => {
   const [productData , setProductData] = useState({})
   const [imgLoaction,setImageLocation] = useState(1)
-  const Navigate = useNavigate()
   const [load,setLoad] = useState(false)
   const [searchParams] = useSearchParams();
   const productID = searchParams.get("id")
@@ -31,19 +30,18 @@ const ProductPage = () => {
     })();
     
   },[]);
-  const avalableSizes = productData?.size?.split(" ");
-  const [selectedSize, setSelectedSize] = useState("");
+  const avalableSizes =  [...(productData?.size?.split(" ").filter(Boolean) || [])];
+  const [selectedSize, setSelectedSize] = useState('');
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-      productData?.images?.length > 0 ? setImage(productData.images[0]) : ""
+    productData?.images?.length > 0 ? setImage(productData.images[0]) : ""
   }, [productData]);
 
   const addToCartHandler = async () => {
     try {
       if( selectedSize === "") return toast.warning("Please select the size to add!")
       
-
         const product = {
           id: productData._id,
           size: selectedSize
@@ -197,7 +195,7 @@ const ProductPage = () => {
 
                 return(
                   <div
-                    onClick={()=>setSelectedSize(item)}
+                    onClick={()=>setSelectedSize(avalableSizes[i])}
                     key={i}
                     className={`w-[30px] h-[30px] border flex justify-center items-center text-xs my-2  mr-2 uppercase ${ selectedSize === item ? "bg-[#5bff1a3b]" : "bg-transparent"} cursor-pointer`}
                   >

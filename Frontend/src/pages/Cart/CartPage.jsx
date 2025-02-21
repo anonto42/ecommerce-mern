@@ -28,7 +28,7 @@ const CartPage = () => {
       >
 
         {
-          user?.cart?.length === 0 ? <div className='w-full h-[40vh] flex justify-center items-center'>
+          user?.cart?.length == 0 ? <div className='w-full h-[40vh] flex justify-center items-center'>
             <Hourglass
               visible={true}
               height="80"

@@ -34,7 +34,7 @@ const Promis = () => {
                     thana: res.data.data.thana,
                     area: res.data.data.area,
                     location: res.data.data.location,
-                    cart: res.data.data.cart.length > 0 ? res.data.data.cart : [],
+                    cart: res.data.data.cart.length > 0 ? res.data.data.cart : [0],
                     orders:  res.data.data.orders.length > 0 ? res.data.data.orders : [],
                     wishlist:  res.data.data.wishlist.length > 0 ? res.data.data.wishlist : [],
                     userType:  res.data.data.userType,

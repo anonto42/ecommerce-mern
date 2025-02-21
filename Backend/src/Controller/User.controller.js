@@ -226,7 +226,6 @@ async function userProfile(req,res) {
                     }
                 }
             ]
-            
         )
         if(!userData){
             return res

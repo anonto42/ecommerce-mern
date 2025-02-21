@@ -16,12 +16,13 @@ const ShopComponent = () => {
   const [catagory,setCatagory] = useState("");
   const [quantity,setQuantity] = useState("");
   const [discription,setDiscription] = useState("");
-  const [sizeSplitData,setPartsData] = useState();
+  const [sizeSplitData,setPartsData] = useState( [...(size?.split(" ").filter(Boolean) || [])]);
   // this variable is if the update product \
   const [serchLoading,setSerchLoading] = useState(false);
   const [UimageFils, setUImageFiles] = useState([]);
   const [Utitle,UsetTile] = useState("");
   const [Uprice,UsetPrice] = useState("");
+  const [sizeU] = useState( [...(Usize?.split(" ").filter(Boolean) || [])]);
   const [Usize,UsetSize] = useState("");
   const [Utag,UsetTag] = useState("");
   const [Ucatagory,UsetCatagory] = useState("");
@@ -44,7 +45,7 @@ const ShopComponent = () => {
       }
       formData.append("name",title);
       formData.append("price",price);
-      formData.append("size",size);
+      formData.append("size",sizeSplitData);
       formData.append("tag",tag);
       formData.append("category",catagory);
       formData.append("quantity", quantity);
@@ -119,7 +120,7 @@ const ShopComponent = () => {
       dataForUpdate.append("name",Utitle);
       dataForUpdate.append("id",PID);
       dataForUpdate.append("price",Uprice);
-      dataForUpdate.append("size",Usize);
+      dataForUpdate.append("size",sizeU);
       dataForUpdate.append("tag",Utag);
       dataForUpdate.append("category",Ucatagory);
       dataForUpdate.append("quantity", Uquantity);

@@ -13,8 +13,6 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
     const[quantity,setQuantity] = useState(1);
     const user = useSelector( user => user.applicationData.userData);
 
-    // console.log(user._id)
-    // console.log( data )
     const deleteCartItemHandler = async () => {
       try {
         
@@ -27,7 +25,7 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
         toast.error(error.response.data.message)
       }
     }
-    
+    console.log(product)
     const shopHandler = () => {
       setDataForOrder(
         {
@@ -37,7 +35,7 @@ const ProductOfCart = ({shopNow,data,setDataForOrder}) => {
           userId:data.user,
           product:{
             name:product.name,
-            productId:product._id,
+            productImage:product._id,
             size:product.size
           },
           totalPriceWithDelivery:( user?.city.toLowerCase() === "dhaka" ? ( (product?.price * quantity) + 60 ) : ( (product?.price * quantity ) + 120 ) ),
