@@ -43,7 +43,8 @@ This is a full-stack e-commerce application built using the MERN (MongoDB, Expre
    cd client && npm start
    ```
 ## Admin access
-This project is part of my portfolio. If you like it or want to collaborate, feel free to reach out!
+- **Email**: anontom90@gmail.com
+- **Password**: 123456
 
 ## Contributing
 If you would like to contribute, feel free to fork the repository and submit a pull request.
