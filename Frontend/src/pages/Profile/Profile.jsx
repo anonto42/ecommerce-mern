@@ -10,7 +10,7 @@ const Profile = () => {
   const { userType } = useSelector( event => event.applicationData.userData );
   const { userData } = useSelector( event => event.applicationData );
 
-  const { value } = JSON.parse(window.localStorage.getItem("isAuthenticated"));
+  const { value } = JSON.parse(window.localStorage.getItem("isAuthenticated")) || { value: false };
 
   if(!value ){
     toast.warning("Please login your account!");
