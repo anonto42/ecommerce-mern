@@ -16,7 +16,7 @@ This is a full-stack e-commerce application built using the MERN (MongoDB, Expre
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose ORM)
 - **Authentication**: JWT (JSON Web Token)
-- **Payment Integration**: (e.g., Stripe, PayPal)
+- **Payment Integration**: (sslcommerz)
 
 ## Installation & Setup
 1. Clone the repository:
