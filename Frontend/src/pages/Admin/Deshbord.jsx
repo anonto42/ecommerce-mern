@@ -25,7 +25,7 @@ const Deshbord = () => {
       setLogOut(true);
       const data = confirm("We will log out your account!");
       if( !data ) return setLogOut(false);
-
+      window.localStorage.removeItem("isAuthenticated");
       await axios.delete(`${import.meta.env.VITE_REACT_SERVER_API}/user/logout`,{withCredentials: true})
       .then( data => console.log(data))
       .catch(err => console.log(err))

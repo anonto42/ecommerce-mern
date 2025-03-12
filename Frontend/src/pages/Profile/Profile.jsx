@@ -10,7 +10,9 @@ const Profile = () => {
   const { userType } = useSelector( event => event.applicationData.userData );
   const { userData } = useSelector( event => event.applicationData );
 
-  if(userType === undefined){
+  const { value } = JSON.parse(window.localStorage.getItem("isAuthenticated"));
+
+  if(!value ){
     toast.warning("Please login your account!");
     setTimeout(()=>{
       window.location.href = "/auth";
@@ -66,9 +68,11 @@ const Profile = () => {
 
   const logout =  async () => {
     try {
-      if ( userData === undefined ) return window.location.href = "/auth"
+      if ( userData === undefined ) return window.location.href = "/auth";
 
-      const continew = confirm("Are you sure you want to log out?")
+      window.localStorage.removeItem("isAuthenticated");
+
+      const continew = confirm("Are you sure you want to log out?");
 
       if (!continew) return;
 

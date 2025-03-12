@@ -28,6 +28,8 @@ const Auth = () => {
 
       authForAdmin(data.data.data.userType)
 
+      window.localStorage.setItem("isAuthenticated",JSON.stringify({value:true}))
+
       setEmail("");
       setPassword("");
       setLoading(false);

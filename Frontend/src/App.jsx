@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScreenBeforeMounted from './components/ScreenBeforeMounted/ScreenBeforeMounted';
 import { ToastContainer } from 'react-toastify';
