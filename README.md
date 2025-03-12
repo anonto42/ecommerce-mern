@@ -16,7 +16,7 @@ This is a full-stack e-commerce application built using the MERN (MongoDB, Expre
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose ORM)
 - **Authentication**: JWT (JSON Web Token)
-- **Payment Integration**: (e.g., Stripe, PayPal)
+- **Payment Integration**: (sslcommerz)
 
 ## Installation & Setup
 1. Clone the repository:
@@ -30,7 +30,7 @@ This is a full-stack e-commerce application built using the MERN (MongoDB, Expre
 3. Install dependencies:
    ```bash
    npm install
-   cd client && npm install
+   cd Backend && npm install
    ```
 4. Set up environment variables:
    - Create a `.env` file in the root directory and add necessary environment variables from `.env.sample`
@@ -40,7 +40,7 @@ This is a full-stack e-commerce application built using the MERN (MongoDB, Expre
    ```
 6. Run the frontend:
    ```bash
-   cd client && npm start
+   cd Frontend && npm i && npm run dev
    ```
 ## Admin access
 `Login with ->`
