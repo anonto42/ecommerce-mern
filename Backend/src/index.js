@@ -22,7 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors(
     {
-        origin:process.env.ORIGIN,
+        // origin:process.env.ORIGIN,
+        origin:"https://e-commerce-ten-alpha-81.vercel.app",
         credentials:true,
     }
 ));
