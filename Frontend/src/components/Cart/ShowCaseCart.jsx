@@ -32,7 +32,7 @@ const ShowCaseCart = ({price,title,images,reviews,count,mr=false,description}) =
                 />
                 {
                     !load?(
-                        <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center justify-center w-full h-full">
                             <RotatingLines
                                 visible={true}
                                 height="50"
