@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAppHeroData , setUserData , setCatagorysData , setBestSellingProductsData , setSpecialOffersDiscountsData , setProductData , setTotalUserData, setAllProductsForAdmin, orders , totalVisitors} from "../Redux/slices/dataFromServer";
 import axios from "axios";
 
@@ -10,8 +10,6 @@ import axios from "axios";
 const Promis = () => {
     const dispatch = useDispatch();
     try {
-        
-        const data = useSelector( data => data.applicationData.userData)
         
         useEffect(()=>{
             
@@ -38,7 +36,6 @@ const Promis = () => {
                     wishlist:  res.data.data.wishlist.length > 0 ? res.data.data.wishlist : [],
                     userType:  res.data.data.userType,
                 })))
-
                 .catch(err => dispatch(setUserData({
                     name: "...",
                     email: "...",
@@ -64,7 +61,7 @@ const Promis = () => {
                 .catch(err => console.log(err))
                 
                 // get All hot-Item
-                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/hotItem`)
+                await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/user/all-products`)
                 .then( res => dispatch(setProductData(res.data.data)))
                 .catch(err => console.log(err))
                 
@@ -92,10 +89,6 @@ const Promis = () => {
                 await axios.get(`${import.meta.env.VITE_REACT_SERVER_API}/admin/visitors`,{ withCredentials: true})
                 .then( res => dispatch(totalVisitors(res.data.data)))
                 .catch(err => console.log(err))
-
-                // send visitor
-                // await axios.post(`${import.meta.env.VITE_REACT_SERVER_API}/user/visitor`)
-                // .catch(err => console.log("error in sending visitor"))
                 
             })();
             
