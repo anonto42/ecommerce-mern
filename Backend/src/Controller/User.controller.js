@@ -377,35 +377,6 @@ async function bestSellingProduct(req,res) {
     }
 }
 
-async function hotItem(req,res) {
-    try {
-
-        const products = await ProductModel.find();
-        if(!products) {
-            return res
-                .status(404)
-                .json(
-                    Responce.error( "Something wrong!", false )
-                )
-        }
-
-        const filltredOffers = products.filter( data => data.tagOfEvent === "Hot-Item");
-
-        return res
-                .status(200)
-                .json(
-                    Responce.success( "Get the Hot-Item products", filltredOffers , false )
-                )
-    } catch (error) {
-        console.log(error)
-        return res
-            .status(404)
-            .json(
-                Responce.error( "Something wrong!" , error , false )
-            )
-    }
-}
-
 async function catagorys(req,res) {
     try {
 
@@ -839,5 +810,32 @@ function canseld(req,res) {
     }
 }
 
+async function AllProducts(req , res) {
+    try {
+        const product = await ProductModel.find();
+        if(!product) {
+            return res
+                .status(404)
+                .json(
+                    Responce.error( "Product not found" , false )
+                )
+        }
+        
+        return res
+            .status(200)
+            .json(
+                Responce.success( "Get the product", product , true )
+            )
+        
+    } catch (error) {
+        console.log(error)
+        return res
+            .status(404)
+            .json(
+                Responce.error( "Something wrong!" , error , false )
+            )
+    }
+}
 
-export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , hotItem , catagorys , AProduct , ACart , DCartItem , order , payOnline , vesite , paied , canseld , faild}
+
+export { login , register , userProfile , logout , updateUserProfile , Heros , specialOffers , bestSellingProduct , catagorys , AProduct , ACart , DCartItem , order , payOnline , vesite , paied , canseld , faild, AllProducts}

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ACart, AProduct, bestSellingProduct, catagorys, DCartItem, Heros, hotItem, login , logout, payOnline, order, register, specialOffers, updateUserProfile, userProfile, vesite, canseld, paied, faild } from "../Controller/User.controller.js";
+import { ACart, AProduct, bestSellingProduct, catagorys, DCartItem, Heros, login , logout, payOnline, order, register, specialOffers, updateUserProfile, userProfile, vesite, canseld, paied, faild, AllProducts } from "../Controller/User.controller.js";
 import tokenCheck from "../Middleware/Aut.js";
 
 const userRoute = Router();
@@ -15,12 +15,12 @@ userRoute.route("/user").get( tokenCheck , userProfile )
 userRoute.route("/update").put( tokenCheck , updateUserProfile )
 // get hero information
 userRoute.route("/hero").get( Heros );
+// get all products
+userRoute.route("/all-products").get( AllProducts );
 // get Special offers products
 userRoute.route("/special").get( specialOffers );
 // get best Selling products
 userRoute.route("/bestselling").get( bestSellingProduct );
-// get Hot-Item
-userRoute.route("/hotItem").get( hotItem );
 // get all catagorys
 userRoute.route("/catagorys").get( catagorys );
 // get a product
